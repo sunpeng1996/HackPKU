@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+			http://www.springframework.org/schema/mvc  http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+
+	
+   <!-- <mvc:default-servlet-handler /> --> 
+    <!-- 强制使用CGLIB代理  -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    
+    <!-- DataSource数据源 -->
+    <context:property-placeholder location="classpath:jdbc.properties" />
+    
+   <!-- 配置dbcp数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 队列中的最小等待数 -->
+		<property name="minIdle" value="${jdbc.minIdle}"></property>
+		<!-- 队列中的最大等待数 -->
+		<property name="maxIdle" value="${jdbc.maxIdle}"></property>
+		<!-- 最长等待时间，单位毫秒 -->
+		<property name="maxWait" value="${jdbc.maxWait}"></property>
+		<!-- 最大活跃数 -->
+		<property name="maxActive" value="${jdbc.maxActive}"></property>
+		<property name="initialSize" value="${jdbc.initialSize}"></property>
+		
+		<property name="testOnBorrow" value="true"></property>
+		<property name="testWhileIdle" value="true"></property>
+		<property name="testOnReturn" value="true"></property>
+		<property name="logAbandoned" value="true"></property>
+		<property name="validationQuery" value="select 1 from dual"></property>
+		
+		
+		  <property name="removeAbandoned" value="true"></property>
+		  <property name="removeAbandonedTimeout" value="30"></property>
+		
+	
+	</bean>
+
+   <!--  <bean id="SqlServerClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="configLocation" value="WEB-INF/sqlmap-config.xml" />
+        <property name="dataSource" ref="dataSource" />
+    </bean> -->
+    
+    
+	<!-- sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据库连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 加载mybatis的全局配置文件 -->
+		<property name="configLocation" value="WEB-INF/sqlMapConfig.xml" />
+	</bean>
+	
+	<!-- mapper批量扫描器 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
+		<property name="basePackage" value="hit.mapper"></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+    
+    
+   <!-- 自动扫描Bean  -->
+    <context:component-scan base-package="hit"/>
+    
+    <!-- Spring iBatis sqlSessionFactory
+     <bean id="sqlSessionFactory" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+             <property name="configLocation" value="WEB-INF/sqlmap-config.xml" />
+     	     <property name="dataSource" ref="dataSource" />
+     </bean>
+     -->
+ <!-- 
+    <bean id="txManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <tx:annotation-driven transaction-manager="txManager" />
+    
+    <aop:config>
+        <aop:pointcut id="baseServiceMethods" expression="execution(* com.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="baseServiceMethods" />
+    </aop:config>
+
+    <aop:aspectj-autoproxy />
+
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="select*" read-only="true" propagation="REQUIRED" />
+            <tx:method name="find*" read-only="true" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED" isolation="REPEATABLE_READ" rollback-for="java.lang.RuntimeException" />
+            <tx:method name="update*" propagation="REQUIRED" isolation="REPEATABLE_READ" rollback-for="java.lang.RuntimeException" />
+            <tx:method name="add*" propagation="REQUIRED" isolation="REPEATABLE_READ" rollback-for="java.lang.RuntimeException" />
+            <tx:method name="delete*" propagation="REQUIRED" isolation="REPEATABLE_READ" rollback-for="java.lang.RuntimeException" />
+        </tx:attributes>
+    </tx:advice>
+     -->
+</beans>
