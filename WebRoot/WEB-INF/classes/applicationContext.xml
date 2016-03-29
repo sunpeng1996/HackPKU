@@ -61,16 +61,17 @@
 		<!-- 加载mybatis的全局配置文件 -->
 		<property name="configLocation" value="WEB-INF/sqlMapConfig.xml" />
 	</bean>
-	<!-- mapper扫描器 -->
+	
+	<!-- mapper批量扫描器 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
-		<property name="basePackage" value="com.gio.mapper"></property>
+		<property name="basePackage" value="hit.mapper"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
     
     
    <!-- 自动扫描Bean  -->
-    <context:component-scan base-package="com"/>
+    <context:component-scan base-package="hit"/>
     
     <!-- Spring iBatis sqlSessionFactory
      <bean id="sqlSessionFactory" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">

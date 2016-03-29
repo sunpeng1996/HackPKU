@@ -12,9 +12,11 @@
  	
  	<!-- spring MVC的核心配置文件 ，配置controller。handlermapping，viewresolve。拦截器-->
  	
- 	<bean id="myController" name="/hello.do" class="hit.controller.TestController" >
- 		
- 	</bean>
+ <!--  	<bean id="myController" name="/hello.do" class="hit.controller.TestController" >
+	</bean> -->
+	
+	
+		<!-- spring mvc注解驱动 -->
     	<context:annotation-config />
        <!-- 把标记了@Controller注解的类转换为bean -->  
       <context:component-scan base-package="hit.controller" />  

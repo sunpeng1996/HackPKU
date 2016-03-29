@@ -6,10 +6,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<!-- 全局setting配置，根据需要添加 -->
 	
-	<!-- 配置别名 -->
+	<!--定义别名 -->
 	<typeAliases>
-		<!-- 批量扫描别名 -->
-		<package name="ssm.po"/>
+		<!-- 批量扫描别名 ,别名就是类名-->
+		<package name="hit.po" />
 	</typeAliases>
 
 	<!-- 配置mapper
