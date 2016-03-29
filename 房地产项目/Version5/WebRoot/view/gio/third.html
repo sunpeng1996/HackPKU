@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<link href='../css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+	<script src="../js/jquery-1.11.3.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/third.js"></script>
+</head>
+<body>
+	<div align="center" style="min-width:600px">
+		<div class="row" >
+			<button class="btn btn-primary" style="float:left;margin-left:40px;margin-top:30px" onclick="goBack()">后退</button>
+			<button class="btn btn-primary" style="float:left;margin-left:10px;margin-top:30px" onclick="backToIndex()">返回主页</button>
+		</div>
+		<h2>对应楼层</h2>
+		<div>
+			<img src="../img/pingmian.png" width="646px" height="642px" usemap="#pingmianMap" id="pingmianImg"/>
+			<div id="testDIV" style="position:absolute;display:none;width:100px;height:20px;z-index:100;background:red" onmouseout="getOut()" onclick="cancelDisplay()">此房屋预警</div>
+			<map name="pingmianMap" id="pingmianMap">
+	     	  <area shape="poly" coords="19,119,191,97,194,186,32,187" href="#07" target="_blank" alt="预警房屋">
+			  <area shape="poly" coords="40,229,160,231,164,275,49,274" href="#08" target="_blank">
+			  <area shape="poly" coords="53,289,164,290,160,323,66,324" href="#09" target="_blank">
+			  <area shape="poly" coords="51,343,159,340,187,381,190,502,56,501" href="#10" target="_blank">
+			  <area shape="poly" coords="204,376,248,370,253,496,214,495" href="#11" target="_blank">
+			  <area shape="poly" coords="263,372,295,375,299,489,260,489" href="#12" target="_blank">
+			  <area shape="poly" coords="309,379,343,374,345,513,308,531" href="#13" target="_blank">
+			  <area shape="poly" coords="358,375,389,376,390,500,359,507" href="#14" target="_blank">
+			  <area shape="poly" coords="407,376,435,374,440,491,407,491" href="#15" target="_blank">
+			  <area shape="poly" coords="455,372,481,377,483,486,452,487" href="#16" target="_blank">
+			  <area shape="poly" coords="496,376,600,369,620,459,506,494" href="#17" target="_blank">
+			  <area shape="poly" coords="522,243,600,246,639,302,628,355,581,314,525,321" href="#18" target="_blank">
+			  <area shape="poly" coords="528,187,572,192,588,222,527,224" href="#19" target="_blank">
+			  <area shape="poly" coords="494,99,512,99,555,168,521,173,504,187,485,184" href="#20" alt="预警房屋" target="_blank">
+			  <area shape="poly" coords="445,94,471,90,474,172,474,189,445,194" href="#1" target="_blank">
+			  <area shape="poly" coords="405,95,432,97,433,194,400,186" href="#2" target="_blank">
+			  <area shape="poly" coords="352,92,378,94,382,190,354,198" href="#3" target="_blank">
+			  <area shape="poly" coords="311,94,334,96,342,193,311,187" href="#4" alt="预警房屋" target="_blank">
+			  <area shape="poly" coords="254,101,293,106,292,186,258,193" href="#5" target="_blank">
+			  <area shape="poly" coords="216,101,239,94,243,190,207,188" href="#6" target="_blank">
+			</map>
+		</div>
+	</div>
+</body>

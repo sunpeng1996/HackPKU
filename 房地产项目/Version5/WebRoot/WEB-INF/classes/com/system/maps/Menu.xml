@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap>
+
+	<typeAlias alias="Menu" type="com.system.vo.Menu" />
+
+	<select id="getAllMenus" resultClass="java.util.HashMap" parameterClass="java.lang.String" remapResults="true">
+		$sql$
+	</select>
+	
+	<select id="parentMenus" resultClass="java.util.HashMap" parameterClass="java.lang.String" remapResults="true">
+		$sql$
+	</select>
+	
+	<insert id="addMenu" parameterClass="Menu">
+		insert into t_menu (menuname,menuurl,isfather,pid,remark) values (#menuname#,#menuurl#,#isfather#,#pid#,#remark#)  
+ 
+	</insert>
+
+	
+
+	<update id="updateMenu" parameterClass="Menu">
+		 update t_menu set id=#id#,menuname=#menuname#,menuurl=#menuurl#,isfather=#isfather#,pid=#pid#,remark=#remark# where id=#id#
+
+	</update>
+
+	
+
+</sqlMap>

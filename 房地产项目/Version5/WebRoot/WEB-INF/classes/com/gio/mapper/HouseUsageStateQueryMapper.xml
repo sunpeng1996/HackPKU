@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gio.mapper.HouseUsageStateQueryMapper" >
+
+	
+	<select id="getAllBuildings" resultType="com.gio.po.Building">
+		select 
+		id bid,
+		lymc bname
+		from t_lyjcxx
+	</select>
+	<select id="QueryHouseUsageState" resultType="com.gio.vo.HouseUsageStateQueryVo" parameterType="int">
+		select
+		thu.usage ,
+		count(trn.data_9) `count`
+		from t_rental_no trn,t_house th ,t_lyjcxx tly,t_house_usage thu
+		where trn.data_2 = th.id and tly.id = th.data_2 and thu.id = trn.data_9 and tly.id = ${value}
+		group by trn.data_9
+		union all 
+		select 
+		thu.usage ,
+		count(try.data_9) `count`
+		from t_rental_yes try,t_house th ,t_lyjcxx tly,t_house_usage thu
+		where try.data_2 = th.id and tly.id = th.data_2 and thu.id = try.data_9 and tly.id = ${value}
+		group by try.data_9
+		
+	</select>
+</mapper>

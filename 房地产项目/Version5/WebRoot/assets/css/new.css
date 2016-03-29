@@ -1,0 +1,46 @@
+#snav a:link {
+    float: left;
+    text-decoration: none;
+    width: 100%;
+}
+#snav a:hover {
+    background: #ffbe20 none repeat scroll 0 0;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+}
+#snav {
+    height: 20px;
+    position: relative;
+    z-index: 100;
+}
+#snav .list {
+    background: #ffe59f none repeat scroll 0 0;
+    border: 1px solid #ffc323;
+    font-weight: normal;
+    line-height: 27px;
+    margin: 0 12px;
+    max-height: 300px;
+    overflow: auto;
+    padding: 4px 6px;
+    position: relative;
+    text-align: left;
+    z-index: 100;
+}
+#snav .menu1 {
+    background: rgba(0, 0, 0, 0) url("../img/snav.png") no-repeat scroll 0 0;
+    font-weight: bold;
+    height: auto;
+    line-height: 27px;
+    overflow-y: hidden;
+    width: 128px;
+	cursor:pointer;
+}
+#snav .menu2 {
+    background: rgba(0, 0, 0, 0) url("../img/snav.png") no-repeat scroll 0 0;
+    font-weight: bold;
+    height: 27px;
+    line-height: 27px;
+    overflow-y: hidden;
+    width: 128px;
+}

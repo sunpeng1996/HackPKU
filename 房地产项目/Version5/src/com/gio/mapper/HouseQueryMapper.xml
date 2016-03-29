@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gio.mapper.HouseQueryMapper" >
+
+	
+	<select id="QueryHouseByNames" resultType="com.gio.vo.HouseQueryVo" parameterType="com.gio.po.Names">
+		select 
+		th.id th_id,
+		th.data_2 th_lyid,
+		th.data_13 owner_name,
+		ty.data_6 user_name,
+		ty.data_12 rental_name,
+		
+		th.data_14 owner_idtype,
+		th.data_15 owner_id,
+		ty.data_7 user_idtype,
+		ty.data_8 user_id,
+		ty.data_13 rental_idtype,
+		ty.data_14 rental_id,
+		thu.usage usage_type
+		from 
+		t_house th,t_rental_yes ty,t_house_usage thu
+		<where>
+			th.id = ty.data_2
+			AND thu.id = ty.data_9
+			<if test="owner_name!=null and owner_name!=''">
+				AND th.data_13 LIKE '%${owner_name}%'
+	   		</if>
+	   		
+			<if test="user_name!=null and user_name!=''">
+				AND ty.data_6 LIKE '%${user_name}%'
+	   		</if>
+	   		
+			<if test="rental_name!=null and rental_name!=''">
+				AND ty.data_12 LIKE '%${rental_name}%'
+	   		</if>
+		</where>
+	</select>
+	<select id="getHouseMsg" parameterType="com.gio.po.Position" resultType="com.gio.po.HouseMsg">
+		select 
+		th.id id,
+		th.data_6 mark,
+		thu.`usage` `usage`,
+		th.data_4 `floor`,
+		th.data_5 num,
+		th.data_13 owner_name,
+		th.data_11 date_begin,
+		th.data_17 date_end
+		from t_house th,t_house_usage thu
+		where th.data_3 = thu.id and th.data_2 = ${bid} and th.data_4 = ${floor} and th.data_5 = ${num}
+	</select>
+</mapper>
