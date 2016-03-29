@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="HackPKU Maven Webapp">
-        <wb-resource deploy-path="/" source-path="/target/m2e-jee/web-resources"/>
+    <wb-module deploy-name="QuickClub">
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/HackPKU Maven Webapp/WebRoot/WEB-INF/classes"/>
-        <property name="context-root" value="HackPKU"/>
+        <property name="context-root" value="QuickClub"/>
+        <property name="java-output-path" value="/QuickClub/WebRoot/WEB-INF/classes"/>
     </wb-module>
 </project-modules>
