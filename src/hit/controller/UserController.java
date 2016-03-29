@@ -3,7 +3,7 @@ package hit.controller;
  * 用户模块控制器
  */
 import hit.po.User;
-import hit.service.impl.UserService;
+import hit.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
