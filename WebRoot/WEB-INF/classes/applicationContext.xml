@@ -48,10 +48,10 @@
 	
 	</bean>
 
-    <bean id="SqlServerClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+   <!--  <bean id="SqlServerClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
         <property name="configLocation" value="WEB-INF/sqlmap-config.xml" />
         <property name="dataSource" ref="dataSource" />
-    </bean>
+    </bean> -->
     
     
 	<!-- sqlSessionFactory -->

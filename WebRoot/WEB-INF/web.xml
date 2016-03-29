@@ -19,13 +19,13 @@
 	
 	
 	<servlet>
-		<servlet-name>spring</servlet-name>
+		<servlet-name>springmvc</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>spring</servlet-name>
-		<url-pattern>/</url-pattern>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	
 	
@@ -56,7 +56,7 @@
 	</filter-mapping>
  -->
 
-	<servlet>
+	<!-- <servlet>
 		<servlet-name>dwr-invoker</servlet-name>
 		<servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
 		<init-param>
@@ -139,7 +139,7 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.woff</url-pattern>
 	</servlet-mapping>
-	
+	 -->
 	<session-config>
     	<session-timeout>30</session-timeout>
   	</session-config>

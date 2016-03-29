@@ -5,8 +5,5 @@
         lazyLoadingEnabled="true" errorTracingEnabled="true" maxRequests="32"  
         maxSessions="10" maxTransactions="5" useStatementNamespaces="false" />
  
-  <sqlMap resource="com/system/maps/User.xml"/>
-  <sqlMap resource="com/system/maps/Login.xml"/>
-  <sqlMap resource="com/system/maps/Role.xml"/>
-  <sqlMap resource="com/system/maps/Menu.xml"/>
+<!--   <sqlMap resource="com/system/maps/User.xml"/> -->
 </sqlMapConfig>
