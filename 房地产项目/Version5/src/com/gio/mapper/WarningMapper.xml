@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gio.mapper.WarningMapper" >
+	<select id="getWarnedHouse" resultType="com.gio.po.HouseVo" parameterType="string">
+		<![CDATA[
+		select 
+		th.id hid,
+		th.data_6 fybh,
+		thu.`usage` `usage`,
+		th.data_4 `floor`,
+		th.data_5 fanghao,
+		th.data_13 owner_name,
+        h.date_end date_end
+		from
+		(
+		select th.id hid,
+               try.data_21 date_end
+		from 
+		t_rental_yes try ,t_house th
+		where try.data_2 =  th.id
+		 and try.data_21 < '${value}' 
+		union
+		select th.id hid,
+               trn.data_17 date_end
+		from 
+		t_rental_no trn ,t_house th
+		where trn.data_2 =  th.id
+		 and trn.data_17 <'${value}' 
+		) h,t_house th ,t_house_usage thu
+		where h.hid = th.id and thu.id = th.data_3	
+		order by hid
+		  ]]>
+	</select>
+	<select id="getRentalWarnedHouseByBid" resultType="com.gio.po.HouseVo" parameterType="int">
+	<![CDATA[
+		select  
+		th.id hid,
+		th.data_6 fybh,
+		thu.`usage` `usage`,
+		th.data_4 `floor`,
+		th.data_5 fanghao,
+		th.data_13 owner_name,
+		try.data_19/try.data_15 rent_money_per_square,
+		try.data_15 square,
+		try.data_19 rent_money
+		from t_rental_yes try,t_house th,t_house_usage thu
+		where try.data_19/try.data_15 <
+		(select AVG(try.data_19/try.data_15)- 400 avg
+		from t_rental_yes try ,t_house th
+		where th.data_2 = ${value}
+		and try.data_2 =  th.id)
+		and try.data_2 =  th.id
+		and thu.id = th.data_3	
+		and th.data_2 = ${value}
+		
+		  ]]>
+	</select>
+	<select id="getWarnedFloor" resultType='java.lang.Integer' parameterType="com.gio.po.FloorPo">
+	<![CDATA[
+		select 
+		th.data_4 `floor`
+		from
+		(
+		select th.id hid,
+		       try.data_21 date_end
+		from 
+		t_rental_yes try ,t_house th
+		where try.data_2 =  th.id
+		 and try.data_21 < '${timestamp}' 
+		union
+		select th.id hid,
+		       trn.data_17 date_end
+		from 
+		t_rental_no trn ,t_house th
+		where trn.data_2 =  th.id
+		 and trn.data_17 <'${timestamp}' 
+		) h,t_house th ,t_house_usage thu
+		where h.hid = th.id and thu.id = th.data_3	and  th.data_2 = ${floor}
+		union
+		select  
+		th.data_4 `floor`
+		from t_rental_yes try,t_house th,t_house_usage thu
+		where try.data_19/try.data_15 <
+		(select AVG(try.data_19/try.data_15) avg
+		from t_rental_yes try ,t_house th
+		where th.data_2 = ${floor}
+		and try.data_2 =  th.id)
+		and try.data_2 =  th.id
+		and thu.id = th.data_3
+		and th.data_2 = ${floor}
+		]]>
+	</select>
+	<select id="getWarnedHouseByFloor" resultType='java.lang.Integer' parameterType="com.gio.po.Position">
+		select th.data_5
+		from t_house th
+		where th.data_4 = ${floor} and th.data_2 = ${bid}
+	</select>
+</mapper>
+	
