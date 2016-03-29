@@ -79,7 +79,7 @@
      	     <property name="dataSource" ref="dataSource" />
      </bean>
      -->
- <!-- 
+ 
     <bean id="txManager"
         class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
@@ -88,7 +88,7 @@
     <tx:annotation-driven transaction-manager="txManager" />
     
     <aop:config>
-        <aop:pointcut id="baseServiceMethods" expression="execution(* com.*.*(..))" />
+        <aop:pointcut id="baseServiceMethods" expression="execution(* hit.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="baseServiceMethods" />
     </aop:config>
 
@@ -104,5 +104,5 @@
             <tx:method name="delete*" propagation="REQUIRED" isolation="REPEATABLE_READ" rollback-for="java.lang.RuntimeException" />
         </tx:attributes>
     </tx:advice>
-     -->
+     
 </beans>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hit.mapper.ClubMapper" >
+  <resultMap id="BaseResultMap" type="hit.po.Club" >
+    <id column="club_id" property="clubId" jdbcType="INTEGER" />
+    <result column="clubname" property="clubname" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="setuptime" property="setuptime" jdbcType="TIMESTAMP" />
+    <result column="validationState" property="validationstate" jdbcType="INTEGER" />
+    <result column="user_id_leader" property="userIdLeader" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    club_id, clubname, description, image, setuptime, validationState, user_id_leader
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from club
+    where club_id = #{clubId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from club
+    where club_id = #{clubId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="hit.po.Club" >
+    insert into club (club_id, clubname, description, 
+      image, setuptime, validationState, 
+      user_id_leader)
+    values (#{clubId,jdbcType=INTEGER}, #{clubname,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{setuptime,jdbcType=TIMESTAMP}, #{validationstate,jdbcType=INTEGER}, 
+      #{userIdLeader,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="hit.po.Club" >
+    insert into club
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="clubId != null" >
+        club_id,
+      </if>
+      <if test="clubname != null" >
+        clubname,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="setuptime != null" >
+        setuptime,
+      </if>
+      <if test="validationstate != null" >
+        validationState,
+      </if>
+      <if test="userIdLeader != null" >
+        user_id_leader,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="clubId != null" >
+        #{clubId,jdbcType=INTEGER},
+      </if>
+      <if test="clubname != null" >
+        #{clubname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="setuptime != null" >
+        #{setuptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validationstate != null" >
+        #{validationstate,jdbcType=INTEGER},
+      </if>
+      <if test="userIdLeader != null" >
+        #{userIdLeader,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hit.po.Club" >
+    update club
+    <set >
+      <if test="clubname != null" >
+        clubname = #{clubname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="setuptime != null" >
+        setuptime = #{setuptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validationstate != null" >
+        validationState = #{validationstate,jdbcType=INTEGER},
+      </if>
+      <if test="userIdLeader != null" >
+        user_id_leader = #{userIdLeader,jdbcType=INTEGER},
+      </if>
+    </set>
+    where club_id = #{clubId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hit.po.Club" >
+    update club
+    set clubname = #{clubname,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      setuptime = #{setuptime,jdbcType=TIMESTAMP},
+      validationState = #{validationstate,jdbcType=INTEGER},
+      user_id_leader = #{userIdLeader,jdbcType=INTEGER}
+    where club_id = #{clubId,jdbcType=INTEGER}
+  </update>
+</mapper>

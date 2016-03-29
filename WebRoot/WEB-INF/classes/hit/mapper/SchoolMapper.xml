@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hit.mapper.SchoolMapper" >
+  <resultMap id="BaseResultMap" type="hit.po.School" >
+    <id column="sch_id" property="schId" jdbcType="INTEGER" />
+    <result column="schoolname" property="schoolname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sch_id, schoolname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from school
+    where sch_id = #{schId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from school
+    where sch_id = #{schId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="hit.po.School" >
+    insert into school (sch_id, schoolname)
+    values (#{schId,jdbcType=INTEGER}, #{schoolname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="hit.po.School" >
+    insert into school
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="schId != null" >
+        sch_id,
+      </if>
+      <if test="schoolname != null" >
+        schoolname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="schId != null" >
+        #{schId,jdbcType=INTEGER},
+      </if>
+      <if test="schoolname != null" >
+        #{schoolname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hit.po.School" >
+    update school
+    <set >
+      <if test="schoolname != null" >
+        schoolname = #{schoolname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sch_id = #{schId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hit.po.School" >
+    update school
+    set schoolname = #{schoolname,jdbcType=VARCHAR}
+    where sch_id = #{schId,jdbcType=INTEGER}
+  </update>
+</mapper>

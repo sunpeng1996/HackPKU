@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hit.mapper.TimeMapper">
+  <resultMap id="BaseResultMap" type="hit.po.Time">
+    <id column="time_id" jdbcType="INTEGER" property="timeId" />
+    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="month" jdbcType="INTEGER" property="month" />
+    <result column="week" jdbcType="INTEGER" property="week" />
+    <result column="day" jdbcType="INTEGER" property="day" />
+    <result column="classNum" jdbcType="INTEGER" property="classnum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    time_id, year, month, week, day, classNum
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from time
+    where time_id = #{timeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from time
+    where time_id = #{timeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="hit.po.Time">
+    insert into time (time_id, year, month, 
+      week, day, classNum
+      )
+    values (#{timeId,jdbcType=INTEGER}, #{year,jdbcType=INTEGER}, #{month,jdbcType=INTEGER}, 
+      #{week,jdbcType=INTEGER}, #{day,jdbcType=INTEGER}, #{classnum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hit.po.Time">
+    insert into time
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="timeId != null">
+        time_id,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="month != null">
+        month,
+      </if>
+      <if test="week != null">
+        week,
+      </if>
+      <if test="day != null">
+        day,
+      </if>
+      <if test="classnum != null">
+        classNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="timeId != null">
+        #{timeId,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null">
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="week != null">
+        #{week,jdbcType=INTEGER},
+      </if>
+      <if test="day != null">
+        #{day,jdbcType=INTEGER},
+      </if>
+      <if test="classnum != null">
+        #{classnum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hit.po.Time">
+    update time
+    <set>
+      <if test="year != null">
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null">
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="week != null">
+        week = #{week,jdbcType=INTEGER},
+      </if>
+      <if test="day != null">
+        day = #{day,jdbcType=INTEGER},
+      </if>
+      <if test="classnum != null">
+        classNum = #{classnum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where time_id = #{timeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hit.po.Time">
+    update time
+    set year = #{year,jdbcType=INTEGER},
+      month = #{month,jdbcType=INTEGER},
+      week = #{week,jdbcType=INTEGER},
+      day = #{day,jdbcType=INTEGER},
+      classNum = #{classnum,jdbcType=INTEGER}
+    where time_id = #{timeId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="hit.po.Time">
+    <id column="time_id" jdbcType="INTEGER" property="timeId" />
+    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="month" jdbcType="INTEGER" property="month" />
+    <result column="week" jdbcType="INTEGER" property="week" />
+    <result column="day" jdbcType="INTEGER" property="day" />
+    <result column="class" jdbcType="INTEGER" property="class" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    time_id, year, month, week, day, class
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from time
+    where time_id = #{timeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from time
+    where time_id = #{timeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="hit.po.Time">
+    insert into time (time_id, year, month, 
+      week, day, class)
+    values (#{timeId,jdbcType=INTEGER}, #{year,jdbcType=INTEGER}, #{month,jdbcType=INTEGER}, 
+      #{week,jdbcType=INTEGER}, #{day,jdbcType=INTEGER}, #{class,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="hit.po.Time">
+    insert into time
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="timeId != null">
+        time_id,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="month != null">
+        month,
+      </if>
+      <if test="week != null">
+        week,
+      </if>
+      <if test="day != null">
+        day,
+      </if>
+      <if test="class != null">
+        class,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="timeId != null">
+        #{timeId,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null">
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="week != null">
+        #{week,jdbcType=INTEGER},
+      </if>
+      <if test="day != null">
+        #{day,jdbcType=INTEGER},
+      </if>
+      <if test="class != null">
+        #{class,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hit.po.Time">
+    update time
+    <set>
+      <if test="year != null">
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null">
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="week != null">
+        week = #{week,jdbcType=INTEGER},
+      </if>
+      <if test="day != null">
+        day = #{day,jdbcType=INTEGER},
+      </if>
+      <if test="class != null">
+        class = #{class,jdbcType=INTEGER},
+      </if>
+    </set>
+    where time_id = #{timeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hit.po.Time">
+    update time
+    set year = #{year,jdbcType=INTEGER},
+      month = #{month,jdbcType=INTEGER},
+      week = #{week,jdbcType=INTEGER},
+      day = #{day,jdbcType=INTEGER},
+      class = #{class,jdbcType=INTEGER}
+    where time_id = #{timeId,jdbcType=INTEGER}
+  </update>
+</mapper>

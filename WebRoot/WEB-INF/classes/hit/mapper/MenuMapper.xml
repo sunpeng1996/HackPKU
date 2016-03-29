@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hit.mapper.MenuMapper" >
+  <resultMap id="BaseResultMap" type="hit.po.Menu" >
+    <id column="menu_id" property="menuId" jdbcType="INTEGER" />
+    <result column="menuname" property="menuname" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="isfather" property="isfather" jdbcType="INTEGER" />
+    <result column="menu_id_parent" property="menuIdParent" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    menu_id, menuname, url, isfather, menu_id_parent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="hit.po.Menu" >
+    insert into menu (menu_id, menuname, url, 
+      isfather, menu_id_parent)
+    values (#{menuId,jdbcType=INTEGER}, #{menuname,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{isfather,jdbcType=INTEGER}, #{menuIdParent,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="hit.po.Menu" >
+    insert into menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="menuname != null" >
+        menuname,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="isfather != null" >
+        isfather,
+      </if>
+      <if test="menuIdParent != null" >
+        menu_id_parent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="menuname != null" >
+        #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="isfather != null" >
+        #{isfather,jdbcType=INTEGER},
+      </if>
+      <if test="menuIdParent != null" >
+        #{menuIdParent,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hit.po.Menu" >
+    update menu
+    <set >
+      <if test="menuname != null" >
+        menuname = #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="isfather != null" >
+        isfather = #{isfather,jdbcType=INTEGER},
+      </if>
+      <if test="menuIdParent != null" >
+        menu_id_parent = #{menuIdParent,jdbcType=INTEGER},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hit.po.Menu" >
+    update menu
+    set menuname = #{menuname,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      isfather = #{isfather,jdbcType=INTEGER},
+      menu_id_parent = #{menuIdParent,jdbcType=INTEGER}
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+</mapper>

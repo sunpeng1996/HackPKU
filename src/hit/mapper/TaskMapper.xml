@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hit.mapper.TaskMapper">
+  <resultMap id="BaseResultMap" type="hit.po.Task">
+    <id column="task_id" jdbcType="INTEGER" property="taskId" />
+    <result column="taskname" jdbcType="VARCHAR" property="taskname" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="totalscore" jdbcType="INTEGER" property="totalscore" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="time_id_begin" jdbcType="INTEGER" property="timeIdBegin" />
+    <result column="time_id_end" jdbcType="INTEGER" property="timeIdEnd" />
+    <result column="user_id_leader" jdbcType="INTEGER" property="userIdLeader" />
+    <result column="club_id" jdbcType="INTEGER" property="clubId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    task_id, taskname, summary, totalscore, state, time_id_begin, time_id_end, user_id_leader, 
+    club_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="hit.po.Task">
+    insert into task (task_id, taskname, summary, 
+      totalscore, state, time_id_begin, 
+      time_id_end, user_id_leader, club_id
+      )
+    values (#{taskId,jdbcType=INTEGER}, #{taskname,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{totalscore,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{timeIdBegin,jdbcType=INTEGER}, 
+      #{timeIdEnd,jdbcType=INTEGER}, #{userIdLeader,jdbcType=INTEGER}, #{clubId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hit.po.Task">
+    insert into task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="taskname != null">
+        taskname,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+      <if test="totalscore != null">
+        totalscore,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="timeIdBegin != null">
+        time_id_begin,
+      </if>
+      <if test="timeIdEnd != null">
+        time_id_end,
+      </if>
+      <if test="userIdLeader != null">
+        user_id_leader,
+      </if>
+      <if test="clubId != null">
+        club_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="taskname != null">
+        #{taskname,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="totalscore != null">
+        #{totalscore,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="timeIdBegin != null">
+        #{timeIdBegin,jdbcType=INTEGER},
+      </if>
+      <if test="timeIdEnd != null">
+        #{timeIdEnd,jdbcType=INTEGER},
+      </if>
+      <if test="userIdLeader != null">
+        #{userIdLeader,jdbcType=INTEGER},
+      </if>
+      <if test="clubId != null">
+        #{clubId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hit.po.Task">
+    update task
+    <set>
+      <if test="taskname != null">
+        taskname = #{taskname,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="totalscore != null">
+        totalscore = #{totalscore,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="timeIdBegin != null">
+        time_id_begin = #{timeIdBegin,jdbcType=INTEGER},
+      </if>
+      <if test="timeIdEnd != null">
+        time_id_end = #{timeIdEnd,jdbcType=INTEGER},
+      </if>
+      <if test="userIdLeader != null">
+        user_id_leader = #{userIdLeader,jdbcType=INTEGER},
+      </if>
+      <if test="clubId != null">
+        club_id = #{clubId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hit.po.Task">
+    update task
+    set taskname = #{taskname,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      totalscore = #{totalscore,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      time_id_begin = #{timeIdBegin,jdbcType=INTEGER},
+      time_id_end = #{timeIdEnd,jdbcType=INTEGER},
+      user_id_leader = #{userIdLeader,jdbcType=INTEGER},
+      club_id = #{clubId,jdbcType=INTEGER}
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="hit.po.Task">
+    <id column="task_id" jdbcType="INTEGER" property="taskId" />
+    <result column="taskname" jdbcType="VARCHAR" property="taskname" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="totalscore" jdbcType="INTEGER" property="totalscore" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="time_id_begin" jdbcType="INTEGER" property="timeIdBegin" />
+    <result column="time_id_end" jdbcType="INTEGER" property="timeIdEnd" />
+    <result column="user_id_leader" jdbcType="INTEGER" property="userIdLeader" />
+    <result column="club_id" jdbcType="INTEGER" property="clubId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    task_id, taskname, summary, totalscore, state, time_id_begin, time_id_end, user_id_leader, 
+    club_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="hit.po.Task">
+    insert into task (task_id, taskname, summary, 
+      totalscore, state, time_id_begin, 
+      time_id_end, user_id_leader, club_id
+      )
+    values (#{taskId,jdbcType=INTEGER}, #{taskname,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{totalscore,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{timeIdBegin,jdbcType=INTEGER}, 
+      #{timeIdEnd,jdbcType=INTEGER}, #{userIdLeader,jdbcType=INTEGER}, #{clubId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hit.po.Task">
+    insert into task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="taskname != null">
+        taskname,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+      <if test="totalscore != null">
+        totalscore,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="timeIdBegin != null">
+        time_id_begin,
+      </if>
+      <if test="timeIdEnd != null">
+        time_id_end,
+      </if>
+      <if test="userIdLeader != null">
+        user_id_leader,
+      </if>
+      <if test="clubId != null">
+        club_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="taskname != null">
+        #{taskname,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="totalscore != null">
+        #{totalscore,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="timeIdBegin != null">
+        #{timeIdBegin,jdbcType=INTEGER},
+      </if>
+      <if test="timeIdEnd != null">
+        #{timeIdEnd,jdbcType=INTEGER},
+      </if>
+      <if test="userIdLeader != null">
+        #{userIdLeader,jdbcType=INTEGER},
+      </if>
+      <if test="clubId != null">
+        #{clubId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hit.po.Task">
+    update task
+    <set>
+      <if test="taskname != null">
+        taskname = #{taskname,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="totalscore != null">
+        totalscore = #{totalscore,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="timeIdBegin != null">
+        time_id_begin = #{timeIdBegin,jdbcType=INTEGER},
+      </if>
+      <if test="timeIdEnd != null">
+        time_id_end = #{timeIdEnd,jdbcType=INTEGER},
+      </if>
+      <if test="userIdLeader != null">
+        user_id_leader = #{userIdLeader,jdbcType=INTEGER},
+      </if>
+      <if test="clubId != null">
+        club_id = #{clubId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hit.po.Task">
+    update task
+    set taskname = #{taskname,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      totalscore = #{totalscore,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      time_id_begin = #{timeIdBegin,jdbcType=INTEGER},
+      time_id_end = #{timeIdEnd,jdbcType=INTEGER},
+      user_id_leader = #{userIdLeader,jdbcType=INTEGER},
+      club_id = #{clubId,jdbcType=INTEGER}
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+</mapper>
