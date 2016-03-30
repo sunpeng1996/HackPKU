@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -63,38 +63,35 @@
                        <i class="fa fa-user fa-fw"></i>964873559@qq.com
                     </a>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:login(2);" aria-expanded="false">
-                       <i class="fa fa-user fa-fw"></i>注销
-                    </a>
-                </li>
+                <!-- /.dropdown -->
             </ul>
         </nav>
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
+
                     <li>
-                        <a class="active-menu" href="javascript:void(0);" id="personInfo"><i class="fa fa-dashboard"></i>个人信息</a>
+                        <a class="active-menu" href="javascript:load('signup.html');"><i class="fa fa-dashboard"></i>个人信息</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" id="confirm"><i class="fa fa-desktop"></i>认证</a>
+                        <a href="#"><i class="fa fa-desktop"></i>认证</a>
                     </li>
 					<li>
-                        <a href="javascript:void(0);"  id="myCommunity"><i class="fa fa-bar-chart-o"></i>
+                        <a href="javascript:load('chart.html');"><i class="fa fa-bar-chart-o"></i>
                             我的社团</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" id="myTask"><i class="fa fa-qrcode"></i> 
+                        <a href="#"><i class="fa fa-qrcode"></i> 
                             我的任务</a>
                     </li>
                     
                     <li>
-                        <a href="javascript:void(0);" id="messageManage"><i class="fa fa-table"></i>
+                        <a href="#"><i class="fa fa-table"></i>
                             消息管理</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);"><i class="fa fa-edit"></i>
+                        <a href="#"><i class="fa fa-edit"></i>
                         </a>
                     </li>
 
@@ -137,16 +134,19 @@
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
             <div id="page-inner">
-                
+                <form action="manager.html">
+                    <p>请到邮箱进行确认后再进行操作！</p>
+                    <input type="submit" value="我已确认">
+                    <button>现在确认</button> 
+                </form>
             </div>
         </div>
         <!-- /. PAGE WRAPPER  -->
     </div>
     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="js/jquery-1.10.2.js"></script>
-    <!-- JS Scripts-->
-    <script src="js/manager.js"></script>
     <!-- Bootstrap Js -->
     <script src="js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
@@ -157,7 +157,7 @@
     <!-- Custom Js -->
     <script src="js/custom-scripts.js"></script>
 
-    
+    <script src="js/common.js"></script>
 
 
 </body>
