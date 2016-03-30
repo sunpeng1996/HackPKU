@@ -3,13 +3,14 @@
 <sqlMap>
 	
 	<typeAlias alias="User" type="hit.po.User" />
+	<typeAlias alias="School" type="hit.po.School"/>
 	
 	<insert id="addUser" parameterClass="User">
 			insert into user (username,password,email,phone,image,validationState,province,sch_id) values
 			(#username#,#password#,#email#,#phone#,#image#,#validationstate#,#province#,#schId#)
 	</insert>
  	
-	<update id="updateUser" parameterClass="User">
+	<update id="updateUser" parameterClass="User" >
 			update user set username=#username#,phone=#phone# ,province=#province#,sch_id=#schId#,
 										major=#major#,time=#time#,sex=#sex# where user_id = #userId#
 	</update>
@@ -20,6 +21,10 @@
   	
   	<select id="selectByEmail" resultClass="User" parameterClass="java.util.Map">
   			select U.* from user U where email=#email#
+  	</select>  	
+  	
+  	<select id="findSchoolBySchoolName" resultClass="School" parameterClass="java.lang.String">
+  			select S.*  from school S where schoolname = #schoolname#
   	</select>
 
 </sqlMap>

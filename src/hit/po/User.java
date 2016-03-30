@@ -18,8 +18,12 @@ public class User {
     private Integer validationstate;
 
     private String province;
-
+   
     private Integer schId;
+    
+    
+
+	private School school;
 
     private String major;
 
@@ -28,6 +32,14 @@ public class User {
     private String sex;
 
     private String time;
+    
+    public Integer getSchId() {
+		return schId;
+	}
+
+	public void setSchId(Integer schId) {
+		this.schId = schId;
+	}
 
     public Integer getUserId() {
         return userId;
@@ -93,15 +105,17 @@ public class User {
         this.province = province == null ? null : province.trim();
     }
 
-    public Integer getSchId() {
-        return schId;
-    }
 
-    public void setSchId(Integer schId) {
-        this.schId = schId;
-    }
 
-    public String getMajor() {
+    public School getSchool() {
+		return school;
+	}
+
+	public void setSchool(School school) {
+		this.school = school;
+	}
+
+	public String getMajor() {
         return major;
     }
 

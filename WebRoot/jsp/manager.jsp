@@ -318,7 +318,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </fieldset>
                     <fieldset>
                         <legend>就读学校：</legend>
-                        <input type="text" name="school">
+                        <input type="text" name="schoolname">
                     </fieldset>
                     <fieldset>
                         <legend>学院：</legend>

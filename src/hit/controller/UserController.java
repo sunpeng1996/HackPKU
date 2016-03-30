@@ -1,11 +1,16 @@
 package hit.controller;
 /**
+ * @author 如今我已剑指天涯sunpeng
+ * 
  * 用户模块控制器
  */
+import hit.mapper.SchoolMapper;
+import hit.po.School;
 import hit.po.User;
-
+import hit.service.SchoolService;
 import hit.service.UserService;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Time;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +28,10 @@ import org.springframework.web.servlet.mvc.AbstractController;
 public class UserController extends AbstractController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private SchoolMapper schoolMapper;
+	@Autowired
+	private SchoolService schoolService;
 
 	@Override
 	protected ModelAndView handleRequestInternal(HttpServletRequest request,
@@ -71,34 +80,46 @@ public class UserController extends AbstractController {
 	
 	/**
 	 * 更新用户信息
-	 * @param request
-	 * @param username
-	 * @param school
-	 * @param institute
-	 * @param major
-	 * @param time
-	 * @param phone
-	 * @param sex
-	 * @param province
-	 * @return
+	 * @author sunpeng123
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value="/user_update.do",method={RequestMethod.POST})
 	public String update(HttpServletRequest request,@RequestParam String username,
-			@RequestParam String school,@RequestParam String institute,@RequestParam String major,
+			@RequestParam String schoolname,@RequestParam String institute,@RequestParam String major,
 			@RequestParam String time,@RequestParam String phone,@RequestParam String sex,
-			@RequestParam String province){
-		
+			@RequestParam String province) throws UnsupportedEncodingException{
+		request.setCharacterEncoding("UTF-8");
 		User user = (User) request.getSession().getAttribute("user");
 		System.out.println("当前用户是"+user.getEmail());
+		Integer id = user.getUserId();
+		String email = user.getEmail();
+		String password = user.getPassword();
+		user.setEmail(email);
+		user.setUserId(id);
+		user.setPassword(password);
 		user.setPhone(phone);
 		user.setProvince(province);
 		user.setUsername(username);
-		//user.setSchId(schId);
+		//通过schoolname得到school对象
+		School school = userService.findSchoolBySchoolName(schoolname);	
+		Integer schid = schoolService.selectSchidBySchoolName(schoolname);
+		if(school==null){
+			//说明school在数据库中没有，那么我们new一个就好了
+			School temp = new School();
+			schoolMapper.insert(temp);//持久化到数据库中			
+			temp.setSchoolname(schoolname);			
+			Integer tempid = schoolService.selectSchidBySchoolName(temp.getSchoolname());
+			user.setSchool(temp);
+			user.setSchId(tempid);			
+		}		else {
+			user.setSchool(school);
+			user.setSchId(schid);
+		}
+	
 		user.setMajor(major);
 		user.setInstitute(institute);
 		user.setTime(time);
 		user.setSex(sex);
-	
 		request.getSession().setAttribute("user", user);
 		
 		userService.updateUser(user);
@@ -106,7 +127,17 @@ public class UserController extends AbstractController {
 		return "index";
 			
 	}
-	
+	/**
+	 * 注销登录
+	 * @return
+	 */
+	@RequestMapping(value="/user_quit.do")
+	public String quit(HttpServletRequest request){
+		User user = (User) request.getAttribute("user");
+		request.getSession().removeAttribute("user");		//将user对象从session中移除
+		
+		return "index";
+	}
 	
 	
 }

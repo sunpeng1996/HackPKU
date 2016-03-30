@@ -6,8 +6,6 @@
 </head>
 <html>
 
-
-
 <%
 	String errorMessage =(String) request.getSession().getAttribute("error");
 %>

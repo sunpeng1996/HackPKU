@@ -4,6 +4,7 @@ package hit.service.impl;
  */
 import hit.common.BaseDao;
 import hit.mapper.UserMapper;
+import hit.po.School;
 import hit.po.User;
 import hit.service.UserService;
 
@@ -22,6 +23,10 @@ public class UserServiceImpl extends BaseDao implements UserService {
 	
 	
 	@Override
+	/**
+	 * @author sunpeng123
+	 * todo：根据email查询User对象
+	 */
 	public User selectByEmail(String email) {
 		Map map = new HashMap();
 		map.put("email", email);
@@ -45,11 +50,17 @@ public class UserServiceImpl extends BaseDao implements UserService {
 			return "fail";
 		}
 	}
-
+	
+/**
+ * @author sunpeng123
+ * 更新用户
+ */
 	@SuppressWarnings("deprecation")
 	public void updateUser(User user) {
 		try {
-			getSqlMapClientTemplate().insert("updateUser", user);
+			getSqlMapClientTemplate().update("updateUser", user);
+			System.out.println("正在更新用户："+user.getUsername());
+			System.out.println(user.getUsername() + " link  "+ user.getEmail());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,9 +82,30 @@ public class UserServiceImpl extends BaseDao implements UserService {
 		
 	}
 
+	@Override
+	/**
+	 * @author sunpeng123
+	 * todo:根据学校名称查询学习对象
+	 */
+	public School findSchoolBySchoolName(String schoolname) {
+		try {
+			List<School> schools = getSqlMapClientTemplate().queryForList("findSchoolBySchoolName", schoolname);
+			if (schools.size()>0) {
+				return (School)schools.get(0);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;		
+	}
 
-
-	
-
-	
 }
+
+	
+
+
+
+	
+
+	
+

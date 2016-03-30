@@ -2,6 +2,7 @@ package hit.service;
 
 import org.springframework.stereotype.Component;
 
+import hit.po.School;
 import hit.po.User;
 
 /**
@@ -21,6 +22,10 @@ public interface UserService {
 		public void updateUser(User user);
 
 		public User login(String password, String email);
+
+		//通过schoolname得到school对象
+		public School findSchoolBySchoolName(String schoolname);	
+	
 		
 		
 }
