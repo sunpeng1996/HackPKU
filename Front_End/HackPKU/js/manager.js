@@ -29,3 +29,8 @@ function addActive(index) {
 	};
 	$(index).addClass("active-menu");
 }
+
+function quitTask() {
+	var task = document.getElementById("tasks");
+	task.style.display = "none";
+}
