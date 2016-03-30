@@ -13,7 +13,8 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Component;
+@Component
 public class UserServiceImpl extends BaseDao implements UserService {
 	
 	@Autowired 
@@ -37,11 +38,20 @@ public class UserServiceImpl extends BaseDao implements UserService {
 		}		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public String createUser(User user) {
-		   userMapper.insert(user);
-		   return null;
+	public String addUser(User user) {
+		try {
+			getSqlMapClientTemplate().insert("addUser", user);
+			return "success";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "fail";
+		}
 	}
+
+
 
 	
 

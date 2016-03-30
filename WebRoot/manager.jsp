@@ -1,6 +1,9 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -307,30 +310,31 @@
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
             <div id="page-inner">
-                <form>
+            	
+                <form action="<%=path%>/user_update.do" method="post">
                     <fieldset>
                         <legend>姓名：</legend>
                         <input type="text" name="username">
                     </fieldset>
                     <fieldset>
                         <legend>就读学校：</legend>
-                        <input type="text" name="universaty">
+                        <input type="text" name="school">
                     </fieldset>
                     <fieldset>
                         <legend>学院：</legend>
-                        <input type="text" name="school">  
+                        <input type="text" name="institute">  
                     </fieldset>
                     <fieldset>
                         <legend>专业：</legend>
                         <input type="text" name="major">
                     </fieldset>
                     <fieldset>
-                        <legend>学历：</legend>
-                        <input type="text" name="education">
-                    </fieldset>
-                    <fieldset>
-                        <legend>在校时间：</legend>
+                        <legend>入学时间：</legend>
                         <input type="text" name="time">
+                    </fieldset>
+                     <fieldset>
+                        <legend>手机：</legend>
+                        <input type="text" name="phone">
                     </fieldset>
                     <fieldset>
                         <legend>性别：</legend>
@@ -338,7 +342,7 @@
                     </fieldset>
                     <fieldset>
                         <legend>所在地：</legend>
-                        <input type="text" name="location">
+                        <input type="text" name="province">
                     </fieldset>
                     <input type="submit" name="submit" value="确认信息">
                 </form>

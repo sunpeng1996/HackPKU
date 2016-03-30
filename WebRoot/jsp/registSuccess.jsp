@@ -23,6 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page.  adadada <br>
+  		注册成功，马上跳转主页，请稍后！
   </body>
 </html>

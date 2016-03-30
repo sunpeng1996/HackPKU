@@ -131,7 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <form name="loginForm" action="<%=path%>/user_regist.do" method="post">
                   <!-- start of login form -->
                   <div id="user-name">
-                    <input type="text" name="username" placeholder="请输入邮箱">
+                    <input type="text" name="email" placeholder="请输入邮箱">
                   </div>
                   <p></p>
                   <div id="user-password">

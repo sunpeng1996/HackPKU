@@ -4,7 +4,10 @@
 	
 	<typeAlias alias="User" type="hit.po.User" />
 	
-	
+	<insert id="addUser" parameterClass="User">
+			insert into user (username,password,email,phone,image,validationState,province,sch_id) values
+			(#username#,#password#,#email#,#phone#,#image#,#validationstate#,#province#,#schId#)
+	</insert>
  	
 	
 	
