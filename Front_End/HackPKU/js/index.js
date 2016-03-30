@@ -1,6 +1,6 @@
 // 登陆注册窗口显示
-window.onload = function(){
- 	
+
+(function(){
  	var lgLi=document.getElementById("lgmain").getElementsByTagName("li");
 	var showlg_1=document.getElementById("showlg_1");
 	var showlg_2=document.getElementById("showlg_2");
@@ -18,7 +18,19 @@ window.onload = function(){
 		}	
 	};
 
-}
+	var login_index=document.getElementById("login_index");
+	var signup_index=document.getElementById("signup_index");
+	var exit = document.getElementById("exit");
+	login_index.onclick = function (){
+		login(2);
+	}
+	signup_index.onclick = function (){
+		login(1);
+	}
+	exit.onclick = function (){
+		noshow();
+	}
+})();
 
 //登陆与注册模块显示
 function login (i) {
@@ -49,3 +61,5 @@ function noshow() {
 	loginbg.style.display = "none";
 	lgmain.style.display = "none";
 }
+
+
