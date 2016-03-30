@@ -1,5 +1,7 @@
 package hit.po;
 
+import java.util.Date;
+
 public class User {
     private Integer userId;
 
@@ -18,6 +20,14 @@ public class User {
     private String province;
 
     private Integer schId;
+
+    private String major;
+
+    private String institute;
+
+    private String sex;
+
+    private String time;
 
     public Integer getUserId() {
         return userId;
@@ -89,5 +99,37 @@ public class User {
 
     public void setSchId(Integer schId) {
         this.schId = schId;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major == null ? null : major.trim();
+    }
+
+    public String getInstitute() {
+        return institute;
+    }
+
+    public void setInstitute(String institute) {
+        this.institute = institute == null ? null : institute.trim();
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

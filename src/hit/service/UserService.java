@@ -17,6 +17,8 @@ public interface UserService {
 		public User selectByEmail(String email);
 		
 		public String addUser(User user);
+
+		public void updateUser(User user);
 		
 		
 }

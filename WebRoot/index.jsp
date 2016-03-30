@@ -107,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            </div>
            <div class="login" id="showlg_2">
             <!--表单验证===================================================-->
-             <form name="loginForm" action="" method="post">
+             <form name="loginForm" action="<%=path %>/user_login.do" method="post">
                   <!-- start of login form -->
                   <div id="user-name">
                     <input type="text" name="username" placeholder="请输入邮箱账号">

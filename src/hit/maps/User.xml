@@ -9,7 +9,10 @@
 			(#username#,#password#,#email#,#phone#,#image#,#validationstate#,#province#,#schId#)
 	</insert>
  	
-	
+	<update id="updateUser" parameterClass="User">
+			update user set username=#username#,phone=#phone# ,province=#province#,sch_id=#schId#,
+										major=#major#,time=#time#,sex=#sex# where user_id = #userId#
+	</update>
 	
 
 </sqlMap>
