@@ -16,5 +16,7 @@ public interface UserService {
 
 		public User selectByEmail(String email);
 		
+		public String createUser(User user);
+		
 		
 }

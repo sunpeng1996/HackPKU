@@ -55,8 +55,8 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
  -->
-
-	<!-- <servlet>
+<!-- 
+	 <servlet>
 		<servlet-name>dwr-invoker</servlet-name>
 		<servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
 		<init-param>
@@ -138,8 +138,8 @@
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.woff</url-pattern>
-	</servlet-mapping>
-	 -->
+	</servlet-mapping> -->
+	 
 	<session-config>
     	<session-timeout>30</session-timeout>
   	</session-config>

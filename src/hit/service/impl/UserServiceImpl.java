@@ -2,16 +2,23 @@ package hit.service.impl;
 /**
  *service实现类
  */
+import hit.common.BaseDao;
+import hit.mapper.UserMapper;
+import hit.po.User;
+import hit.service.UserService;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import hit.common.BaseDao;
-import hit.po.User;
-import hit.service.UserService;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserServiceImpl extends BaseDao implements UserService {
-
+	
+	@Autowired 
+	private UserMapper userMapper;
+	
 	@Override
 	public User login() {
 		// TODO Auto-generated method stub
@@ -27,8 +34,16 @@ public class UserServiceImpl extends BaseDao implements UserService {
 			return null;
 		} else {			
 			return (User)list.get(0);
-		}
-		
+		}		
 	}
+
+	@Override
+	public String createUser(User user) {
+		   userMapper.insert(user);
+		   return null;
+	}
+
+	
+
 	
 }

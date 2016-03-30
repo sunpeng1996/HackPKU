@@ -48,10 +48,10 @@
 	
 	</bean>
 
-<!--     <bean id="SqlServerClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
-        <property name="configLocation" value="WEB-INF/sqlmap-config.xml" />
+      <bean id="SqlServerClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="configLocation" value="classpath:sqlmap-config.xml" />
         <property name="dataSource" ref="dataSource" />
-    </bean>  -->
+     </bean>   
     
     
 	<!-- sqlSessionFactory -->
@@ -59,7 +59,7 @@
 		<!-- 数据库连接池 -->
 		<property name="dataSource" ref="dataSource" />
 		<!-- 加载mybatis的全局配置文件 -->
-		<property name="configLocation" value="WEB-INF/sqlMapConfig.xml" />
+		<property name="configLocation" value="classpath:sqlMapConfig.xml" />
 	</bean>
 	
 	<!-- mapper批量扫描器 -->
@@ -71,8 +71,10 @@
     
     
    <!-- 自动扫描Bean -->
+   
     <context:component-scan base-package="hit"/>
     
+
  <!-- 
     <bean id="txManager"
         class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -82,7 +84,7 @@
     <tx:annotation-driven transaction-manager="txManager" />
     
     <aop:config>
-        <aop:pointcut id="baseServiceMethods" expression="execution(* hit.*(..))" />
+        <aop:pointcut id="baseServiceMethods" expression="execution(* hit.*.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="baseServiceMethods" />
     </aop:config>
 
@@ -97,6 +99,6 @@
             <tx:method name="add*" propagation="REQUIRED" isolation="REPEATABLE_READ" rollback-for="java.lang.RuntimeException" />
             <tx:method name="delete*" propagation="REQUIRED" isolation="REPEATABLE_READ" rollback-for="java.lang.RuntimeException" />
         </tx:attributes>
-    </tx:advice> -->
+    </tx:advice> --> 
      
 </beans>

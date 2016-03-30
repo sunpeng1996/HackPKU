@@ -34,12 +34,21 @@ public class UserController extends AbstractController {
 	@RequestMapping(value="/user_regist.do",method={RequestMethod.POST})
 	public String regist(HttpServletRequest request , @RequestParam String email ,@RequestParam String password ){
 			User user = new User();
-			User temp = userService.selectByEmail(email);
+			user.setEmail(email);
+			user.setPassword(password);
+			System.out.println("过来了");
+		//	User temp = userService.selectByEmail(email);
 			//未完待续
+			userService.createUser(user);
+		/*	if (temp==null) {
+					
+			}*/
 			
 			
-			return password;
+			return "hello";
 		
 	}
+	
+	
 	
 }
