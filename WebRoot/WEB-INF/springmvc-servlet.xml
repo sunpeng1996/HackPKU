@@ -10,6 +10,8 @@
        http://www.springframework.org/schema/mvc  
     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
  	
+ 	
+ 	
  	<!-- spring MVC的核心配置文件 ，配置controller。handlermapping，viewresolve。拦截器-->
  	
  <!--  	<bean id="myController" name="/hello.do" class="hit.controller.TestController" >
@@ -22,10 +24,12 @@
       <context:component-scan base-package="hit.controller" />  
       <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->  
       
+      
+              
       <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />       
        <!--配置视图解析器 对模型视图名称的解析，即在模型视图名称添加前后缀 -->  
        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"  
-       			   p:prefix="/jsp/" p:suffix=".jsp" />  
+       			   p:prefix="/" p:suffix=".jsp"      />  
        			   
        			   
      <!--     附件上传 

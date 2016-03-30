@@ -14,5 +14,12 @@
 										major=#major#,time=#time#,sex=#sex# where user_id = #userId#
 	</update>
 	
+	<select id="login"  resultClass="User"  parameterClass="java.util.Map">
+  			  SELECT U.* FROM user U   WHERE email=#email# AND password=#password#
+  	</select>
+  	
+  	<select id="selectByEmail" resultClass="User" parameterClass="java.util.Map">
+  			select U.* from user U where email=#email#
+  	</select>
 
 </sqlMap>

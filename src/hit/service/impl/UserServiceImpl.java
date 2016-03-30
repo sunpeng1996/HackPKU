@@ -20,17 +20,12 @@ public class UserServiceImpl extends BaseDao implements UserService {
 	@Autowired 
 	private UserMapper userMapper;
 	
-	@Override
-	public User login() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public User selectByEmail(String email) {
 		Map map = new HashMap();
-		map.put("EMAIL", email);
-		List list = getSqlMapClientTemplate().queryForList("user", map);
+		map.put("email", email);
+		List list = getSqlMapClientTemplate().queryForList("selectByEmail", map);
 		if (list.size() == 0 || list == null) {
 			return null;
 		} else {			
@@ -58,6 +53,20 @@ public class UserServiceImpl extends BaseDao implements UserService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public User login(String password, String email){
+		Map map = new HashMap();
+		map.put("email", email);
+		map.put("password", password);
+		List list = getSqlMapClientTemplate().queryForList("login", map);
+		if (list.size() == 0 || list == null) {
+			return null;
+		} else {
+			return (User)list.get(0);
 		}
 		
 	}

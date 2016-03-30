@@ -3,6 +3,7 @@ package hit.controller;
  * 用户模块控制器
  */
 import hit.po.User;
+
 import hit.service.UserService;
 
 import java.sql.Time;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
+
 @Controller
 public class UserController extends AbstractController {
 	@Autowired
@@ -29,10 +31,28 @@ public class UserController extends AbstractController {
 		return null;
 	}
 
-	/*@RequestMapping(value="/login.do",method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(){
-			
-	}*/
+	
+	@RequestMapping(value="/user_login.do",method = {RequestMethod.POST })
+	public String login(HttpServletRequest request,@RequestParam String email,@RequestParam String password){
+		 System.out.println("到达登陆后台0--------------------------------------------");
+		User user = userService.selectByEmail(email);
+	
+		if(user==null){
+			request.getSession().setAttribute("error","登录失败，该邮箱尚未注册");
+			return "jsp/error";
+		}else{
+			User temp = userService.login(password, email);
+			if(temp==null){
+				request.getSession().setAttribute("error","邮箱或密码错误");
+				return "jsp/error";
+			}else{
+				request.getSession().setAttribute("user",temp);
+				System.out.println(temp.getEmail()+"我他妈想看看是谁的邮箱");
+				System.out.println("登录成功，强行调转到主页");
+				return "index";
+			}
+		}			
+	}
 	
 	@RequestMapping(value="/user_regist.do",method={RequestMethod.POST})
 	public String regist(HttpServletRequest request , @RequestParam String email ,@RequestParam String password ){
@@ -44,7 +64,7 @@ public class UserController extends AbstractController {
 			String flag = userService.addUser(user);	
 			request.getSession().setAttribute("user", user);//将用户放入到session域中
 			if (flag.equals("success")) {
-				return "manager";
+				return "jsp/manager";
 			}
 			return "";		
 	}

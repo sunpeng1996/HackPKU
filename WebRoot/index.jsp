@@ -1,4 +1,7 @@
 ﻿<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="http://java.sun.com/jstl/core" %>
+<%@page import="hit.po.User"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -41,6 +44,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body id="page-top" class="index">
+
+
+
     <div id="wrapper"></div>
     <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
@@ -78,8 +84,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         加入我们
                     </a>
                 </li>
+                您好， <c:out value="${user.email }"/>
                 <!-- /.dropdown -->
             </ul>
+            <c:if test="${sessionScope.user==null }">
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:login(2);" aria-expanded="false">
@@ -94,23 +102,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
                 <!-- /.dropdown -->
             </ul>
+            </c:if>
+            
+            <c:if test="sessionScope.user!=null">
+            	  <ul class="nav navbar-top-links navbar-right">
+		                <li class="dropdown">
+		                    <a class="dropdown-toggle" data-toggle="dropdown" href="" aria-expanded="true">
+		                      	您好， <c:out value="${user.email }"/>
+		                    </a>
+		                </li>
+                  	</ul>            
+            </c:if>
+            
         </nav>
         <!-- 登录和注册 -->
+        
+        
+        
     <div id="loginbg">
         <div id="lgmain">
-          <div class="lghead" id="login_id">
-            <ul>
-              <li><a id="register_active" href="javascript:login(1);">注册</a></li>
-               <li><a id="login_active" href="javascript:login(2);">登录</a></li>
-             </ul>
+          <div class="lghead" id="login_id">         
+          			<ul>
+             			 <li><a id="register_active" href="javascript:login(1);">注册</a></li>
+              			 <li><a id="login_active" href="javascript:login(2);">登录</a></li>
+           		    </ul>
+               		
+            
              <a class="exit" href="javascript:noshow()">X</a>
            </div>
            <div class="login" id="showlg_2">
             <!--表单验证===================================================-->
-             <form name="loginForm" action="<%=path %>/user_login.do" method="post">
+             <form name="loginForm" action="<%=path%>/user_login.do" method="post">
                   <!-- start of login form -->
                   <div id="user-name">
-                    <input type="text" name="username" placeholder="请输入邮箱账号">
+                    <input type="text" name="email" placeholder="请输入邮箱账号">
                   </div>
                   <p></p>
                   <div id="user-password">

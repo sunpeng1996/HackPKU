@@ -12,13 +12,15 @@ import hit.po.User;
  */
 @Component
 public interface UserService {
-		public User login();
+		//public User login(String password, String email);
 
 		public User selectByEmail(String email);
 		
 		public String addUser(User user);
 
 		public void updateUser(User user);
+
+		public User login(String password, String email);
 		
 		
 }
