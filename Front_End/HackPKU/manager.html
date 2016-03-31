@@ -9,6 +9,8 @@
     <link href="css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
     <link href="css/font-awesome.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="css/my.css" rel="stylesheet" />
     <!-- Morris Chart Styles-->
     <link href="js/morris/morris-0.4.3.min.css" rel="stylesheet" />
     <!-- Custom Styles-->
@@ -59,13 +61,13 @@
             </ul>
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:login(2);" aria-expanded="false">
+                    <a class="dropdown-toggle" href="manager.html" aria-expanded="false">
                        <i class="fa fa-user fa-fw"></i>964873559@qq.com
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:login(2);" aria-expanded="false">
-                       <i class="fa fa-user fa-fw"></i>注销
+                    <a class="dropdown-toggle" href="index.html" aria-expanded="false">
+                       <i class="fa fa-power-off fa-fw"></i>注销
                     </a>
                 </li>
             </ul>
@@ -137,6 +139,47 @@
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
             <div id="page-inner">
+                <div id="pageInfo">
+                    <nav>
+                        <span>个人信息</span>
+                        <a href="javascript:void(0);" id="edit-Info"><i class="fa fa-icon-edit fa-file">&nbsp;</i>编辑信息</a>
+                    </nav>
+                    <form id="Infomation">
+                        <div>
+                            <span>姓名：</span>
+                            <div class="inner-div">黄运智</div>
+                        </div>
+                        <div>
+                            <span>就读学校：</span>
+                            <div class="inner-div">哈尔滨工业大学</div>
+                        </div>
+                        <div>
+                            <span>学院：</span>
+                            <div class="inner-div">软件学院</div>
+                        </div>
+                        <div>
+                            <span>专业：</span>
+                            <div class="inner-div">软件工程</div>
+                        </div>
+                        <div>
+                            <span>学历：</span>
+                            <div class="inner-div">本科</div>
+                        </div>
+                        <div>
+                            <span>在校时间：</span>
+                            <div class="inner-div">2014-09到2018-07</div>
+                        </div>
+                        <div>
+                            <span>性别：</span>
+                            <div class="inner-div">男</div>
+                        </div>
+                        <div>
+                            <span>所在地：</span>
+                            <div class="inner-div">黑龙江省哈尔滨市</div>
+                        </div>  
+                        <div class="photo"></div>
+                    </form>
+                </div>
                 
             </div>
         </div>
@@ -157,9 +200,7 @@
     <!-- Custom Js -->
     <script src="js/custom-scripts.js"></script>
 
-    
-
-
+    <script type="text/javascript" src="js/upload.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,6 @@
+body {
+	min-width: 1200px;
+}
 #loginbg{
 	display: none;
 	position: fixed;
@@ -110,4 +113,72 @@
 	display: none;
 	position: absolute;
 	margin-top: 11px;
+}
+#pageInfo {
+	padding: 20px;
+	width: 100%;
+	height: 100%;
+	box-shadow: 0 0 10px 0 #09192A;
+}
+#pageInfo > nav {
+	position: relative;
+	font-size: 20px;
+	border-bottom: solid 2px #09192A;
+}
+#pageInfo > nav a {
+	position: absolute;
+	right: 50px;
+	bottom: 0px;
+	color: #77C0FD;
+	display: block;
+	text-decoration: none;
+}
+#Infomation {
+	position: relative;
+	max-width: 900px;
+	margin: 100px auto;
+	font-size: 20px;
+	font-family: "Microsoft YaHei";
+}
+#Infomation > div {
+	position: relative;
+	margin: 20px 50% 20px 0px;
+	width: 450px;
+	height: 50px;
+	line-height: 50px;
+}
+#Infomation span {
+	display: block;
+	float: right;
+	margin-right: 300px;
+}
+/*#Infomation span::after {
+	content: "";
+	display: block;
+	clear: both;
+}*/
+#Infomation .inner-div {
+	position: absolute;
+	width: 250px;
+	height: 100%;
+	right: 0px;
+	/*float: right;*/
+}
+#Infomation nav {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	margin: 0px 100px;
+}
+#Infomation .photo {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	right: 0px;
+	top: 0px;
+	margin: 10px 10%;
+	border: solid 1px #09192A;
+}
+#Infomation .button {
+	
 }

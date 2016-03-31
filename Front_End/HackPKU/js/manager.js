@@ -1,6 +1,6 @@
 (function (){
 	$("#personInfo").bind("click",function() {
-		$("#page-inner").load("personInfo.html");
+		$("#page-inner").load("personInfo.html #pageInfo");
 		addActive('#personInfo');
 	});
 	$("#confirm").bind("click",function() {
@@ -19,8 +19,12 @@
 		$("#page-inner").load("messageManage.html");
 		addActive('#messageManage');
 	});
+	$("#edit-Info").bind("click",function() {
+		$("#page-inner").load("addInfo.html");
+	})
 })();
 
+//活跃的菜单按钮添加样式
 function addActive(index) {
 	var menu_li = document.getElementById('main-menu').getElementsByTagName('li');
 	for (var i = 0; i < menu_li.length; i++) {
@@ -30,7 +34,9 @@ function addActive(index) {
 	$(index).addClass("active-menu");
 }
 
+//退出任务
 function quitTask() {
 	var task = document.getElementById("tasks");
 	task.style.display = "none";
 }
+
