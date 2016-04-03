@@ -54,7 +54,14 @@ $(function () {
             for (var i=0;i<59;i+=5 ){
                 clockMin.push(div('div', 'option').text(i))
             }
-            
+            var clockHour_1 = [];
+            var clockMin_1 = [];
+            for (var i=0;i<24;i++ ){
+                clockHour_1.push(div('div', 'option').text(i))
+            }
+            for (var i=0;i<59;i+=5 ){
+                clockMin_1.push(div('div', 'option').text(i))
+            }
             // HTML Tree
             $this.append(
                 div('div', 'fixed-event'),
@@ -89,19 +96,22 @@ $(function () {
                                     div('div', 'dropdown').append(clockMin)
                                 )
                             ),
+                            div('span','time-between').text('To'),
                             div('div', 'add-time').append(
                                 div('div', 'disabled'),
                                 div('div', 'select').addClass('hour').css('background-color', settings.color).append(
                                     div('span').text('00'),
-                                    div('div', 'dropdown').append(clockHour)
+                                    div('div', 'dropdown').append(clockHour_1)
                                 ),
                                 div('div', 'left').append(':'),
                                 div('div', 'select').addClass('min').css('background-color', settings.color).append(
                                     div('span').text('00'),
-                                    div('div', 'dropdown').append(clockMin)
+                                    div('div', 'dropdown').append(clockMin_1)
                                 )
                             ),
-                            div('div', 'clear')
+
+                            div('div', 'clear'),
+                            div('div','people')
                         ),
                         div('div', 'events').append(
                             div('h3','').append(
@@ -291,29 +301,29 @@ $(function () {
             var dataId = parseInt($this.find('.total-bar b').text());
             $this.find('.submit').on('click', function(){
                 var title = $(this).prev('input').val();
-                var hour = $(this).parents('.add-new').find('.hour > span').text();
-                var min = $(this).parents('.add-new').find('.min > span').text();
-                var isAllDay = $(this).parents('.add-new').find('.all-day fieldset').attr('data-type');
-                var isAllDayText = $(this).parents('.add-new').find('.all-day fieldset label').text();
-                var thisDay = $this.find('.day.this-month.selected').attr('data-date');
-                var time;
-                if ( isAllDay == 'disabled' ) {
-                    time = hour + ':' + min;
-                } else {
-                    time = isAllDayText;
-                }
-                $this.prepend(div('div', 'added-event').attr({'data-date':thisDay, 'data-time': time, 'data-title': title, 'data-id': dataId}));
+                var start_hour = $(this).parents('.add-new ').find('.add-time:first').find('.hour > span').text();
+                var start_min = $(this).parents('.add-new ').find('.add-time:first').find('.min > span').text();
+                var end_hour = $(this).parents('.add-new ').find('.add-time:last').find('.hour > span').text();
+                var end_min = $(this).parents('.add-new ').find('.add-time:last').find('.min > span').text();
                 
+                var thisDay = $this.find('.day.this-month.selected').attr('data-date');
+                var start_time;
+                var end_time;
+
+                
+                start_time = start_hour + ':' + start_min;
+                end_time = end_hour + ':' + end_min;
+                $this.prepend(div('div', 'added-event').attr({'data-date':thisDay, 'data-start-time': start_time, 'data-end-time': end_time,'data-title': title, 'data-id': dataId}));
                 $this.find('.day.this-month.selected').prepend(
                     div('div','event-single').attr('data-id', dataId).append(
                         div('p','').text(title),
                         div('div','details').append(
-                            div('div', 'clock').text(time),
+                            div('div', 'clock').text('From' +'   '+ start_time + '   To   ' +end_time),
                             div('div', 'erase')
                         )
                     )
                 );
-                $this.find('.day').has('.event-single').addClass('have-event').prepend(div('i',''));
+                $this.find('.day').has('.event-single').addClass('have-event').prepend(div('i','').text('New'));
                 $this.find('.events-list').html($this.find('.day.this-month.selected .event-single').clone())
                 $this.find('.events-list .event-single').eq(0).hide().slideDown();
                 calcTotalDayAgain();
