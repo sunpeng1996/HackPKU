@@ -224,7 +224,7 @@
 	left: 0px;
 	right: 0px;
 	width: 400px;
-	height: 480px;
+	height: 530px;
 	top: 100px;
 	margin: 0 auto;
 	z-index: 100;
@@ -267,7 +267,8 @@
 }
 .jalendar .add-new .people{
     width: 100%;
-    height: 50px;
+    height: 40px;
+    margin-top: 10px;
 }
 .jalendar .add-new .time-between {
     font-size: 20px;
@@ -278,10 +279,10 @@
 }
 .jalendar .add-time {
     float: left;
-    width: 108px;
+    width: 120px;
     background: url(../images/jalendar-sprite.png) 0 -179px;
-    padding: 0 0 0 25px;
-    margin: 0 20px;
+    padding: 0 0 0 20px;
+    margin: 0 25px;
     font: bold 13px "Helvetica Neue", Arial;
     position: relative;
 }
@@ -391,7 +392,7 @@
 }
 .jalendar .events h3 span {
     display: inline-block;
-    width: 100px;
+    width: 110px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     background: url(../images/jalendar-wood-bg.png);
@@ -399,6 +400,7 @@
 }
 .jalendar .events .events-list {
     max-height: 100%;
+    height: 300px;
     overflow-x: auto;
     padding: 2px 2px 0 2px;
     position: relative;
@@ -443,7 +445,11 @@
     font: bold 12px "Helvetica Neue", Arial;
     float: left;
     display: inline-block;
-    width: 120px;
+    width: 140px;
+}
+.jalendar .events .event-single .details .target-people{
+    float: left;
+    padding: 0 20px;
 }
 .jalendar .events .event-single .details .erase {
     background: url(../images/jalendar-sprite.png) 0 -217px;
@@ -453,4 +459,41 @@
     height: 13px;
     cursor: pointer;
 }
-
+.people span {
+    display: block;
+    float: left;
+    line-height: 40px;
+}
+.people .btn {
+    float: left;
+    line-height: 2.5;
+    padding: 1px 15px;
+}
+.people .members {
+    float: left;
+    width: 230px;
+    height: 40px;
+    margin: 0px 10px;
+    padding: 0 10px;
+    line-height: 40px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 0 #000;
+}
+.modal .modal-well {
+    float: right;
+    width: 430px;
+    min-height: 50px;
+    padding: 2px 20px;
+}
+.modal-body::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.badge {
+    padding: 10px 20px;
+    margin: 5px;
+}
