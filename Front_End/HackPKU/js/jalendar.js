@@ -111,7 +111,11 @@ $(function () {
                             ),
 
                             div('div', 'clear'),
-                            div('div','people')
+                            div('div','people').append(
+                                div('span','').text('成员：'),
+                                div('div','members'),
+                                '<a href="javascript:void(0)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Add</a>'
+                                )
                         ),
                         div('div', 'events').append(
                             div('h3','').append(
@@ -301,6 +305,7 @@ $(function () {
             var dataId = parseInt($this.find('.total-bar b').text());
             $this.find('.submit').on('click', function(){
                 var title = $(this).prev('input').val();
+                var members = $(this).parents('.add-new').find('.people').find('.members').html();
                 var start_hour = $(this).parents('.add-new ').find('.add-time:first').find('.hour > span').text();
                 var start_min = $(this).parents('.add-new ').find('.add-time:first').find('.min > span').text();
                 var end_hour = $(this).parents('.add-new ').find('.add-time:last').find('.hour > span').text();
@@ -319,6 +324,7 @@ $(function () {
                         div('p','').text(title),
                         div('div','details').append(
                             div('div', 'clock').text('From' +'   '+ start_time + '   To   ' +end_time),
+                            div('div', 'target-people').text(members),
                             div('div', 'erase')
                         )
                     )
@@ -332,6 +338,7 @@ $(function () {
                 $this.find('.events-list').scrollTop(0);
                 // form reset
                 $this.find('.add-new > input[type="text"]').val(lAddEvent[settings.lang]).select();
+                $(this).parents('.add-new').find('.people').find('.members').empty();
                 dataId++;
             });
             
@@ -351,6 +358,53 @@ $(function () {
         };
 
     }(jQuery));
+    
+        $(function () {
+           $(".dropdown-menu > li > a").click(function(){
+               var val = $(this).html();
+               $(".well").html(function(index,value){
+                   return value + "<a href='javascript:void(0)' class='a_inserted'><span class='badge'>" + val+ "</span></a>";
+               });
+               $(".members").html(function(index,value){
+                   return value  + val+ "、";
+               });
+               $(".well > a:last-child").insertBefore("#plus");
+               badge_bind();
+           });
+           $("textarea:eq(0)").keyup(function(){
+               $(this).text(function(index,value){
+                      var len = value.length;
+                      if(len > 70){
+                          alert("长度超限！");
+                          return value.substring(0,70);
+                      }
+                });
+           }).blur(function(){
+               $(this).text(function(index,value){
+                      var len = value.length;
+                      if(len < 20){
+                          alert("真的只有那么一点描述吗？");
+                      }
+                });
+           });
+           badge_bind();
+       });
+       function badge_bind(){
+           $(".well > a > .badge").mouseover(function(){
+               $(this).html(function(index,value){
+                   return value+"<span class='glyphicon glyphicon-remove'></span>";
+               });
+           }).mouseout(function(){
+               $(this).html(function(index,value){
+                   var index_  =  value.indexOf("span");
+                   if(index_ != -1){
+                       return value.substring(0,index_-1);
+                   }
+               });
+           }).click(function(){
+               $(this).parent().remove();
+           });
+       }
 
 });
 
