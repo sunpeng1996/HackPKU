@@ -118,25 +118,28 @@ body {
 	padding: 20px;
 	width: 100%;
 	height: 100%;
-	box-shadow: 0 0 10px 0 #09192A;
+	background: #fff;
+	box-shadow: 0 0 1px 0 #77C0FD;
 }
 #pageInfo > nav {
 	position: relative;
 	font-size: 20px;
-	border-bottom: solid 2px #09192A;
+	border-bottom: solid 2px #000;
 }
 #pageInfo > nav a {
 	position: absolute;
 	right: 50px;
-	bottom: 0px;
+	bottom: 5px;
 	color: #77C0FD;
 	display: block;
+	padding: 0 10px;
+	border: solid 1px #77C0FD;
 	text-decoration: none;
 }
 #Infomation {
 	position: relative;
 	max-width: 900px;
-	margin: 100px auto;
+	margin: 50px auto;
 	font-size: 20px;
 	font-family: "Microsoft YaHei";
 }
@@ -150,6 +153,7 @@ body {
 #Infomation span {
 	display: block;
 	float: right;
+	line-height: 35px;
 	margin-right: 300px;
 }
 /*#Infomation span::after {
@@ -160,7 +164,8 @@ body {
 #Infomation .inner-div {
 	position: absolute;
 	width: 250px;
-	height: 100%;
+	height: 35px;
+	line-height: 35px;
 	right: 0px;
 	/*float: right;*/
 }
@@ -180,5 +185,28 @@ body {
 	border: solid 1px #09192A;
 }
 #Infomation .button {
-	
+	background: #fff;
+	color: #09192A;
+	font-size: 20px;
+	width: 125px;
+	height: 40px;
+	border: solid 1px #09192A;
+	-webkit-transition: 0.5s linear;
+	-o-transition: 0.5s linear;
+	transition: 0.5s linear;
+}
+#Infomation .button[type="submit"] {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+#Infomation .button[type="submit"]:hover {
+	border: solid 1px #77C0FD;
+	color: #77C0FD;
+	background: #09192A;
+}
+#Infomation .button[type="button"] {
+	position: absolute;
+	top: 240px;
+	right: calc(10% + 35px);
 }

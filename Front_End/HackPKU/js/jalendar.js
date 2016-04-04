@@ -64,7 +64,6 @@ $(function () {
             }
             // HTML Tree
             $this.append(
-                div('div', 'fixed-event'),
                 div('div', 'jalendar-wood').append(
                     div('div', 'jalendar-pages').append(
                         div('div', 'pages-bottom'),
@@ -315,7 +314,14 @@ $(function () {
                 var start_time;
                 var end_time;
 
-                
+                $.post("http://192.168.1.106:8080/QuickClub2/demo.do",{
+                      title:title,
+                      members: members 
+                    },
+                    function (data) {
+                       alert(data);
+                });
+
                 start_time = start_hour + ':' + start_min;
                 end_time = end_hour + ':' + end_min;
                 $this.prepend(div('div', 'added-event').attr({'data-date':thisDay, 'data-start-time': start_time, 'data-end-time': end_time,'data-title': title, 'data-id': dataId}));
@@ -407,4 +413,3 @@ $(function () {
        }
 
 });
-

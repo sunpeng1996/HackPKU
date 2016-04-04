@@ -33,88 +33,8 @@
                 y: canvas.height / 2 - 100 / 2
             }
             /////////////结果canvas配置
-            var resCanvas = [$("#res1")[0].getContext("2d"), $("#res2")[0].getContext("2d"), $("#res3")[0].getContext("2d")];
-            //结果canvas尺寸配置
-            var resSize = [100, 50, 32]
-            resSize.forEach(function (size, i) {
-                $("#res" + (i + 1))[0].width = size;
-                $("#res" + (i + 1))[0].height = size;
-            });
-            //////// 滤镜配置
-            var filters = [];
-            filters.push({
-                name: "灰度", func: function (pixelData) {
-                    //r、g、b、a
-                    //灰度滤镜公式： gray=r*0.3+g*0.59+b*0.11
-                    var gray;
-                    for (var i = 0; i < canvasConfig.width * canvasConfig.height; i++) {
-                        gray = pixelData[4 * i + 0] * 0.3 + pixelData[4 * i + 1] * 0.59 + pixelData[4 * i + 2] * 0.11;
-                        pixelData[4 * i + 0] = gray;
-                        pixelData[4 * i + 1] = gray;
-                        pixelData[4 * i + 2] = gray;
-                    }
-                }
-            });
-            filters.push({
-                name: "黑白", func: function (pixelData) {
-                    //r、g、b、a
-                    //黑白滤镜公式： 0 or 255
-                    var gray;
-                    for (var i = 0; i < canvasConfig.width * canvasConfig.height; i++) {
-                        gray = pixelData[4 * i + 0] * 0.3 + pixelData[4 * i + 1] * 0.59 + pixelData[4 * i + 2] * 0.11;
-                        if (gray > 255 / 2) {
-                            gray = 255;
-                        }
-                        else {
-                            gray = 0;
-                        }
-                        pixelData[4 * i + 0] = gray;
-                        pixelData[4 * i + 1] = gray;
-                        pixelData[4 * i + 2] = gray;
-                    }
-                }
-            });
-            filters.push({
-                name: "反色", func: function (pixelData) {
-                    for (var i = 0; i < canvasConfig.width * canvasConfig.height; i++) {
-                        pixelData[i * 4 + 0] = 255 - pixelData[i * 4 + 0];
-                        pixelData[i * 4 + 1] = 255 - pixelData[i * 4 + 1];
-                        pixelData[i * 4 + 2] = 255 - pixelData[i * 4 + 2];
-                    }
-                }
-            });
-            filters.push({ name: "无", func: null });
-            // 添加滤镜按钮
-            filters.forEach(function (filter) {
-                var button = $("<button>" + filter.name + "</button>");
-                button.on(eventName.click, function () {
-                    canvasConfig.filter = filter.func;
-                    //重绘
-                    draw(context, canvasConfig.img, canvasConfig.size);
-                })
-                $("#filters").append(button);
-            });
-            //下载生成的图片(只下载第一张)
-            $("#download").on(eventName.click, function () {
-
-                //将mime-type改为image/octet-stream，强制让浏览器直接download
-                var _fixType = function (type) {
-                    type = type.toLowerCase().replace(/jpg/i, 'jpeg');
-                    var r = type.match(/png|jpeg|bmp|gif/)[0];
-                    return 'image/' + r;
-                };
-                var saveFile = function (data, filename) {
-                    var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
-                    save_link.href = data;
-                    save_link.download = filename;
-                    var event = document.createEvent('MouseEvents');
-                    event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-                    save_link.dispatchEvent(event);
-                };
-                var imgData = $("#res1")[0].toDataURL("png");
-                imgData = imgData.replace(_fixType("png"), 'image/octet-stream');//base64
-                saveFile(imgData, "头像created on" + new Date().getTime() + "." + "png");
-            });
+            var resCanvas = [$("#res1")[0].getContext("2d")];
+            
             //上传图片
             $("#upload").on(eventName.click, function () {
                 var imgData = $("#res1")[0].toDataURL("png");
@@ -237,16 +157,10 @@
                 context.restore();
                 //绘制结果
                 var imageData = context.getImageData(config.x, config.y, pickerSize, pickerSize)
-                resCanvas.forEach(function (resContext, i) {
-                    resContext.clearRect(0, 0, resSize[i], resSize[i]);
-                    resContext.drawImage(canvas, config.x, config.y, pickerSize, pickerSize, 0, 0, resSize[i], resSize[i]);
-                    //添加滤镜效果
-                    if (canvasConfig.filter) {
-                        var imageData = resContext.getImageData(0, 0, resSize[i], resSize[i]);
-                        var temp = resContext.getImageData(0, 0, resSize[i], resSize[i]);// 有的滤镜实现需要temp数据
-                        canvasConfig.filter(imageData.data, temp);
-                        resContext.putImageData(imageData, 0, 0, 0, 0, resSize[i], resSize[i]);
-                    }
+                resCanvas.forEach(function (resContext) {
+                    resContext.clearRect(0, 0,'','');
+                    resContext.drawImage(canvas, config.x, config.y, pickerSize, pickerSize, 0, 0,'','');
+                    // 添加滤镜效果
                 });
             }
             //逆时针用路径自己来绘制矩形，这样可以控制方向，以便挖洞
