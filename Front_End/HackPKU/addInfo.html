@@ -8,7 +8,6 @@
     <div id="pageInfo">
         <nav>
             <span>个人信息</span>
-            <a href="javascript:void(0);" id="edit-Info"><i class="fa fa-icon-edit fa-file">&nbsp;</i>编辑信息</a>
         </nav>
         <form id="Infomation" action="javascript:void(0);">
             <div>
@@ -29,19 +28,31 @@
             </div>
             <div>
                 <span>学历：</span>
-                <input class="inner-div" type="text" name="education">
+                <div class="inner-div">
+                    <select>
+                        <option value="middle-school">初中</option>
+                        <option value="hight-school">高中</option>
+                        <option value="undergraduate">本科</option>
+                        <option value="postgraduate">研究生</option>
+                        <option value="doctor">博士</option>
+                    </select>
+                </div>
             </div>
             <div>
-                <span>在校时间：</span>
-                <input class="inner-div" type="text" name="time">
+                <span>毕业时间：</span>
+                <input class="inner-div" placeholder="YYYY-MM" type="text" name="time">
             </div>
             <div>
                 <span>性别：</span>
-                <input class="inner-div" type="text" name="sex">
+                <div class="inner-div">
+                    <input  type="radio" name="sex" value="male">&nbsp;男
+                    <input  type="radio" name="sex" value="female">&nbsp;女
+                </div>
+                
             </div>
             <div>
                 <span>所在地：</span>
-                <input class="inner-div" type="text" name="location">
+                <input class="inner-div" placeholder="XX省XX市" type="text" name="location">
             </div>  
             <div class="photo"></div>
             <input class="button" type="submit" name="submit" value="确认信息">
