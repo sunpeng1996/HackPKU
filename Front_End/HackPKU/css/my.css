@@ -121,12 +121,12 @@ body {
 	background: #fff;
 	box-shadow: 0 0 1px 0 #77C0FD;
 }
-#pageInfo > nav {
+#pageInfo  nav {
 	position: relative;
 	font-size: 20px;
 	border-bottom: solid 2px #000;
 }
-#pageInfo > nav a {
+#pageInfo  nav a {
 	position: absolute;
 	right: 50px;
 	bottom: 5px;
@@ -290,4 +290,222 @@ body {
 }
 #pageInfo .communitydiv a:hover {
 	border-radius: 0px;
+}
+/*社团管理页面*/
+#pageInfo #communityInfoChange {
+	position: relative;
+	margin: 30px 20px;
+	padding: 20px;
+	width: calc(100% - 40px);
+	height: 470px;
+}
+#pageInfo #communityInfoChange-left {
+	width: 310px;
+	font-size: 20px;
+}
+#pageInfo #communityInfoChange-left input{
+	width: 200px;
+}
+#pageInfo #communityInfoChange-logo {
+	position: relative;
+	margin: 20px 0 20px 80px;
+	width: 250px;
+	height: 300px;
+}
+#pageInfo #communityInfoChange-logo input {
+	position: absolute;
+	width: 200px;
+	height: 40px;
+	opacity: 0;
+	top: -1px;
+}
+#pageInfo #communityInfoChange-logo span {
+	position: absolute;
+	left: -80px;
+	font-size: 20px;
+}
+#pageInfo #communityInfoChange-logo a{
+	position: absolute;
+	bottom: 10px;
+	left: 25px;
+	width: 200px;
+	height: 40px;
+	border: solid 1px #09192A;
+	background: transparent;
+	color: #09192A;
+	text-align: center;
+	overflow: hidden;
+	font-size: 20px;
+	text-decoration: none;
+	transition: 0.5s linear;
+	-webkit-transition: 0.5s linear;
+	-moz-transition: 0.5 linear;
+}
+#pageInfo #communityInfoChange-logo a:hover {
+	background: #09192A;
+	color: #77C0FD;
+	border: solid 1px #77C0FD;
+}
+#pageInfo #communityInfoChange-logo #communityLogo {
+	width: 200px;
+	height: 200px;
+	border: solid 1px #CFCFCF;
+	margin: 0 auto;
+}
+#pageInfo #communityInfoChange-right {
+	position: absolute;
+	min-width: 50%;
+	height: 400px;
+	left: 350px;
+	top: 20px;
+	font-size: 20px;
+}
+#pageInfo #communityInfoChange-right span {
+	position: absolute;
+	top: 0px;
+}
+#pageInfo #communityInfoChange-right textarea {
+	float: right;
+	width: 73%;
+	height: 340px;
+	resize: none;
+}
+#pageInfo #communityInfoChange-bottom input {
+	float: right;
+	width: 150px;
+	height: 40px;
+	margin: 30px 100px 0 0 ;
+	border: none;
+	background: #FF7B36;
+	font-size: 18px;
+	color: #09192A;
+	border-radius: 15px;
+	transition: 0.5s linear;
+	-webkit-transition: 0.5s linear;
+	-moz-transition: 0.5 linear;
+}
+#pageInfo #communityInfoChange-bottom input:hover {
+	border-radius: 0px;
+}
+/*社团成员调整*/
+#pageInfo #communityMemChange {
+	width: 100%;
+	margin: 20px 0px;
+	padding: 0 30px;
+}
+#pageInfo #communityMemChange table {
+	width: 100%;
+	font-size: 20px;
+	background: ;
+	text-align: center;
+	border-color: #77C0FD;
+}
+#pageInfo #communityMemChange table tr {
+	height: 50px;
+	border-color: #77C0FD;
+}
+#pageInfo #communityMemChange table tr:nth-child(2n+1) {
+	background: #E5EBF2;
+	height: 50px;
+}
+#pageInfo #communityMemChange table tr th {
+	width: 33.3333%;
+	background: #09192A;
+	text-align: center;
+	color: #77C0FD;
+	border-color: #77C0FD;
+}
+#pageInfo #communityMemChange table tr td {
+	width: 33.3333%;
+	border-color: #77C0FD;
+}
+#pageInfo #communityMemChange table tr td a {
+	display: block;
+	width: 100px;
+	height: 30px;
+	margin: 0 auto;
+	color: #77C0FD;
+	text-decoration: none;
+	border: solid 1px #77C0FD;
+}
+#pageInfo #communityMemChange table tr td a:active {
+	background: #09192A;
+}
+#pageInfo #requestNum {
+	color: #FF0000;
+}
+#myModal .requestMem {
+	width: 100%;
+	height: 50px;
+	padding: 0px 30px;
+	font-size: 20px;
+	line-height: 50px;
+	border-bottom: solid 1px #CFCFCF;
+}
+#myModal .requestMem:first-child {
+	border-top: solid 1px #CFCFCF;
+}
+#myModal .requestMem select{
+	float: right;
+	margin: 10px 30px 0px 0px;
+}
+/*社团角色分配*/
+#pageInfo #communityPosChange {
+	width: 100%;
+	padding: 20px 30px;
+}
+#pageInfo #communityPosChange table{
+	width: 100%;
+	padding: 10px;
+	text-align: center;
+	border-radius: 10px;
+	font-size: 20px;
+}
+#pageInfo #communityPosChange table tr{
+	height: 50px;
+	border-bottom: solid 10px #FFF;
+}
+#pageInfo #communityPosChange table tr:last-child{
+	border-bottom: none;
+}
+#pageInfo #communityPosChange table tr th{
+	height: 60px;
+	text-align: center;
+	color: #000;
+	background: #f2dede;
+	border-radius: 10px;
+}
+#pageInfo #communityPosChange table tr td{
+	background: #E5EBF2;
+	border-radius: 10px;
+}
+#pageInfo #communityPosChange table tr th:first-child{
+	width: 30%;
+}
+#pageInfo #communityPosChange table tr th:last-child{
+	width: 30%;
+}
+#pageInfo #communityPosChange table tr td:first-child{
+	width: 30%;
+}
+#pageInfo #communityPosChange table tr td:last-child{
+	width: 30%;
+}
+#pageInfo #communityPosChange table tr td select{
+	width: 50%;
+	border: none;
+	border-left: solid 1px #000;
+	background: #E5EBF2;
+}
+#pageInfo #communityPosChange table tr td button{
+	width: 50%;
+	border: none;
+	border-radius: 10px;
+	color: #09192A;
+	border: solid 1px #77C0FD;
+	background: #FF7B36;
+}
+#pageInfo #communityPosChange table tr td button:active{
+	background: #09192A;
+	color: #77C0FD;
 }

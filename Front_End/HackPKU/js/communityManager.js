@@ -37,6 +37,14 @@
 	$("#communityInfoChange").bind("click",function() {
 		$("#page-inner").load("communityInfoChange.html");
 	})
+	// 社团成员调整
+	$("#communityMemChange").bind("click",function() {
+		$("#page-inner").load("communityMemChange.html");
+	})
+	// 社团角色分配
+	$("#communityPosChange").bind("click",function() {
+		$("#page-inner").load("communityPosChange.html");
+	})
 })();
 
 //活跃的菜单按钮添加样式
