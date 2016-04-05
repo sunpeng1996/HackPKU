@@ -32,8 +32,6 @@
                 x: canvas.width / 2 - 100 / 2,
                 y: canvas.height / 2 - 100 / 2
             }
-            /////////////结果canvas配置
-            var resCanvas = [$("#res1")[0].getContext("2d")];
             
             //上传图片
             $("#upload").on(eventName.click, function () {

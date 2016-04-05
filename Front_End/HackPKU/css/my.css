@@ -136,6 +136,7 @@ body {
 	border: solid 1px #77C0FD;
 	text-decoration: none;
 }
+/*个人信息页面*/
 #Infomation {
 	position: relative;
 	max-width: 900px;
@@ -209,4 +210,84 @@ body {
 	position: absolute;
 	top: 240px;
 	right: calc(10% + 35px);
+}
+/*认证页面*/
+#page-inner .confirm {
+	position: relative;
+	width: 100%;
+	height: 150px;
+	margin-bottom: 30px;
+	padding: 20px 40px;
+	background: #fff;
+}
+#page-inner #confirm button {
+	position: absolute;
+	right: 100px;
+	top: 50px;
+	width: 120px;
+	height: 40px;
+	border: none;
+	border-radius: 5px;
+	background: #FF7B36;
+}
+/*我的社团页面*/
+#pageInfo .communitydiv {
+	position: relative;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	width: calc(100% - 40px);
+	height: 250px;
+	margin: 20px;
+	border-radius: 5px;
+	border: solid 1px #fff;
+}
+#pageInfo .community1 {
+	background: #5CB85C;
+}
+#pageInfo .community2 {
+	background: #F0433D;
+}
+#pageInfo .community3 {
+	background: #4CB1CF;
+}
+#pageInfo .community4 {
+	background: #F04ADE;
+}
+#pageInfo .community5 {
+	background: #0B62A4;
+}
+#pageInfo .communitydiv img {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	margin: 25px 60px;
+	border: solid 10px #fff;
+}
+#pageInfo .communitydiv .communitySum {
+	position: absolute;
+	width: 40%;
+	height: 200px;
+	top: 25px;
+	left: 300px;
+	color: #fff;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+#pageInfo .communitydiv a {
+	display: block;
+	float: right;
+	width: 13%;
+	height: 50px;
+	margin: 95px 40px ;
+	border-radius: 15px;
+	border: solid 1px #77C0FD;
+	color: #fff;
+	background: #09192A;
+	text-decoration: none;
+	text-align: center;
+	line-height: 50px;
+	font-size: 24px;
+}
+#pageInfo .communitydiv a:hover {
+	border-radius: 0px;
 }

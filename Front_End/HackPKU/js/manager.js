@@ -45,9 +45,4 @@ function addActive(index) {
 	$(index).addClass("active-menu");
 }
 
-//退出任务
-function quitTask() {
-	var task = document.getElementById("tasks");
-	task.style.display = "none";
-}
 
