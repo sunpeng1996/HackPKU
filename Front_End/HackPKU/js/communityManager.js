@@ -45,6 +45,10 @@
 	$("#communityPosChange").bind("click",function() {
 		$("#page-inner").load("communityPosChange.html");
 	})
+	// 社团角色管理
+	$("#communityPosManage").bind("click",function() {
+		$("#page-inner").load("communityPosManage.html");
+	})
 })();
 
 //活跃的菜单按钮添加样式

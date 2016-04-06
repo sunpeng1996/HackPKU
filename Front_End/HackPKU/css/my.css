@@ -509,3 +509,157 @@ body {
 	background: #09192A;
 	color: #77C0FD;
 }
+/*社团角色管理*/
+#pageInfo #communityPosManage {
+	position: relative;
+	width: 100%;
+	height: auto;
+	font-size: 20px;
+	padding: 0px 20px;
+	position: relative;
+}
+#pageInfo #communityPosManage .communityPosManageDiv {
+	position: relative;
+	width: 100%;
+	height: 250px;
+	margin: 20px 0px;
+	border: solid 1px #CFCFCF;
+}
+#pageInfo #communityPosManage .communityPosManageDiv:first-child {
+	display:none;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .input input {
+	width: 220px;
+	height: 40px;
+	margin: 20px 30px;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .textarea textarea{
+	position: absolute;
+	float: right;
+	right: 45px;
+	width: 60%;
+	height: 150px;
+	top: 20px;
+	resize: none;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .submit input{
+	position: absolute;
+	width: 120px;
+	padding: 5px 0px;
+	right: 45px;
+	bottom: 20px;
+	border: solid 1px #CFCFCF;
+	transition: 0.3s linear;
+	-webkit-transition: 0.3s linear;
+	-moz-transition: 0.3s linear;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .submit input:hover {
+	background: #fff;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .button {
+	margin: 55px 0px 0px 30px;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .button a {
+	display: inline-block;
+	width: 100px;
+	padding: 5px 0px;
+	font-size: 15px;
+	border: solid 1px #77C0FD;
+	color: #77C0FD;
+	text-align: center;
+	text-decoration: none;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .button a:active {
+	background: #09192A;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .button input {
+	width: 70px;
+	padding: 5px 0px;
+	margin-left: 45px;
+	font-size: 15px;
+	border: solid 1px #CFCFCF;
+	transition: 0.3s linear;
+	-webkit-transition: 0.3s linear;
+	-moz-transition: 0.3s linear;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .button input:hover{
+	background: #FF7B36;
+}
+#pageInfo .communityPosManageAdd {
+	position: relative;
+	width: calc(100% - 40px);
+	height: 150px;
+	margin: 20px auto;
+	color: #E5EBF2;
+	border: solid 1px #CFCFCF;
+	transition: 0.5s ease;
+	-webkit-transition: 0.5s ease;
+	-moz-transition: 0.5s ease;
+}
+#pageInfo .communityPosManageAdd:hover {
+	border-left: solid 20px #FF7B36;
+	color: #FF7B36;
+}
+
+#pageInfo .communityPosManageAdd i {
+	display: block;
+	width: 97px;
+	margin: 20px auto;
+	font-size: 120px;
+	color: inherit;
+} 
+#pageInfo #myModal .communityPower {
+	width: auto;
+	height: 30px;
+	padding: 5px 10px;
+	font-size: 14px;
+	color: #FFF;
+	margin: 10px;
+	float: left;
+	border-radius: 10px;
+}
+#pageInfo #myModal .communityPower:nth-child(1) {
+	background: #FF7B36;
+}
+#pageInfo #myModal .communityPower:nth-child(2) {
+	background: #9400D3;
+}
+#pageInfo #myModal .communityPower:nth-child(3) {
+	background: #9ACD32;
+}
+#pageInfo #myModal .communityPower:nth-child(4) {
+	background: #FF0000;
+}
+#pageInfo #myModal .communityPower:nth-child(5) {
+	background: #CDCD00;
+}
+#pageInfo #myModal .communityPower:nth-child(6) {
+	background: #CD6600;
+}
+#pageInfo #myModal .communityPower:nth-child(7) {
+	background: #09192A;
+}
+#pageInfo #myModal .communityPower:nth-child(8) {
+	background: #6495ED;
+}
+#pageInfo #myModal .communityPower:nth-child(9) {
+	background: #A8A8A8;
+}
+#pageInfo #myModal .communityPower:nth-child(10) {
+	background: #8B2252;
+}
+#pageInfo #myModal .communityPower:nth-child(11) {
+	background: #00CD00;
+}
+#pageInfo #myModal .communityPower:nth-child(12) {
+	background: #D15FEE;
+}
+#pageInfo #myModal .communityPower:nth-child(13) {
+	background: #556B2F;
+}
+#pageInfo #myModal .communityPower:nth-child(14) {
+	background: #7FFFD4;
+}
+#pageInfo #myModal .communityPower:nth-child(15) {
+	background: #CD3278;
+}
