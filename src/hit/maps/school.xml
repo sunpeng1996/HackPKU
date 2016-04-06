@@ -6,6 +6,9 @@
 	<typeAlias alias="School" type="hit.po.School"/>
 	
 	
-  	
 
+
+	<select id="selectSchidBySchoolName" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+			select sch_id from school where schoolname = #schoolname#
+	</select>
 </sqlMap>

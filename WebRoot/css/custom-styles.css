@@ -28,7 +28,6 @@ body {
     margin:10px 20px 10px 0px;
     background-color:transparent;
     padding:10px;
-    min-height:1200px;
 }
 
 .text-center {
@@ -41,9 +40,6 @@ body {
 h1, .h1, h2, .h2, h3, .h3 {
 margin-top: 7px;
 margin-bottom: -5px;
-}
-h2 {
-    color: #000;
 }
 h4 {
     padding-top:10px;

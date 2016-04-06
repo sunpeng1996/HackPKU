@@ -32,15 +32,17 @@
        			   p:prefix="/" p:suffix=".jsp"      />  
        			   
        			   
-     <!--     附件上传 
+     <!--     附件上传 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver --> 
+     
        <bean id="multipartResolver"  
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver"  
-          p:defaultEncoding="utf-8" >
-           设置上传文件的最大尺寸为100MB  
+          p:defaultEncoding="utf-8"
+          p:uploadTempDir="fileupload" >
+           <!-- 设置上传文件的最大尺寸为100MB   -->
 		    <property name="maxUploadSize">  
 		        <value>3000485760</value>  
-		    </property>   
-          </bean>  -->
+		    </property>   		  
+          </bean>  
           
           
 

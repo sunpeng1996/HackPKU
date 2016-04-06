@@ -9,5 +9,6 @@
         lazyLoadingEnabled="true" errorTracingEnabled="true" maxRequests="32"  
         maxSessions="10" maxTransactions="5" useStatementNamespaces="false" />
  		<sqlMap resource="hit/maps/User.xml"/>
+ 		<sqlMap  resource="hit/maps/School.xml"/>
  
 </sqlMapConfig>

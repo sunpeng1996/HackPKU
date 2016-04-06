@@ -10,8 +10,8 @@ import hit.po.User;
 import hit.service.SchoolService;
 import hit.service.UserService;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.sql.Time;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
@@ -65,10 +66,19 @@ public class UserController extends AbstractController {
 	
 	@RequestMapping(value="/user_regist.do",method={RequestMethod.POST})
 	public String regist(HttpServletRequest request , @RequestParam String email ,@RequestParam String password ){
-			User user = new User();
+		User temp = userService.selectByEmail(email);
+		if (temp!=null) {
+			System.out.println("该邮箱已经被注册");
+			request.getSession().setAttribute("error", "该邮箱已经被注册");
+			return "index";
+		}
+		else {
+			
+		
+		User user = new User();
 			user.setEmail(email);
 			user.setPassword(password);
-			
+			System.out.println("创建用户user");
 			//调用创建用户的方法
 			String flag = userService.addUser(user);	
 			request.getSession().setAttribute("user", user);//将用户放入到session域中
@@ -76,6 +86,7 @@ public class UserController extends AbstractController {
 				return "jsp/manager";
 			}
 			return "";		
+		}
 	}
 	
 	/**
@@ -87,11 +98,11 @@ public class UserController extends AbstractController {
 	public String update(HttpServletRequest request,@RequestParam String username,
 			@RequestParam String schoolname,@RequestParam String institute,@RequestParam String major,
 			@RequestParam String time,@RequestParam String phone,@RequestParam String sex,
-			@RequestParam String province) throws UnsupportedEncodingException{
+			@RequestParam String province,@RequestParam("image") MultipartFile file) throws UnsupportedEncodingException{
 		request.setCharacterEncoding("UTF-8");
 		User user = (User) request.getSession().getAttribute("user");
 		System.out.println("当前用户是"+user.getEmail());
-		Integer id = user.getUserId();
+		Integer id = user.getUserId();//获取当前用户id
 		String email = user.getEmail();
 		String password = user.getPassword();
 		user.setEmail(email);
@@ -106,13 +117,15 @@ public class UserController extends AbstractController {
 		if(school==null){
 			//说明school在数据库中没有，那么我们new一个就好了
 			School temp = new School();
-			schoolMapper.insert(temp);//持久化到数据库中			
+					
 			temp.setSchoolname(schoolname);			
+			schoolMapper.insert(temp);//持久化到数据库中	
 			Integer tempid = schoolService.selectSchidBySchoolName(temp.getSchoolname());
-			user.setSchool(temp);
-			user.setSchId(tempid);			
+			
+			user.setSchId(tempid);
+			user.setSchoolname(schoolname);
 		}		else {
-			user.setSchool(school);
+			user.setSchoolname(schoolname);
 			user.setSchId(schid);
 		}
 	
@@ -120,9 +133,26 @@ public class UserController extends AbstractController {
 		user.setInstitute(institute);
 		user.setTime(time);
 		user.setSex(sex);
-		request.getSession().setAttribute("user", user);
+		user.setValidationstate(1);//设置用户的验证状态，1表示完善信息完毕，但未实名认证
 		
-		userService.updateUser(user);
+		if (!file.isEmpty()) {  
+            try {  
+                // 文件保存路径  
+                String filePath = request.getSession().getServletContext().getRealPath("/") + "fileupload/"  
+                        + file.getOriginalFilename();  
+                // 转存文件  
+                file.transferTo(new File(filePath));  
+            } catch (Exception e) {  
+                e.printStackTrace();  
+            }  
+        }  
+		
+		userService.updateUser(user);		
+		
+		
+		request.getSession().removeAttribute("user");
+		request.getSession().setAttribute("user", user);
+				
 		
 		return "index";
 			
@@ -135,8 +165,31 @@ public class UserController extends AbstractController {
 	public String quit(HttpServletRequest request){
 		User user = (User) request.getAttribute("user");
 		request.getSession().removeAttribute("user");		//将user对象从session中移除
-		
+		System.out.println("注销成功。。。");
 		return "index";
+	}
+	/**
+	 * 我的信息
+	 * @author 作者: 如今我已·剑指天涯
+	 * @Description:
+	TODO
+	 *创建时间:2016年4月6日下午9:11:40
+	 * @return
+	 */
+	@RequestMapping(value="/MyInfo.do")
+	public String MyInfo() {
+		return "jsp/manager1";
+	}
+	
+	/**
+	 * 编辑信息
+	 * @author sunpeng123
+	 * @time
+	 * 
+	 */
+	@RequestMapping(value="/editInfo.do")
+	public  String editInfo(){
+		return "jsp/manager";
 	}
 	
 	

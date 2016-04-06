@@ -24,7 +24,9 @@ public interface UserService {
 		public User login(String password, String email);
 
 		//通过schoolname得到school对象
-		public School findSchoolBySchoolName(String schoolname);	
+		public School findSchoolBySchoolName(String schoolname);
+
+		
 	
 		
 		

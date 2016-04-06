@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>myEvents</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/myEvents.css" type="text/css" />
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/jalendar.js"></script>
+    <script type="text/javascript">
+    $(function () {
+        $('#myId3').jalendar();
+    });
+    </script>
+</head>
+<body min-width="1200px">
+    <div id="pageInfo">
+        <div id="myId3" class="jalendar mid">
+        </div> 
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
+              <div class="modal-dialog">  
+                <div class="modal-content">  
+                  <div class="modal-header">  
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>  
+                    <h4 class="modal-title">添加任务成员</h4>  
+                  </div>  
+                  <div class="modal-body">  
+                    <div class="btn-group">
+                       <button type="button" class="btn btn-default dropdown-toggle" 
+                          data-toggle="dropdown">
+                          成员 <span class="caret"></span>
+                       </button>
+                       <ul class="dropdown-menu" role="menu">
+                            <li><a href="javascript:void(0)">孙一铀</a></li> 
+                            <li><a href="javascript:void(0)">孙鹏</a></li>  
+                            <li><a href="javascript:void(0)">张旭 </a></li>
+                            <li><a href="javascript:void(0)">黄运智</a></li>
+                            <li><a href="javascript:void(0)">U++</a></li>
+                            <li><a href="javascript:void(0)">U--</a></li>
+                            <li><a href="javascript:void(0)">U**</a></li>
+                            <li><a href="javascript:void(0)">U//</a></li>
+                            <li><a href="javascript:void(0)">U%%</a></li>
+                            <li><a href="javascript:void(0)">HHH</a></li>
+                            <li><a href="javascript:void(0)">666</a></li>
+                       </ul>
+                    </div>  
+                    <div class="well modal-well"></div>
+                  </div>  
+                  <div class="modal-footer">  
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">确认</button>  
+                  </div>  
+                </div><!-- /.modal-content -->  
+              </div><!-- /.modal-dialog -->  
+            </div><!-- /.modal -->  
+    </div>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+               
+                

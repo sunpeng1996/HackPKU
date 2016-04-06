@@ -58,9 +58,10 @@ public class UserServiceImpl extends BaseDao implements UserService {
 	@SuppressWarnings("deprecation")
 	public void updateUser(User user) {
 		try {
+			
 			getSqlMapClientTemplate().update("updateUser", user);
 			System.out.println("正在更新用户："+user.getUsername());
-			System.out.println(user.getUsername() + " link  "+ user.getEmail());
+			System.out.println(user.getUsername() + " 和  "+ user.getEmail());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

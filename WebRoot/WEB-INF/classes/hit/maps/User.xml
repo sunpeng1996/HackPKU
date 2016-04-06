@@ -7,12 +7,14 @@
 	
 	<insert id="addUser" parameterClass="User">
 			insert into user (username,password,email,phone,image,validationState,province,sch_id) values
-			(#username#,#password#,#email#,#phone#,#image#,#validationstate#,#province#,#schId#)
+			(#username#,#password#,#email#,#phone#,#image#,#validationstate#,#province#,#schId#) 
+			
 	</insert>
  	
 	<update id="updateUser" parameterClass="User" >
 			update user set username=#username#,phone=#phone# ,province=#province#,sch_id=#schId#,
-										major=#major#,time=#time#,sex=#sex# where user_id = #userId#
+				institute=#institute#,validationState=#validationstate#,major=#major#,time=#time#,sex=#sex#,
+				schoolname=#schoolname# where email = #email#
 	</update>
 	
 	<select id="login"  resultClass="User"  parameterClass="java.util.Map">

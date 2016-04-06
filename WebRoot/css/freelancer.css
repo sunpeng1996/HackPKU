@@ -6,6 +6,7 @@
 
 body {
     overflow-x: hidden;
+    background: #e5ebf2;
 }
 
 p {
@@ -94,7 +95,7 @@ header img {
     display: block;
     width: 100%;
     min-height: 500px;
-    max-height: 600px;
+    max-height: 700px;
 }
 
 header .intro-text .name {
@@ -378,6 +379,7 @@ footer .footer-below {
     border: 0;
     border-radius: 0;
     text-align: center;
+    background: #e5ebf2;
     background-clip: border-box;
     -webkit-box-shadow: none;
     box-shadow: none;

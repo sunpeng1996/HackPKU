@@ -311,38 +311,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div id="page-wrapper">
             <div id="page-inner">
             	
-                <form action="<%=path%>/user_update.do" method="post">
+                <form action="<%=path%>/user_update.do" method="post" enctype="multipart/form-data">
                     <fieldset>
                         <legend>姓名：</legend>
-                        <input type="text" name="username">
+                        <input type="text" name="username" value="${sessionScope.user.username }">
                     </fieldset>
                     <fieldset>
                         <legend>就读学校：</legend>
-                        <input type="text" name="schoolname">
+                        <input type="text" name="schoolname" value="${sessionScope.user.schoolname }">
                     </fieldset>
                     <fieldset>
                         <legend>学院：</legend>
-                        <input type="text" name="institute">  
+                        <input type="text" name="institute" value="${sessionScope.user.institute }">  
                     </fieldset>
                     <fieldset>
                         <legend>专业：</legend>
-                        <input type="text" name="major">
+                        <input type="text" name="major" value="${sessionScope.user.major }">
                     </fieldset>
                     <fieldset>
                         <legend>入学时间：</legend>
-                        <input type="text" name="time">
+                        <input type="text" name="time" value="${sessionScope.user.time }">
                     </fieldset>
                      <fieldset>
                         <legend>手机：</legend>
-                        <input type="text" name="phone">
+                        <input type="text" name="phone" value="${sessionScope.user.phone }">
                     </fieldset>
                     <fieldset>
                         <legend>性别：</legend>
-                        <input type="text" name="sex">
+                        <input type="text" name="sex" value="${sessionScope.user.sex }">
                     </fieldset>
                     <fieldset>
                         <legend>所在地：</legend>
-                        <input type="text" name="province">
+                        <input type="text" name="province" value="${sessionScope.user.province }">
+                    </fieldset>
+                    <fieldset>
+                    	<legend>照片：</legend>
+                    	<input type="file" name="image" >
                     </fieldset>
                     <input type="submit" name="submit" value="确认信息">
                 </form>

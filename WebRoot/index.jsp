@@ -84,36 +84,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         加入我们
                     </a>
                 </li>
-                您好， <c:out value="${user.email }"/>
+                
+               
+                
+              <%--   s as您好， <c:out value="${user.email }"/> --%>
                 <!-- /.dropdown -->
             </ul>
-            <c:if test="${sessionScope.user==null }">
+           
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:login(2);" aria-expanded="false">
-                       登录
-                    </a>
-                </li>
+			             <c:if test="${sessionScope.user==null }">
+				                <li class="dropdown">
+				                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:login(2);" aria-expanded="false">
+				                       登录
+				                    </a>
+				                </li>
+				                <!-- /.dropdown -->
+				                <li class="dropdown">
+				                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:login(1);" aria-expanded="false">
+				                        注册
+				                    </a>
+				                </li>
+			              </c:if>
                 <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:login(1);" aria-expanded="false">
-                        注册
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            </c:if>
-            
-            <c:if test="sessionScope.user!=null">
+                
+                  <c:if test="${ sessionScope.user!=null}">
             	  <ul class="nav navbar-top-links navbar-right">
 		                <li class="dropdown">
-		                    <a class="dropdown-toggle" data-toggle="dropdown" href="" aria-expanded="true">
+		                    <a class="dropdown-toggle" data-toggle="dropdown" href="<%=path%>/MyInfo.do"  aria-expanded="true">
 		                      	您好， <c:out value="${user.email }"/>
 		                    </a>
 		                </li>
-                  	</ul>            
-            </c:if>
-            
+		                 <li class="dropdown">
+		                    <a  class="dropdown-toggle" href="<%=path%>/user_quit.do" aria-expanded="false">
+		                       <i class="fa fa-power-off fa-fw"></i>注销
+		                    </a>
+	               	 </li>    
+                  	</ul>              	
+                    </c:if> 
+                
+            </ul>            
         </nav>
         <!-- 登录和注册 -->
         
@@ -147,6 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   </div>
                   <a href="javascript:void(0)">忘记密码？</a>
                   <div class="errorInfo">
+                  	
                     <p>用户名或密码错误！</p> <!-- 显示表单验证的出错信息 -->
                   </div>
             </form>
@@ -157,6 +167,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <!-- start of login form -->
                   <div id="user-name">
                     <input type="text" name="email" placeholder="请输入邮箱">
+                     <p>  <c:out value="${sessionScope.error}"></c:out> </p>
                   </div>
                   <p></p>
                   <div id="user-password">
@@ -169,6 +180,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <input type="submit" class="btn" value="注册"/>
                   </div>
                   <div class="errorInfo">
+                 
                     <p>用户名或密码错误！</p> <!-- 显示表单验证的出错信息 -->
                   </div>
             </form>

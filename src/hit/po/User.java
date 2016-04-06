@@ -19,11 +19,9 @@ public class User {
 
     private String province;
    
-    private Integer schId;
+    private Integer schId;   
     
-    
-
-	private School school;
+	private String schoolname;
 
     private String major;
 
@@ -107,12 +105,12 @@ public class User {
 
 
 
-    public School getSchool() {
-		return school;
+	public String getSchoolname() {
+		return schoolname;
 	}
 
-	public void setSchool(School school) {
-		this.school = school;
+	public void setSchoolname(String schoolname) {
+		this.schoolname = schoolname;
 	}
 
 	public String getMajor() {
