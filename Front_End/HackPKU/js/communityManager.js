@@ -49,6 +49,10 @@
 	$("#communityPosManage").bind("click",function() {
 		$("#page-inner").load("communityPosManage.html");
 	})
+	// 任务评分
+	$("#taskCommon").bind("click",function() {
+		$("#page-inner").load("taskCommon.html");
+	})
 })();
 
 //活跃的菜单按钮添加样式
