@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>社团信息变更</title>
+</head>
+<body>
+	<div id="pageInfo">
+		<nav>
+			社团管理 >> 社团信息变更
+		</nav>
+		<form id="communityInfoChange">
+			<div id="communityInfoChange-left">
+				<span>社团名称：</span>
+				<input type="text" name="communityName">
+			</div>
+			<div id="communityInfoChange-logo">
+				<span>社团图标：</span>
+				<div id="communityLogo"></div>
+				<a href="javascript:void(0);">
+					点击上传<input type="file" name="submitLogo" accept="image/*">
+				</a>
+			</div>
+			<div id="communityInfoChange-right">
+				<span>社团简介：</span>
+				<textarea></textarea>
+			</div>
+			<div id="communityInfoChange-bottom">
+				<input type="submit" value="确认修改" name="submit">
+			</div>
+		</form>
+		
+	</div>
+</body>
+</html>

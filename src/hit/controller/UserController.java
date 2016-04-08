@@ -12,6 +12,7 @@ import hit.service.UserService;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -90,7 +91,7 @@ public class UserController extends AbstractController {
 	}
 	
 	/**
-	 * 更新用户信息
+	 * 更新用户信息，包括文件上传
 	 * @author sunpeng123
 	 * @throws UnsupportedEncodingException 
 	 */
@@ -98,7 +99,7 @@ public class UserController extends AbstractController {
 	public String update(HttpServletRequest request,@RequestParam String username,
 			@RequestParam String schoolname,@RequestParam String institute,@RequestParam String major,
 			@RequestParam String time,@RequestParam String phone,@RequestParam String sex,
-			@RequestParam String province,@RequestParam("image") MultipartFile file) throws UnsupportedEncodingException{
+			@RequestParam String province,@RequestParam(value = "image", required = false) MultipartFile image) throws UnsupportedEncodingException{
 		request.setCharacterEncoding("UTF-8");
 		User user = (User) request.getSession().getAttribute("user");
 		System.out.println("当前用户是"+user.getEmail());
@@ -134,21 +135,44 @@ public class UserController extends AbstractController {
 		user.setTime(time);
 		user.setSex(sex);
 		user.setValidationstate(1);//设置用户的验证状态，1表示完善信息完毕，但未实名认证
-		
-		if (!file.isEmpty()) {  
+		//以下为处理上传文件的代码
+		if (!image.isEmpty()) {  
             try {  
                 // 文件保存路径  
-                String filePath = request.getSession().getServletContext().getRealPath("/") + "fileupload/"  
-                        + file.getOriginalFilename();  
+             /*   String filePath = request.getSession().getServletContext().getRealPath("/") + "fileupload/"  
+                        + image.getOriginalFilename();  
                 // 转存文件  
-                file.transferTo(new File(filePath));  
+                image.transferTo(new File(filePath));  
+                System.out.println("文件上传成功，路径是"+filePath);
+                user.setImage(filePath);//图片信息入库
+                request.getSession().setAttribute("filepath", filePath);*/
+            	//2016.0408晚第二次实现图片上传代码
+            	String pathRoot = request.getSession().getServletContext().getContextPath();//获取物理路径webapp所在路径
+            	String path="";  
+            	
+            	String savepath  = request.getSession().getServletContext().getRealPath("/");
+            	            	
+            	if(!image.isEmpty()){
+            		//生成uuid作为文件名称
+            		String uuid = UUID.randomUUID().toString().replace("-", "");
+            		 
+            		//获得文件类型，用于过滤和判断，现在先不做了
+            	    String contentType=image.getContentType();  
+            	    String imageName=contentType.substring(contentType.indexOf("/")+1); 
+            	    path="/fileupload/"+uuid+"."+imageName;  
+            		String imagePath = uuid+"."+imageName;  //这是用于显示到前台的名称
+            	    image.transferTo(new File(savepath+path));  
+            		
+            		user.setImage(path);//入库
+            		request.getSession().setAttribute("imagePath", imagePath);
+            		System.out.println("老子想看看图片的路径：："+pathRoot + "  名称： "+ path);
+            	}
+            	
             } catch (Exception e) {  
                 e.printStackTrace();  
             }  
         }  
-		
 		userService.updateUser(user);		
-		
 		
 		request.getSession().removeAttribute("user");
 		request.getSession().setAttribute("user", user);

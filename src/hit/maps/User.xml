@@ -14,7 +14,7 @@
 	<update id="updateUser" parameterClass="User" >
 			update user set username=#username#,phone=#phone# ,province=#province#,sch_id=#schId#,
 				institute=#institute#,validationState=#validationstate#,major=#major#,time=#time#,sex=#sex#,
-				schoolname=#schoolname# where email = #email#
+				schoolname=#schoolname#, image=#image# where email = #email#
 	</update>
 	
 	<select id="login"  resultClass="User"  parameterClass="java.util.Map">
