@@ -94,8 +94,6 @@ header .container {
 header img {
     display: block;
     width: 100%;
-    min-height: 500px;
-    max-height: 700px;
 }
 
 header .intro-text .name {

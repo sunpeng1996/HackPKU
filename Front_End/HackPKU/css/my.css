@@ -715,3 +715,20 @@ body {
 #pageInfo #taskCommon #myModal .modal-body .scores input{
 	float: right;
 }
+
+/*首页展示*/
+#carousel-example-generic .carousel-inner {
+	background: #2c3e50;
+}
+#carousel-example-generic .item img{
+	display: block;
+	width: 450px;
+	height: 300px;
+	margin: 100px;
+}
+#carousel-example-generic .carousel-caption {
+	position: absolute;
+	padding-left: 300px;
+	padding-top: 0px;
+	top: -100px;
+}

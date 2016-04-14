@@ -177,16 +177,6 @@
 			$(".communityPosManageAdd").click(function() {
 				$("#pageInfo").find("#communityPosManage").append($(".communityPosManageDiv:first-child").clone());
 			});
-			$("a[data-toggle='modal']").click(function() {
-				var divs = $(".communityPosManageDiv");
-				var father = $(this).parent().parent();
-				var target = father.find("#myModal");
-				for(var i = 0;i<divs.length;i++){
-					divs.find("#myModal").removeAttr("id","myModal");
-				}
-				target.attr("id","myModal");
-			});
-		})();
     </script>
 </body>
 </html>

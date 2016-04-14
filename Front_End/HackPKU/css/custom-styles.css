@@ -240,6 +240,10 @@ font-size: 30px;
 font-weight: 700;
 text-transform: uppercase;
 line-height: 30px;
+background: url(../images/logo.png);
+display: block;
+background-size: 100%;
+background-repeat: no-repeat;
 }
 .top-navbar .nav > li {
 position: relative;
@@ -401,6 +405,52 @@ font-size: 12px;
 line-height: 1.428571429;
 }
 
+#index-bottom {
+    position: relative;
+}
+#index-left img{
+    display: block;
+    width: 400px;
+    height: 300px;
+    margin: 0 auto;
+    border: solid 20px #272822;
+    border-radius: 10px;
+}
+#index-left {
+    width: 500px;
+    margin: 0 100px;
+    padding-bottom: 5px;
+    border-bottom: solid 25px #272822;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+#index-right {
+    position: absolute;
+    left: 650px;
+    top: 100px;
+}
+#index-right p {
+    font-size: 20px;
+}
+#index-right ul {
+    font-size: 16px;
+}
+#index-right a {
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    text-decoration: none;
+    background: #18BC9C;
+    padding: 10px 0px;
+    border-radius: 5px;
+}
+#index-right a:hover {
+    background: #09192A;
+    color: #77C0FD;
+}
 /*----------------------------------------------
     MEDIA QUERIES     
 ------------------------------------------------*/
