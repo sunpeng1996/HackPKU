@@ -1,0 +1,88 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+
+	<!-- 可以扫描controller、service、...
+	这里让扫描controller，指定controller的包
+	 -->
+	<context:component-scan base-package="hit.qcb"/>
+	<!--注解映射器 --><!-- 
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/> -->
+	<!--注解适配器 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/> -->
+	
+	<!-- 视图解析器
+	解析jsp解析，默认使用jstl标签，classpath下的得有jstl的包
+	 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 配置jsp路径的前缀 -->
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<!-- 配置jsp路径的后缀 -->
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	
+	<!-- 自定义参数绑定 -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<!-- 转换器 -->
+		<property name="converters">
+			<list>
+				<!-- 日期类型转换 -->
+				<bean class="hit.qcb.controller.converter.CustomDateConverter"/>
+			</list>
+		</property>
+		
+	
+	</bean>
+	
+<!-- 校验错误信息配置文件 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<!-- 资源文件名-->
+		<property name="basenames">   
+       	 <list>    
+            <value>classpath:CustomValidationMessages</value> 
+       	 </list>   
+    	</property>
+		<!-- 资源文件编码格式 -->
+		<property name="fileEncodings" value="utf-8" />
+		<!-- 对资源文件内容缓存时间，单位秒 -->
+		<property name="cacheSeconds" value="120" />
+	</bean>
+	<!-- 全局异常处理器
+	只要实现HandlerExceptionResolver接口就是全局异常处理器
+	 -->
+	<bean class="hit.qcb.exception.CustomExceptionResolver"></bean>
+	
+	
+	<!-- 文件上传 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为5MB -->
+		<property name="maxUploadSize">
+			<value>5242880</value>
+		</property>
+	</bean>
+	<!--拦截器 -->
+<mvc:interceptors>
+	<!--多个拦截器,顺序执行 -->
+	<!-- 登陆认证拦截器 -->
+	<mvc:interceptor>
+		<mvc:mapping path="/**"/>
+		<bean class="hit.qcb.interceptor.LoginInterceptor"></bean>
+	</mvc:interceptor>
+</mvc:interceptors>
+	
+	
+</beans>

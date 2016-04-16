@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="s" uri="http://java.sun.com/jstl/core" %>
-<%@page import="hit.po.User"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+request.setAttribute("basePath", basePath); 
 %>
-<html lang="en">
 
 <head>
 
@@ -26,13 +26,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <!-- 自己的css -->
     <link href="css/my.css" rel="stylesheet">
+    
+    <link rel="shortcut icon" href="images/favicon.ico" />
 
     <!-- custom-style.css -->
     <link rel="stylesheet" type="text/css" href="css/custom-styles.css">
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,9 +44,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body id="page-top" class="index">
-
-
-
     <div id="wrapper"></div>
     <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
@@ -56,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">LOGO</a>
+                <a class="navbar-brand" href="index.jsp">LOGO</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-left">
@@ -80,37 +77,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-user fa-fw"></i>
+                        <i class="fa fa-group fa-fw"></i>
                         加入我们
                     </a>
                 </li>
-                
-               
-                
-              <%--   s as您好， <c:out value="${user.email }"/> --%>
                 <!-- /.dropdown -->
             </ul>
-           
             <ul class="nav navbar-top-links navbar-right">
-			             <c:if test="${sessionScope.user==null }">
-				                <li class="dropdown">
-				                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:login(2);" aria-expanded="false">
-				                       登录
-				                    </a>
-				                </li>
-				                <!-- /.dropdown -->
-				                <li class="dropdown">
-				                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:login(1);" aria-expanded="false">
-				                        注册
-				                    </a>
-				                </li>
-			              </c:if>
+			<c:if test="${sessionScope.user==null }">
+                <li class="dropdown">
+                    <a id="login_index" class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" aria-expanded="false">
+                       登录
+                    </a>
+                </li>
                 <!-- /.dropdown -->
-                
-                  <c:if test="${ sessionScope.user!=null}">
-            	  <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a id="signup_index" class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" aria-expanded="false">
+                        注册
+                    </a>
+                </li>
+				</c:if>
+                <!-- /.dropdown -->
+            
+			<c:if test="${ sessionScope.user!=null}">
+			<ul class="nav navbar-top-links navbar-right">
 		                <li class="dropdown">
-		                    <a class="dropdown-toggle" data-toggle="dropdown" href="<%=path%>/MyInfo.do"  aria-expanded="true">
+		                    <a class="dropdown-toggle" href="<%=path%>/MyInfo.do"  aria-expanded="true">
 		                      	您好， <c:out value="${user.email }"/>
 		                    </a>
 		                </li>
@@ -120,28 +112,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    </a>
 	               	 </li>    
                   	</ul>              	
-                    </c:if> 
-                
-            </ul>            
+             </c:if> 
+			 </ul>
         </nav>
         <!-- 登录和注册 -->
-        
-        
-        
     <div id="loginbg">
         <div id="lgmain">
-          <div class="lghead" id="login_id">         
-          			<ul>
-             			 <li><a id="register_active" href="javascript:login(1);">注册</a></li>
-              			 <li><a id="login_active" href="javascript:login(2);">登录</a></li>
-           		    </ul>
-               		
-            
-             <a class="exit" href="javascript:noshow()">X</a>
+          <div class="lghead" id="login_id">
+            <ul>
+              <li><a id="register_active" href="javascript:void(0);">注册</a></li>
+               <li><a id="login_active" href="javascript:void(0);">登录</a></li>
+             </ul>
+             <a id="exit" class="exit" href="javascript:void(0)">X</a>
            </div>
            <div class="login" id="showlg_2">
             <!--表单验证===================================================-->
-             <form name="loginForm" action="<%=path%>/user_login.do" method="post">
+             <form id="loginForm" name="loginForm" action="<%=path%>/MyInfo.do" method="post">
                   <!-- start of login form -->
                   <div id="user-name">
                     <input type="text" name="email" placeholder="请输入邮箱账号">
@@ -152,35 +138,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   </div>
                   <p></p>
                   <div id="button-group">
-                    <input type="submit" class="btn" value="登录"/>
+                    <input type="button" id="login_btn" class="btn" value="登录" onclick="confirm_login()"/>
+                    
                   </div>
                   <a href="javascript:void(0)">忘记密码？</a>
                   <div class="errorInfo">
-                  	
                     <p>用户名或密码错误！</p> <!-- 显示表单验证的出错信息 -->
                   </div>
             </form>
+            <script>
+	            confirm_login = function(){
+	            	$.post("<%=path%>/user_login.do",$('#loginForm').serialize(),function(data){
+	            		if(data == 'success'){
+	            			$('#loginForm').submit();
+	            		}else{
+	            			alert(data);
+	            		}
+	            	});
+	            };
+	        </script>
              <!-- end of form=========================================- -->
           </div>
           <div class="signup" id="showlg_1">
              <form name="loginForm" action="<%=path%>/user_regist.do" method="post">
                   <!-- start of login form -->
                   <div id="user-name">
-                    <input type="text" name="email" placeholder="请输入邮箱">
-                     <p>  <c:out value="${sessionScope.error}"></c:out> </p>
+                    <input type="text" name="email" placeholder="请输入邮箱" class="required email">
                   </div>
-                  <p></p>
+                  <p><c:out value="${sessionScope.error}"></c:out></p>
                   <div id="user-password">
                     <input type="password" name="password" placeholder="请输入密码">
                     <p></p>
-                    <input type="password" name="password" placeholder="请确认密码">
+                    <input type="password" name="repassword" placeholder="请确认密码">
                   </div>
                   <p></p>
                   <div id="button-group">
                     <input type="submit" class="btn" value="注册"/>
                   </div>
                   <div class="errorInfo">
-                 
                     <p>用户名或密码错误！</p> <!-- 显示表单验证的出错信息 -->
                   </div>
             </form>
@@ -197,37 +192,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li data-target="#carousel-example-generic" data-slide-to="1"></li>
             <li data-target="#carousel-example-generic" data-slide-to="2"></li>
           </ol>
-
-          <!-- Wrapper for slides -->
+ <!-- Wrapper for slides -->
           <div class="carousel-inner" role="listbox">
             <div class="item active">
-              <img src="img/portfolio/cake.png" alt="...">
+              <img src="images/show_1.jpg" alt="...">
               <div class="carousel-caption">
-                ...
+                <img src="images/show_2.jpg" alt="...">
               </div>
             </div>
             <div class="item">
-              <img src="img/portfolio/cabin.png" alt="...">
+              <img src="images/show_3.jpg" alt="...">
               <div class="carousel-caption">
-                ...
+                <img src="images/show_4.jpg" alt="...">
               </div>
             </div>
             <div class="item">
-              <img src="img/portfolio/circus.png" alt="...">
+              <img src="images/show_5.jpg" alt="...">
               <div class="carousel-caption">
-                ...
-              </div>
-            </div>
-            <div class="item">
-              <img src="img/portfolio/game.png" alt="...">
-              <div class="carousel-caption">
-                ...
-              </div>
-            </div>
-            <div class="item">
-              <img src="img/portfolio/safe.png" alt="...">
-              <div class="carousel-caption">
-                ...
+                <img src="images/show_6.jpg" alt="...">
               </div>
             </div>
           </div>
@@ -261,7 +243,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/cabin.png" class="img-responsive" alt="">
+                        <img src="images/portfolio/cabin.png" class="img-responsive" alt="">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -271,7 +253,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/cake.png" class="img-responsive" alt="">
+                        <img src="images/portfolio/cake.png" class="img-responsive" alt="">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -281,7 +263,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/circus.png" class="img-responsive" alt="">
+                        <img src="images/portfolio/circus.png" class="img-responsive" alt="">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -291,7 +273,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/game.png" class="img-responsive" alt="">
+                        <img src="images/portfolio/game.png" class="img-responsive" alt="">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -301,7 +283,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/safe.png" class="img-responsive" alt="">
+                        <img src="images/portfolio/safe.png" class="img-responsive" alt="">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -311,7 +293,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/submarine.png" class="img-responsive" alt="">
+                        <img src="images/portfolio/submarine.png" class="img-responsive" alt="">
                     </a>
                 </div>
             </div>
@@ -323,78 +305,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>About</h2>
+                    <h2>关于我们</h2>
                     <hr class="star-light">
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2">
-                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+                    <p>我们是一款基于Web的社团管理APP，我们致力于改善当前高中和大学里存在的管理社团的种种不便。在社交网络盛行的时代，我们应当告别繁琐沉重的社团管理方式。利用互联网络来发布、管理社团的相关事务。</p>
                 </div>
                 <div class="col-lg-4">
-                    <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
-                </div>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <a href="#" class="btn btn-lg btn-outline">
-                        <i class="fa fa-download"></i> Download Theme
-                    </a>
+                    <p>我们不只是一个社团管理网站，我们也是一个基于大数据分析的社交网络体系。我们的网站是应用于全国社团的，而我们也会根据全国社团举办的活动信息进行分析来对社团活动进行推荐。社团论坛模块也能够允许所有社团成员进行发帖交流。还会联合不同学校社团进行共同举办大型活动等。</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Contact Me</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                    <form name="sentMessage" id="contactForm" novalidate>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Name</label>
-                                <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Email Address</label>
-                                <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Phone Number</label>
-                                <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Message</label>
-                                <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <br>
-                        <div id="success"></div>
-                        <div class="row">
-                            <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-success btn-lg">Send</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <section id="index-bottom">
+        <div id="index-left">
+            <img src="images/manage.png">
+        </div>
+        <div id="index-right">
+            <h2>管理控制后台</h2>
+            <p>
+                通过管理后台，可以轻松的完成社团的信息修改、成员增减、职位分配、任务管理、活动评价以及社团论坛等操作。
+            </p>
+            <ul>
+                <li>人脸识别登录系统</li>
+                <li>IBM BlueMix云平台和青云数据库管理</li>
+                <li>更加方便快捷的社团管理方式</li>
+                <li>实时通知最新活动和任务</li>
+                <li>历史活动一览而知</li>
+            </ul>
+            <a href="javascript:void(0);"><i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;立即体验</a>
         </div>
     </section>
 
@@ -404,11 +347,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="container">
                 <div class="row">
                     <div class="footer-col col-md-4">
-                        <h3>Location</h3>
-                        <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                        <h3>友情链接</h3>
+                        <a href="https://console.ng.bluemix.net/">IBM BlueMix</a>
+                        <br>
+                        <a href="https://www.qingcloud.com/">青云</a>
+                        <br>
+                        <a href="https://www.sensetime.com/">商汤科技</a>
+                        <br>
+                        <a href="https://www.hit.edu.cn/">哈工大</a>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>Around the Web</h3>
+                        <h3>联系我们</h3>
                         <ul class="list-inline">
                             <li>
                                 <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
@@ -428,8 +377,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </ul>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>About Freelancer</h3>
-                        <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                        <h3>HIT_SSHZ</h3>
+                        <p>
+                            哈尔滨工业大学14级计软学院
+                            <br>
+                            孙一铀、黄运智、孙鹏、张旭
+                            <br>
+                            提供技术支持
+                        </p>
                     </div>
                 </div>
             </div>
@@ -438,7 +393,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Copyright &copy; Your Website 2014
+                        Copyright &copy; All rights preserved by HIT_SSHZ
                     </div>
                 </div>
             </div>
@@ -676,8 +631,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
     <!-- JS Scripts-->
-
-    <script src="js/common.js"></script>
+    <script src="js/index.js"></script>
+    <!-- jQuery Js -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="js/jquery.metisMenu.js"></script>
+<!-- 
+    <script src="js/jquery.validate.js" type="text/javascript"></script>
+ -->
 
 </body>
 

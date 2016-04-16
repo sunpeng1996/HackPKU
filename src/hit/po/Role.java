@@ -40,4 +40,11 @@ public class Role {
     public void setClubId(Integer clubId) {
         this.clubId = clubId;
     }
+
+	@Override
+	public String toString() {
+		return "Role [roleId=" + roleId + ", rolename=" + rolename
+				+ ", description=" + description + ", clubId=" + clubId + "]";
+	}
+    
 }

@@ -4,14 +4,19 @@ package hit.controller;
  * 
  * 用户模块控制器
  */
+import hit.common.JavaMailUtils;
+import hit.common.SenseTime;
 import hit.mapper.SchoolMapper;
+import hit.po.Club;
 import hit.po.School;
 import hit.po.User;
+import hit.service.ClubService;
 import hit.service.SchoolService;
 import hit.service.UserService;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
@@ -31,7 +37,7 @@ public class UserController extends AbstractController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private SchoolMapper schoolMapper;
+	private ClubService clubService;
 	@Autowired
 	private SchoolService schoolService;
 
@@ -42,29 +48,38 @@ public class UserController extends AbstractController {
 		return null;
 	}
 
-	
 	@RequestMapping(value="/user_login.do",method = {RequestMethod.POST })
-	public String login(HttpServletRequest request,@RequestParam String email,@RequestParam String password){
+	public @ResponseBody String login(HttpServletRequest request,@RequestParam String email,@RequestParam String password){
 		 System.out.println("到达登陆后台0--------------------------------------------");
 		User user = userService.selectByEmail(email);
-	
+		
 		if(user==null){
 			request.getSession().setAttribute("error","登录失败，该邮箱尚未注册");
-			return "jsp/error";
+//			return "jsp/error";
+//			return "用户名或密码错误!";
+			return "wrong username or password!";
 		}else{
 			User temp = userService.login(password, email);
 			if(temp==null){
 				request.getSession().setAttribute("error","邮箱或密码错误");
-				return "jsp/error";
+//				return "用户名或密码错误!";
+
+				return "wrong username or password!";
 			}else{
+				temp.setUserId(user.getUserId());//妈的，这句话不加就有问题，，，，，bug终于找到了
 				request.getSession().setAttribute("user",temp);
+				request.getSession().setAttribute("user_id", user.getUserId());
+				if(temp.getImage()!=null){
+					//如果有图片，就将他显示出来
+					request.getSession().setAttribute("imagePath", temp.getImage());
+					System.out.println("该用户的图片是：："+temp.getImage());
+				}
 				System.out.println(temp.getEmail()+"我他妈想看看是谁的邮箱");
 				System.out.println("登录成功，强行调转到主页");
-				return "index";
+				return "success";
 			}
 		}			
 	}
-	
 	@RequestMapping(value="/user_regist.do",method={RequestMethod.POST})
 	public String regist(HttpServletRequest request , @RequestParam String email ,@RequestParam String password ){
 		User temp = userService.selectByEmail(email);
@@ -73,18 +88,26 @@ public class UserController extends AbstractController {
 			request.getSession().setAttribute("error", "该邮箱已经被注册");
 			return "index";
 		}
-		else {
-			
-		
-		User user = new User();
+		else {				
+		   User user = new User();
 			user.setEmail(email);
 			user.setPassword(password);
 			System.out.println("创建用户user");
+			user.setValidationstate(0);//未激活，此时是0
 			//调用创建用户的方法
 			String flag = userService.addUser(user);	
+			String keyCode = UUID.randomUUID().toString().replace("-","") +""+ UUID.randomUUID().toString().replace("-", "");     //激活key，用于激活邮件
+			
+			String url = "http://localhost:8080/Quiclub/user_active.do?key="   ;
+			
+			JavaMailUtils.sendMail(user.getEmail(), "激活邮件，请点击下面链接完成激活操作！",
+					"<a href='" + url +keyCode+ "&email=" + user.getEmail() +"'>" + "</a><br/>");//发送激活邮件
+			user.setKeyCode(keyCode);//入库
+			userService.updateUserByEmail(user);
 			request.getSession().setAttribute("user", user);//将用户放入到session域中
+			request.getSession().setAttribute("user_id", user.getUserId());
 			if (flag.equals("success")) {
-				return "jsp/manager";
+				return "jsp/toActive";
 			}
 			return "";		
 		}
@@ -96,89 +119,19 @@ public class UserController extends AbstractController {
 	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value="/user_update.do",method={RequestMethod.POST})
-	public String update(HttpServletRequest request,@RequestParam String username,
-			@RequestParam String schoolname,@RequestParam String institute,@RequestParam String major,
-			@RequestParam String time,@RequestParam String phone,@RequestParam String sex,
-			@RequestParam String province,@RequestParam(value = "image", required = false) MultipartFile image) throws UnsupportedEncodingException{
-		request.setCharacterEncoding("UTF-8");
-		User user = (User) request.getSession().getAttribute("user");
+	public String update(HttpServletRequest request,@RequestParam(defaultValue="papapa") String username,
+			@RequestParam(defaultValue="papapa") String schoolname,@RequestParam(defaultValue="papapa") String institute,@RequestParam(defaultValue="papapa") String major,
+			@RequestParam(defaultValue="papapa") String time,@RequestParam(defaultValue="papapa") String phone,@RequestParam(defaultValue="papapa") String sex,
+			@RequestParam(defaultValue="papapa") String scholar,@RequestParam(defaultValue="papapa") String province,@RequestParam(value = "image", required = false) MultipartFile image) throws UnsupportedEncodingException{
+		User user = (User) request.getSession().getAttribute("user");//从request中获取user
 		System.out.println("当前用户是"+user.getEmail());
-		Integer id = user.getUserId();//获取当前用户id
-		String email = user.getEmail();
-		String password = user.getPassword();
-		user.setEmail(email);
-		user.setUserId(id);
-		user.setPassword(password);
-		user.setPhone(phone);
-		user.setProvince(province);
-		user.setUsername(username);
-		//通过schoolname得到school对象
-		School school = userService.findSchoolBySchoolName(schoolname);	
-		Integer schid = schoolService.selectSchidBySchoolName(schoolname);
-		if(school==null){
-			//说明school在数据库中没有，那么我们new一个就好了
-			School temp = new School();
-					
-			temp.setSchoolname(schoolname);			
-			schoolMapper.insert(temp);//持久化到数据库中	
-			Integer tempid = schoolService.selectSchidBySchoolName(temp.getSchoolname());
-			
-			user.setSchId(tempid);
-			user.setSchoolname(schoolname);
-		}		else {
-			user.setSchoolname(schoolname);
-			user.setSchId(schid);
-		}
-	
-		user.setMajor(major);
-		user.setInstitute(institute);
-		user.setTime(time);
-		user.setSex(sex);
-		user.setValidationstate(1);//设置用户的验证状态，1表示完善信息完毕，但未实名认证
-		//以下为处理上传文件的代码
-		if (!image.isEmpty()) {  
-            try {  
-                // 文件保存路径  
-             /*   String filePath = request.getSession().getServletContext().getRealPath("/") + "fileupload/"  
-                        + image.getOriginalFilename();  
-                // 转存文件  
-                image.transferTo(new File(filePath));  
-                System.out.println("文件上传成功，路径是"+filePath);
-                user.setImage(filePath);//图片信息入库
-                request.getSession().setAttribute("filepath", filePath);*/
-            	//2016.0408晚第二次实现图片上传代码
-            	String pathRoot = request.getSession().getServletContext().getContextPath();//获取物理路径webapp所在路径
-            	String path="";  
-            	
-            	String savepath  = request.getSession().getServletContext().getRealPath("/");
-            	            	
-            	if(!image.isEmpty()){
-            		//生成uuid作为文件名称
-            		String uuid = UUID.randomUUID().toString().replace("-", "");
-            		 
-            		//获得文件类型，用于过滤和判断，现在先不做了
-            	    String contentType=image.getContentType();  
-            	    String imageName=contentType.substring(contentType.indexOf("/")+1); 
-            	    path="/fileupload/"+uuid+"."+imageName;  
-            		String imagePath = uuid+"."+imageName;  //这是用于显示到前台的名称
-            	    image.transferTo(new File(savepath+path));  
-            		
-            		user.setImage(path);//入库
-            		request.getSession().setAttribute("imagePath", imagePath);
-            		System.out.println("老子想看看图片的路径：："+pathRoot + "  名称： "+ path);
-            	}
-            	
-            } catch (Exception e) {  
-                e.printStackTrace();  
-            }  
-        }  
-		userService.updateUser(user);		
-		
+		User userNew = userService.update(request,user,username,schoolname,institute,major,time,phone,sex,province,image,scholar);
+		request.setCharacterEncoding("UTF-8");
+		//调用user的更新方法
+		userService.updateUser(userNew);		
 		request.getSession().removeAttribute("user");
-		request.getSession().setAttribute("user", user);
-				
-		
-		return "index";
+		request.getSession().setAttribute("user", userNew);
+		return "forward:index.jsp";
 			
 	}
 	/**
@@ -190,7 +143,7 @@ public class UserController extends AbstractController {
 		User user = (User) request.getAttribute("user");
 		request.getSession().removeAttribute("user");		//将user对象从session中移除
 		System.out.println("注销成功。。。");
-		return "index";
+		return "forward:index.jsp";
 	}
 	/**
 	 * 我的信息
@@ -201,8 +154,12 @@ public class UserController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping(value="/MyInfo.do")
-	public String MyInfo() {
-		return "jsp/manager1";
+	public String MyInfo(HttpServletRequest request) {
+		if (request.getSession().getAttribute("user") == null) {
+			return "jsp/error";
+		}else{
+			return "jsp/manager1";			
+		}
 	}
 	
 	/**
@@ -214,6 +171,64 @@ public class UserController extends AbstractController {
 	@RequestMapping(value="/editInfo.do")
 	public  String editInfo(){
 		return "jsp/manager";
+	}
+	/**
+	 * @author sunyiyou
+	 * @param request
+	 * @param club_id
+	 * @return
+	 */
+	@RequestMapping(value="/toClubPage.do",method={RequestMethod.GET})
+	public String toClubPage(HttpServletRequest request,Integer club_id){
+		request.getSession().setAttribute("club_id", club_id);
+		Integer user_id = (Integer) request.getSession().getAttribute("user_id");
+		if (user_id ==  null) {
+			user_id = 1;
+		}
+		List<Integer> menu_ids = clubService.getRoleMenu(clubService.getUserRoleInClub(user_id, club_id).getRoleId());
+		request.setAttribute("menu_ids", menu_ids);
+		return "jsp/CommunityManager";
+	}
+	/**
+	 * @author sunyiyou
+	 * @param request
+	 * @param club_id
+	 * @return
+	 */
+	@RequestMapping(value="/getUserClubs.do")
+	public String getUserClubs(HttpServletRequest request){
+		Integer user_id = (Integer) request.getSession().getAttribute("user_id");
+		if (user_id == null) {
+			user_id = 1;
+		}
+		List<Club> clubs = clubService.getClubsByUser(user_id);
+		request.setAttribute("clubs", clubs);
+		return "jsp/myCommunity";
+	}
+	
+	/**
+	 * 
+	 * @author 作者: 如今我已·剑指天涯
+	 * @Description:激活账号的方法
+	 * @return
+	 */
+	@RequestMapping(value="/user_active.do")
+	public String active(HttpServletRequest request) {
+		String temp = request.getParameter("key");//获取到了
+		String email = request.getParameter("email");//OK
+		User user = userService.selectByEmail(email);
+		if(user.getKeyCode().equals(temp)){
+			//激活成功
+			user.setValidationstate(1);//已激活
+			userService.updateUser(user);
+			request.getSession().setAttribute("user", user);
+			request.setAttribute("message", "激活成功，请完善信息");
+			return "jsp/manager";
+		}else{
+			request.setAttribute("error","激活失败，请返回到您的邮箱查看");
+			return "jsp/error";
+		}
+		
 	}
 	
 	

@@ -11,19 +11,12 @@
 			
 	</insert>
  	
-	<update id="updateUser" parameterClass="User" >
-			update user set username=#username#,phone=#phone# ,province=#province#,sch_id=#schId#,
-				institute=#institute#,validationState=#validationstate#,major=#major#,time=#time#,sex=#sex#,
-				schoolname=#schoolname#, image=#image# where email = #email#
-	</update>
+	
 	
 	<select id="login"  resultClass="User"  parameterClass="java.util.Map">
   			  SELECT U.* FROM user U   WHERE email=#email# AND password=#password#
   	</select>
   	
-  	<select id="selectByEmail" resultClass="User" parameterClass="java.util.Map">
-  			select U.* from user U where email=#email#
-  	</select>  	
   	
   	<select id="findSchoolBySchoolName" resultClass="School" parameterClass="java.lang.String">
   			select S.*  from school S where schoolname = #schoolname#

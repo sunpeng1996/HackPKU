@@ -1,3 +1,4 @@
+var basePath = "http://localhost:8080/QuickClub2";
 (function (){
 	//异步加载页面
 	//个人信息页面
@@ -7,6 +8,7 @@
 	});
 	//认证页面
 	$("#confirm").bind("click",function() {
+		
 		$("#page-inner").load("confirm.html");
 		addActive('#confirm');
 	});
@@ -31,19 +33,91 @@
 	})
 	// 查看日程页面
 	$("#myEvents").bind("click",function() {
-		$("#page-inner").load("myEvents.html");
-	})
+		$.ajax({ 
+            url:basePath + "/scheduel.do", 
+            type:'GET', 
+            contentType:'application/json;charset=utf-8',
+            success: function(data){ 
+            	$("#page-inner").html(data);
+            },
+            error: function(data){
+                alert("gg");
+            }
+        }); 
+	});
 	// 社团信息变更页面
 	$("#communityInfoChange").bind("click",function() {
-		$("#page-inner").load("communityInfoChange.html");
-	})
+		$.ajax({ 
+            url:basePath + "/editclubmessage.do", 
+            type:'GET', 
+            contentType:'application/json;charset=utf-8',
+            success: function(data){ 
+            	$("#page-inner").html(data);
+            },
+            error: function(data){
+                alert("gg");
+            }
+        }); 
+		
+	});
+	$("#distributeActivity").bind("click",function() {
+		
+		$.ajax({ 
+            url:basePath + "/distributeactivity.do", 
+            type:'GET', 
+            contentType:'application/json;charset=utf-8',
+            success: function(data){ 
+            	$("#page-inner").html(data);
+            },
+            error: function(data){
+                alert("gg");
+            }
+        }); 
+	});
 	// 社团成员调整
 	$("#communityMemChange").bind("click",function() {
-		$("#page-inner").load("communityMemChange.html");
+		
+		$.ajax({ 
+            url:basePath + "/adjustclubmember.do", 
+            type:'GET', 
+            contentType:'application/json;charset=utf-8',
+            success: function(data){ 
+            	$("#page-inner").html(data);
+            },
+            error: function(data){
+                alert("gg");
+            }
+        }); 
 	})
 	// 社团角色分配
-	$("#communityPosChange").bind("click",function() {
-		$("#page-inner").load("communityPosChange.html");
+	$("#communityPosChange").bind("click",function(menu_id) {
+		
+		$.ajax({ 
+            url:basePath + "/delegateclubrole.do", 
+            type:'GET', 
+            contentType:'application/json;charset=utf-8',
+            success: function(data){ 
+            	$("#page-inner").html(data);
+            },
+            error: function(data){
+                alert("gg");
+            }
+        }); 
+	});
+	
+	// 社团角色管理
+	$("#communityPosManage").bind("click",function() {
+		$.ajax({ 
+            url:basePath + "/showRoles.do", 
+            type:'GET', 
+            contentType:'application/json;charset=utf-8',
+            success: function(data){ 
+            	$("#page-inner").html(data);
+            },
+            error: function(data){
+                alert("gg");
+            }
+        }); 
 	})
 })();
 

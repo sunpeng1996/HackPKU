@@ -1,14 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hit.mapper.TaskMapper">
-  <resultMap id="BaseResultMap" type="hit.po.Task">
+
+  <delete id="deleteTaskParticiparors" parameterType="java.lang.Integer">
+    delete from task_participators
+    where task_id = #{task_id,jdbcType=INTEGER}
+  </delete>
+<insert id="addTaskParticiparors" parameterType="hit.po.TaskParticipator">
+	insert into task_participators values(#{user.userId},#{task.taskId},0)
+</insert>
+<select id="getTaskUsers" parameterType="java.lang.Integer" resultType="hit.po.User">
+	SELECT
+	`user`.`username`
+	FROM
+	`task_participators`,
+	`user`
+	WHERE
+	task_participators.task_id = #{task_id}
+	AND user.user_id = task_participators.user_id_participator 
+</select>
+
+ <select id="getClubTasks" parameterType="java.lang.Integer" resultType="hit.po.EventPo">
+ 	 SELECT
+	 `task`.`task_id`,
+	`task`.`taskname`,
+	`task`.`summary`,
+	`task`.`time_id_begin`,
+	`task`.`time_id_end`,
+	`task`.`totalscore`
+	FROM
+	`task`
+	WHERE
+	state = 0 AND club_id = #{club_id}
+ </select>
+ <select id="getUserTasksAdmin" parameterType="hit.po.ClubMember" resultType="hit.po.EventPo">
+ 	 SELECT
+	 `task`.`task_id`,
+	`task`.`taskname`,
+	`task`.`summary`,
+	`task`.`time_id_begin`,
+	`task`.`time_id_end`,
+	`task`.`totalscore`
+	FROM
+	`task`
+	WHERE
+	state = 0 AND club_id = #{club.clubId}  AND user_id_leader = #{user.userId}
+ </select>
+ <select id="getUserTasks" parameterType="hit.po.ClubMember" resultType="hit.po.EventPo">
+ 	SELECT
+ 	`task`.`task_id`,
+	`task`.`taskname`,
+	`task`.`summary`,
+	`task`.`time_id_begin`,
+	`task`.`time_id_end`,
+	`task`.`totalscore`
+	FROM
+	`task_participators`,
+	`task`,
+	`user`
+	WHERE
+	state = 0 
+	AND user.user_id = #{user.userId}
+	 AND task.club_id = #{club.clubId} 
+	AND task.task_id = task_participators.task_id 
+	AND user.user_id = task_participators.user_id_participator 
+ </select>
+ <select id="getDateTaskAdmin" parameterType="hit.po.ClubMember" resultType="java.util.Date">
+ 	SELECT
+	`task`.`time_id_begin`
+	FROM
+	`task`
+	WHERE
+	state = 0 AND club_id = #{club.clubId}  AND user_id_leader = #{user.userId}
+ </select>
+ <select id="getDateWithTask" parameterType="hit.po.ClubMember" resultType="java.util.Date">
+ 	SELECT
+	`task`.`time_id_begin`
+	FROM
+	`task`,
+	`task_participators`,
+	`user`
+	WHERE
+	 user.user_id = #{user.userId} 
+	 AND task.state = 0 
+	 AND task.club_id = #{club.clubId}  
+	 AND task.task_id = task_participators.task_id 
+	 AND user.user_id = task_participators.user_id_participator 
+ </select>
+<resultMap id="BaseResultMap" type="hit.po.Task">
     <id column="task_id" jdbcType="INTEGER" property="taskId" />
     <result column="taskname" jdbcType="VARCHAR" property="taskname" />
     <result column="summary" jdbcType="VARCHAR" property="summary" />
     <result column="totalscore" jdbcType="INTEGER" property="totalscore" />
     <result column="state" jdbcType="INTEGER" property="state" />
-    <result column="time_id_begin" jdbcType="INTEGER" property="timeIdBegin" />
-    <result column="time_id_end" jdbcType="INTEGER" property="timeIdEnd" />
+    <result column="time_id_begin" jdbcType="TIMESTAMP" property="timeIdBegin" />
+    <result column="time_id_end" jdbcType="TIMESTAMP" property="timeIdEnd" />
     <result column="user_id_leader" jdbcType="INTEGER" property="userIdLeader" />
     <result column="club_id" jdbcType="INTEGER" property="clubId" />
   </resultMap>
@@ -32,8 +118,8 @@
       time_id_end, user_id_leader, club_id
       )
     values (#{taskId,jdbcType=INTEGER}, #{taskname,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
-      #{totalscore,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{timeIdBegin,jdbcType=INTEGER}, 
-      #{timeIdEnd,jdbcType=INTEGER}, #{userIdLeader,jdbcType=INTEGER}, #{clubId,jdbcType=INTEGER}
+      #{totalscore,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{timeIdBegin,jdbcType=TIMESTAMP}, 
+      #{timeIdEnd,jdbcType=TIMESTAMP}, #{userIdLeader,jdbcType=INTEGER}, #{clubId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="hit.po.Task">
@@ -84,10 +170,10 @@
         #{state,jdbcType=INTEGER},
       </if>
       <if test="timeIdBegin != null">
-        #{timeIdBegin,jdbcType=INTEGER},
+        #{timeIdBegin,jdbcType=TIMESTAMP},
       </if>
       <if test="timeIdEnd != null">
-        #{timeIdEnd,jdbcType=INTEGER},
+        #{timeIdEnd,jdbcType=TIMESTAMP},
       </if>
       <if test="userIdLeader != null">
         #{userIdLeader,jdbcType=INTEGER},
@@ -113,10 +199,10 @@
         state = #{state,jdbcType=INTEGER},
       </if>
       <if test="timeIdBegin != null">
-        time_id_begin = #{timeIdBegin,jdbcType=INTEGER},
+        time_id_begin = #{timeIdBegin,jdbcType=TIMESTAMP},
       </if>
       <if test="timeIdEnd != null">
-        time_id_end = #{timeIdEnd,jdbcType=INTEGER},
+        time_id_end = #{timeIdEnd,jdbcType=TIMESTAMP},
       </if>
       <if test="userIdLeader != null">
         user_id_leader = #{userIdLeader,jdbcType=INTEGER},
@@ -127,18 +213,5 @@
     </set>
     where task_id = #{taskId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="hit.po.Task">
-    update task
-    set taskname = #{taskname,jdbcType=VARCHAR},
-      summary = #{summary,jdbcType=VARCHAR},
-      totalscore = #{totalscore,jdbcType=INTEGER},
-      state = #{state,jdbcType=INTEGER},
-      time_id_begin = #{timeIdBegin,jdbcType=INTEGER},
-      time_id_end = #{timeIdEnd,jdbcType=INTEGER},
-      user_id_leader = #{userIdLeader,jdbcType=INTEGER},
-      club_id = #{clubId,jdbcType=INTEGER}
-    where task_id = #{taskId,jdbcType=INTEGER}
-  </update>
   
-
 </mapper>

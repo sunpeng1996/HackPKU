@@ -1,0 +1,734 @@
+body {
+	min-width: 1200px;
+	font-family: 'Microsoft YaHei';
+}
+#loginbg{
+	display: none;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.7);
+	color: #77C0FD;
+	z-index: 100;
+}
+#lgmain{
+	top: 50%;
+	left: 50%;
+	width: 330px;
+	height: 380px;
+	margin-top: -190px;
+	margin-left: -165px;
+	position: fixed;
+	border-radius: 2px;
+	border: solid 1px #77C0FD;
+	z-index: 120;
+	display: none;
+}
+.lghead{
+	width: 100%;
+	position: absolute;
+	border-bottom: 1px solid #77C0FD;
+}
+.lghead ul{
+	margin: 0px;
+	padding: 0px;
+}
+.lghead ul li{
+	list-style: none;
+	float: left;
+}
+.lghead ul li a{
+	font-family: "Microsoft YaHei";
+	font-size: 17px;
+	display: block;
+	padding: 0 13px;
+	line-height: 40px;
+	text-decoration: none;
+}
+.active,
+.lghead ul li a:hover{
+	border-left: solid 1px #77C0FD;
+	border-right: solid 1px #77C0FD;
+}
+.lghead .exit{
+	position: absolute;
+	margin: 5px 0px 0px 165px;
+	font-size: 20px;
+	text-decoration: none;
+}
+.lghead .exit:hover{
+	font-size: 23px;
+	text-decoration: none;
+}
+.login{
+	display: none;
+	position: absolute;
+	height: 300px;
+	margin-top: 80px;
+	margin-left: 30px;
+}
+.login input{
+	width: 270px;
+	padding: 9px 9px 9px 10px;
+	background: transparent;
+	border: solid 1px #77C0FD;
+}
+.login p{
+	display: block;
+	height: 20px;
+}
+.login #button-group input{
+	background: #09192A;
+	font-size: 18px;
+	font-family: "Microsoft YaHei"
+}
+.signup{
+	/*display: none;*/
+	position: absolute;
+	height: 300px;
+	margin-top: 80px;
+	margin-left: 30px;
+}
+.signup input{
+	width: 270px;
+	padding: 9px 9px 9px 10px;
+	background: transparent;
+	border: solid 1px #77C0FD;
+}
+.signup p{
+	display: block;
+	height: 20px;
+}
+.signup #button-group input{
+	background: #09192A;
+	font-size: 18px;
+	font-family: "Microsoft YaHei"
+}
+.login a{
+	display: block;
+	margin-left: 200px;
+	margin-top: 10px;
+}
+.errorInfo{
+	display: none;
+	position: absolute;
+	margin-top: 11px;
+}
+#pageInfo {
+	padding: 20px;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	box-shadow: 0 0 1px 0 #77C0FD;
+}
+#pageInfo  nav {
+	position: relative;
+	font-size: 20px;
+	border-bottom: solid 2px #000;
+}
+#pageInfo  nav a {
+	position: absolute;
+	right: 50px;
+	bottom: 5px;
+	color: #77C0FD;
+	display: block;
+	padding: 0 10px;
+	border: solid 1px #77C0FD;
+	text-decoration: none;
+}
+/*个人信息页面*/
+#Infomation {
+	position: relative;
+	max-width: 900px;
+	margin: 50px auto;
+	font-size: 20px;
+	font-family: "Microsoft YaHei";
+}
+#Infomation > div {
+	position: relative;
+	margin: 20px 50% 20px 0px;
+	width: 450px;
+	height: 50px;
+	line-height: 50px;
+}
+#Infomation span {
+	display: block;
+	float: right;
+	line-height: 35px;
+	margin-right: 300px;
+}
+/*#Infomation span::after {
+	content: "";
+	display: block;
+	clear: both;
+}*/
+#Infomation .inner-div {
+	position: absolute;
+	width: 250px;
+	height: 35px;
+	line-height: 35px;
+	right: 0px;
+	/*float: right;*/
+}
+#Infomation nav {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	margin: 0px 100px;
+}
+#Infomation .photo {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	right: 0px;
+	top: 0px;
+	margin: 10px 10%;
+	border: solid 1px #09192A;
+}
+#Infomation .button {
+	background: #fff;
+	color: #09192A;
+	font-size: 20px;
+	width: 125px;
+	height: 40px;
+	border: solid 1px #09192A;
+	-webkit-transition: 0.5s linear;
+	-o-transition: 0.5s linear;
+	transition: 0.5s linear;
+}
+#Infomation .button[type="submit"] {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+#Infomation .button[type="submit"]:hover {
+	border: solid 1px #77C0FD;
+	color: #77C0FD;
+	background: #09192A;
+}
+#Infomation .button[type="button"] {
+	position: absolute;
+	top: 240px;
+	right: calc(10% + 35px);
+}
+/*认证页面*/
+#page-inner .confirm {
+	position: relative;
+	width: 100%;
+	height: 150px;
+	margin-bottom: 30px;
+	padding: 20px 40px;
+	background: #fff;
+}
+#page-inner #confirm button {
+	position: absolute;
+	right: 100px;
+	top: 50px;
+	width: 120px;
+	height: 40px;
+	border: none;
+	border-radius: 5px;
+	background: #FF7B36;
+}
+/*我的社团页面*/
+#pageInfo .communitydiv {
+	position: relative;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	width: calc(100% - 40px);
+	height: 250px;
+	margin: 20px;
+	border-radius: 5px;
+	border: solid 1px #fff;
+}
+#pageInfo .community1 {
+	background: #5CB85C;
+}
+#pageInfo .community2 {
+	background: #F0433D;
+}
+#pageInfo .community3 {
+	background: #4CB1CF;
+}
+#pageInfo .community4 {
+	background: #F04ADE;
+}
+#pageInfo .community5 {
+	background: #0B62A4;
+}
+#pageInfo .communitydiv img {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	margin: 25px 60px;
+	border: solid 10px #fff;
+}
+#pageInfo .communitydiv .communitySum {
+	position: absolute;
+	width: 40%;
+	height: 200px;
+	top: 25px;
+	left: 300px;
+	color: #fff;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+#pageInfo .communitydiv a {
+	display: block;
+	float: right;
+	width: 13%;
+	height: 50px;
+	margin: 95px 40px ;
+	border-radius: 15px;
+	border: solid 1px #77C0FD;
+	color: #fff;
+	background: #09192A;
+	text-decoration: none;
+	text-align: center;
+	line-height: 50px;
+	font-size: 24px;
+}
+#pageInfo .communitydiv a:hover {
+	border-radius: 0px;
+}
+/*社团管理页面*/
+#pageInfo #communityInfoChange {
+	position: relative;
+	margin: 30px 20px;
+	padding: 20px;
+	width: calc(100% - 40px);
+	height: 470px;
+}
+#pageInfo #communityInfoChange-left {
+	width: 310px;
+	font-size: 20px;
+}
+#pageInfo #communityInfoChange-left input{
+	width: 200px;
+}
+#pageInfo #communityInfoChange-logo {
+	position: relative;
+	margin: 20px 0 20px 80px;
+	width: 250px;
+	height: 300px;
+}
+#pageInfo #communityInfoChange-logo input {
+	position: absolute;
+	width: 200px;
+	height: 40px;
+	opacity: 0;
+	top: -1px;
+}
+#pageInfo #communityInfoChange-logo span {
+	position: absolute;
+	left: -80px;
+	font-size: 20px;
+}
+#pageInfo #communityInfoChange-logo a{
+	position: absolute;
+	bottom: 10px;
+	left: 25px;
+	width: 200px;
+	height: 40px;
+	border: solid 1px #09192A;
+	background: transparent;
+	color: #09192A;
+	text-align: center;
+	overflow: hidden;
+	font-size: 20px;
+	text-decoration: none;
+	transition: 0.5s linear;
+	-webkit-transition: 0.5s linear;
+	-moz-transition: 0.5 linear;
+}
+#pageInfo #communityInfoChange-logo a:hover {
+	background: #09192A;
+	color: #77C0FD;
+	border: solid 1px #77C0FD;
+}
+#pageInfo #communityInfoChange-logo #communityLogo {
+	width: 200px;
+	height: 200px;
+	border: solid 1px #CFCFCF;
+	margin: 0 auto;
+}
+#pageInfo #communityInfoChange-right {
+	position: absolute;
+	min-width: 50%;
+	height: 400px;
+	left: 350px;
+	top: 20px;
+	font-size: 20px;
+}
+#pageInfo #communityInfoChange-right span {
+	position: absolute;
+	top: 0px;
+}
+#pageInfo #communityInfoChange-right textarea {
+	float: right;
+	width: 73%;
+	height: 340px;
+	resize: none;
+}
+#pageInfo #communityInfoChange-bottom input {
+	float: right;
+	width: 150px;
+	height: 40px;
+	margin: 30px 100px 0 0 ;
+	border: none;
+	background: #FF7B36;
+	font-size: 18px;
+	color: #09192A;
+	border-radius: 15px;
+	transition: 0.5s linear;
+	-webkit-transition: 0.5s linear;
+	-moz-transition: 0.5 linear;
+}
+#pageInfo #communityInfoChange-bottom input:hover {
+	border-radius: 0px;
+}
+/*社团成员调整*/
+#pageInfo #communityMemChange {
+	width: 100%;
+	margin: 20px 0px;
+	padding: 0 30px;
+}
+#pageInfo #communityMemChange table {
+	width: 100%;
+	font-size: 20px;
+	background: ;
+	text-align: center;
+	border-color: #77C0FD;
+}
+#pageInfo #communityMemChange table tr {
+	height: 50px;
+	border-color: #77C0FD;
+}
+#pageInfo #communityMemChange table tr:nth-child(2n+1) {
+	background: #E5EBF2;
+	height: 50px;
+}
+#pageInfo #communityMemChange table tr th {
+	width: 33.3333%;
+	background: #09192A;
+	text-align: center;
+	color: #77C0FD;
+	border-color: #77C0FD;
+}
+#pageInfo #communityMemChange table tr td {
+	width: 33.3333%;
+	border-color: #77C0FD;
+}
+#pageInfo #communityMemChange table tr td a {
+	display: block;
+	width: 100px;
+	height: 30px;
+	margin: 0 auto;
+	color: #77C0FD;
+	text-decoration: none;
+	border: solid 1px #77C0FD;
+}
+#pageInfo #communityMemChange table tr td a:active {
+	background: #09192A;
+}
+#pageInfo #requestNum {
+	color: #FF0000;
+}
+#myModal .requestMem {
+	width: 100%;
+	height: 50px;
+	padding: 0px 30px;
+	font-size: 20px;
+	line-height: 50px;
+	border-bottom: solid 1px #CFCFCF;
+}
+#myModal .requestMem:first-child {
+	border-top: solid 1px #CFCFCF;
+}
+#myModal .requestMem select{
+	float: right;
+	margin: 10px 30px 0px 0px;
+}
+/*社团角色分配*/
+#pageInfo #communityPosChange {
+	width: 100%;
+	padding: 20px 30px;
+}
+#pageInfo #communityPosChange table{
+	width: 100%;
+	padding: 10px;
+	text-align: center;
+	border-radius: 10px;
+	font-size: 20px;
+}
+#pageInfo #communityPosChange table tr{
+	height: 50px;
+	border-bottom: solid 10px #FFF;
+}
+#pageInfo #communityPosChange table tr:last-child{
+	border-bottom: none;
+}
+#pageInfo #communityPosChange table tr th{
+	height: 60px;
+	text-align: center;
+	color: #000;
+	background: #f2dede;
+	border-radius: 10px;
+}
+#pageInfo #communityPosChange table tr td{
+	background: #E5EBF2;
+	border-radius: 10px;
+}
+#pageInfo #communityPosChange table tr th:first-child{
+	width: 30%;
+}
+#pageInfo #communityPosChange table tr th:last-child{
+	width: 30%;
+}
+#pageInfo #communityPosChange table tr td:first-child{
+	width: 30%;
+}
+#pageInfo #communityPosChange table tr td:last-child{
+	width: 30%;
+}
+#pageInfo #communityPosChange table tr td select{
+	width: 50%;
+	border: none;
+	border-left: solid 1px #000;
+	background: #E5EBF2;
+}
+#pageInfo #communityPosChange table tr td button{
+	width: 50%;
+	border: none;
+	border-radius: 10px;
+	color: #09192A;
+	border: solid 1px #77C0FD;
+	background: #FF7B36;
+}
+#pageInfo #communityPosChange table tr td button:active{
+	background: #09192A;
+	color: #77C0FD;
+}
+/*社团角色管理*/
+#pageInfo #communityPosManage {
+	position: relative;
+	width: 100%;
+	height: auto;
+	font-size: 20px;
+	padding: 0px 20px;
+	position: relative;
+}
+#pageInfo #communityPosManage .communityPosManageDiv {
+	position: relative;
+	width: 100%;
+	height: 250px;
+	margin: 20px 0px;
+	border: solid 1px #CFCFCF;
+}
+#pageInfo #communityPosManage .communityPosManageDiv:first-child {
+	display:none;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .input input {
+	width: 220px;
+	height: 40px;
+	margin: 20px 30px;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .textarea textarea{
+	position: absolute;
+	float: right;
+	right: 45px;
+	width: 60%;
+	height: 150px;
+	top: 20px;
+	resize: none;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .submit input{
+	position: absolute;
+	width: 120px;
+	padding: 5px 0px;
+	right: 45px;
+	bottom: 20px;
+	border: solid 1px #CFCFCF;
+	transition: 0.3s linear;
+	-webkit-transition: 0.3s linear;
+	-moz-transition: 0.3s linear;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .submit input:hover {
+	background: #fff;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .button {
+	margin: 55px 0px 0px 30px;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .button a {
+	display: inline-block;
+	width: 100px;
+	padding: 5px 0px;
+	font-size: 15px;
+	border: solid 1px #77C0FD;
+	color: #77C0FD;
+	text-align: center;
+	text-decoration: none;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .button a:active {
+	background: #09192A;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .button input {
+	width: 70px;
+	padding: 5px 0px;
+	margin-left: 45px;
+	font-size: 15px;
+	border: solid 1px #CFCFCF;
+	transition: 0.3s linear;
+	-webkit-transition: 0.3s linear;
+	-moz-transition: 0.3s linear;
+}
+#pageInfo #communityPosManage .communityPosManageDiv .button input:hover{
+	background: #FF7B36;
+}
+#pageInfo .communityPosManageAdd {
+	position: relative;
+	width: calc(100% - 40px);
+	height: 150px;
+	margin: 20px auto;
+	color: #E5EBF2;
+	border: solid 1px #CFCFCF;
+	transition: 0.5s ease;
+	-webkit-transition: 0.5s ease;
+	-moz-transition: 0.5s ease;
+}
+#pageInfo .communityPosManageAdd:hover {
+	border-left: solid 20px #FF7B36;
+	color: #FF7B36;
+}
+
+#pageInfo .communityPosManageAdd i {
+	display: block;
+	width: 97px;
+	margin: 20px auto;
+	font-size: 120px;
+	color: inherit;
+} 
+#pageInfo #myModal .communityPower {
+	width: auto;
+	height: 30px;
+	padding: 5px 10px;
+	font-size: 14px;
+	color: #FFF;
+	margin: 10px;
+	float: left;
+	border-radius: 10px;
+}
+#pageInfo #myModal .communityPower:nth-child(1) {
+	background: #FF7B36;
+}
+#pageInfo #myModal .communityPower:nth-child(2) {
+	background: #9400D3;
+}
+#pageInfo #myModal .communityPower:nth-child(3) {
+	background: #9ACD32;
+}
+#pageInfo #myModal .communityPower:nth-child(4) {
+	background: #FF0000;
+}
+#pageInfo #myModal .communityPower:nth-child(5) {
+	background: #CDCD00;
+}
+#pageInfo #myModal .communityPower:nth-child(6) {
+	background: #CD6600;
+}
+#pageInfo #myModal .communityPower:nth-child(7) {
+	background: #09192A;
+}
+#pageInfo #myModal .communityPower:nth-child(8) {
+	background: #6495ED;
+}
+#pageInfo #myModal .communityPower:nth-child(9) {
+	background: #A8A8A8;
+}
+#pageInfo #myModal .communityPower:nth-child(10) {
+	background: #8B2252;
+}
+#pageInfo #myModal .communityPower:nth-child(11) {
+	background: #00CD00;
+}
+#pageInfo #myModal .communityPower:nth-child(12) {
+	background: #D15FEE;
+}
+#pageInfo #myModal .communityPower:nth-child(13) {
+	background: #556B2F;
+}
+#pageInfo #myModal .communityPower:nth-child(14) {
+	background: #7FFFD4;
+}
+#pageInfo #myModal .communityPower:nth-child(15) {
+	background: #CD3278;
+}
+/*任务评分*/
+#pageInfo #taskCommon {
+	position: relative;
+	width: 100%;
+	height: auto;
+	font-size: 20px;
+	padding: 30px 50px;
+}
+#pageInfo #taskCommon table {
+	width: 100%;
+}
+#pageInfo #taskCommon table tr {
+	width: 100%;
+	height: 50px;
+	margin: 30px 0px;
+}
+#pageInfo #taskCommon table tr td:last-child {
+	position: relative;
+}
+#pageInfo #taskCommon table tr input[type="submit"] {
+	position: absolute;
+	display: block;
+	width: 100px;
+	top: 10px;
+	right: 20px;
+	border: solid 1px #000;
+}
+#pageInfo #taskCommon table tr input[type="submit"]:hover {
+	background: #09192A;
+	color: #FFF;
+	border: solid 1px #FFF;
+}
+#pageInfo #taskCommon table tr a {
+	display: block;
+	width: 600px;
+	height: 30px;
+	white-space: nowrap;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+#pageInfo #taskCommon table tr a:hover {
+	color: #FF7B36;
+}
+#pageInfo #taskCommon #myModal .modal-body .scores {
+	position: relative;
+	width: 300px;
+	margin: 20px auto;
+}
+#pageInfo #taskCommon #myModal .modal-body .scores input{
+	float: right;
+}
+
+/*首页展示*/
+#carousel-example-generic .carousel-inner {
+	background: #2c3e50;
+}
+#carousel-example-generic .item img{
+	display: block;
+	width: 450px;
+	height: 300px;
+	margin: 100px;
+}
+#carousel-example-generic .carousel-caption {
+	position: absolute;
+	padding-left: 300px;
+	padding-top: 0px;
+	top: -100px;
+}

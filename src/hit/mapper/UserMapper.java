@@ -14,4 +14,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    
+    String getface(String face_id);
 }

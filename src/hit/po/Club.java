@@ -72,4 +72,13 @@ public class Club {
     public void setUserIdLeader(Integer userIdLeader) {
         this.userIdLeader = userIdLeader;
     }
+
+	@Override
+	public String toString() {
+		return "Club [clubId=" + clubId + ", clubname=" + clubname
+				+ ", description=" + description + ", image=" + image
+				+ ", setuptime=" + setuptime + ", validationstate="
+				+ validationstate + ", userIdLeader=" + userIdLeader + "]";
+	}
+   
 }

@@ -1,7 +1,5 @@
 package hit.po;
 
-import java.util.Date;
-
 public class User {
     private Integer userId;
 
@@ -18,10 +16,8 @@ public class User {
     private Integer validationstate;
 
     private String province;
-   
-    private Integer schId;   
-    
-	private String schoolname;
+
+    private Integer schId;
 
     private String major;
 
@@ -30,14 +26,12 @@ public class User {
     private String sex;
 
     private String time;
-    
-    public Integer getSchId() {
-		return schId;
-	}
 
-	public void setSchId(Integer schId) {
-		this.schId = schId;
-	}
+    private String schoolname;
+
+    private String scholar;
+
+    private String keyCode;
 
     public Integer getUserId() {
         return userId;
@@ -103,17 +97,15 @@ public class User {
         this.province = province == null ? null : province.trim();
     }
 
+    public Integer getSchId() {
+        return schId;
+    }
 
+    public void setSchId(Integer schId) {
+        this.schId = schId;
+    }
 
-	public String getSchoolname() {
-		return schoolname;
-	}
-
-	public void setSchoolname(String schoolname) {
-		this.schoolname = schoolname;
-	}
-
-	public String getMajor() {
+    public String getMajor() {
         return major;
     }
 
@@ -142,6 +134,30 @@ public class User {
     }
 
     public void setTime(String time) {
-        this.time = time;
+        this.time = time == null ? null : time.trim();
+    }
+
+    public String getSchoolname() {
+        return schoolname;
+    }
+
+    public void setSchoolname(String schoolname) {
+        this.schoolname = schoolname == null ? null : schoolname.trim();
+    }
+
+    public String getScholar() {
+        return scholar;
+    }
+
+    public void setScholar(String scholar) {
+        this.scholar = scholar == null ? null : scholar.trim();
+    }
+
+    public String getKeyCode() {
+        return keyCode;
+    }
+
+    public void setKeyCode(String keyCode) {
+        this.keyCode = keyCode == null ? null : keyCode.trim();
     }
 }

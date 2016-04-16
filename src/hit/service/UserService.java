@@ -1,6 +1,9 @@
 package hit.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import hit.po.School;
 import hit.po.User;
@@ -27,7 +30,14 @@ public interface UserService {
 		public School findSchoolBySchoolName(String schoolname);
 
 		
-	
-		
+		public User getUserById(Integer userId);
+
+		//在第一次注册后自动调用的方法
+		public User update(HttpServletRequest request, User user,
+				String username, String schoolname, String institute,
+				String major, String time, String phone, String sex,
+				String province, MultipartFile image, String scholar);
+
+		public void updateUserByEmail(User user);
 		
 }

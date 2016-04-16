@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addInfo</title>
+</head>
+<body>
+    <div id="pageInfo">
+        <nav>
+            <span>个人信息</span>
+        </nav>
+        <form id="Infomation" action="javascript:void(0);">
+            <div>
+                <span>姓名：</span>
+                <input class="inner-div" type="text" name="username">
+            </div>
+            <div>
+                <span>就读学校：</span>
+                <input class="inner-div" type="text" name="universaty">
+            </div>
+            <div>
+                <span>学院：</span>
+                <input class="inner-div" type="text" name="school">
+            </div>
+            <div>
+                <span>专业：</span>
+                <input class="inner-div" type="text" name="major">
+            </div>
+            <div>
+                <span>学历：</span>
+                <div class="inner-div">
+                    <select>
+                        <option value="middle-school">初中</option>
+                        <option value="hight-school">高中</option>
+                        <option value="undergraduate">本科</option>
+                        <option value="postgraduate">研究生</option>
+                        <option value="doctor">博士</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <span>毕业时间：</span>
+                <input class="inner-div" placeholder="YYYY-MM" type="text" name="time">
+            </div>
+            <div>
+                <span>性别：</span>
+                <div class="inner-div">
+                    <input  type="radio" name="sex" value="male">&nbsp;男
+                    <input  type="radio" name="sex" value="female">&nbsp;女
+                </div>
+                
+            </div>
+            <div>
+                <span>所在地：</span>
+                <input class="inner-div" placeholder="XX省XX市" type="text" name="location">
+            </div>  
+            <div class="photo"></div>
+            <input class="button" type="submit" name="submit" value="确认信息">
+            <input class="button" type="button" name="upload" value="修改头像" onclick="upload.html">
+        </form>
+    </div>
+    
+</body>
+</html>
+                
+                

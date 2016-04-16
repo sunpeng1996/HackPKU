@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addInfo</title>
+    <style type="text/css">
+        canvas {
+            border: solid thin #ccc;
+            cursor: pointer;
+        }
+
+        #canvasContainer {
+            position: relative;
+        }
+
+        #picker {
+            position: absolute;
+            border: solid thin #ccc;
+            cursor: move;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        #resize {
+            width: 0;
+            height: 0;
+            border-bottom: 15px solid rgba(200,200,200,0.8);
+            border-left: 15px solid transparent;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            cursor: se-resize;
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+            <!-- 上传图片 -->
+            <input id="fileinput" type="file" /><br />
+            <br />
+            <div id="canvasContainer">
+                <canvas id="container"></canvas>
+                <div id="picker">
+                    <div id="resize"></div>
+                </div>
+            </div>
+            <br />
+            <button id="bigger">原图放大</button>
+            <button id="smaller">原图缩小</button>
+            <button id="upload">上传 </button>
+            <!-- 上传图片结束 -->
+     <!-- jQuery Js -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/upload.js"></script>
+</body>
+</html>
+                
+                

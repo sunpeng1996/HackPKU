@@ -1,5 +1,7 @@
 package hit.po;
 
+import java.util.Date;
+
 public class Task {
     private Integer taskId;
 
@@ -11,9 +13,9 @@ public class Task {
 
     private Integer state;
 
-    private Integer timeIdBegin;
+    private Date timeIdBegin;
 
-    private Integer timeIdEnd;
+    private Date timeIdEnd;
 
     private Integer userIdLeader;
 
@@ -59,19 +61,19 @@ public class Task {
         this.state = state;
     }
 
-    public Integer getTimeIdBegin() {
+    public Date getTimeIdBegin() {
         return timeIdBegin;
     }
 
-    public void setTimeIdBegin(Integer timeIdBegin) {
+    public void setTimeIdBegin(Date timeIdBegin) {
         this.timeIdBegin = timeIdBegin;
     }
 
-    public Integer getTimeIdEnd() {
+    public Date getTimeIdEnd() {
         return timeIdEnd;
     }
 
-    public void setTimeIdEnd(Integer timeIdEnd) {
+    public void setTimeIdEnd(Date timeIdEnd) {
         this.timeIdEnd = timeIdEnd;
     }
 

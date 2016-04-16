@@ -71,12 +71,14 @@
     
     
    <!-- 自动扫描Bean -->
-   
     <context:component-scan base-package="hit"/>
-    
-
+	
+	<!-- 
+	<bean id="userController" class="hit.controller.UserController">
+		<property name="userService" ref="userService"></property>
+	</bean> -->
  <!-- 
-    <bean id="txManager"
+    <bean id="txManager"s
         class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>

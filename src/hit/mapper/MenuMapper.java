@@ -1,6 +1,9 @@
 package hit.mapper;
 
+import java.util.List;
+
 import hit.po.Menu;
+import hit.po.RolePrivilege;
 
 public interface MenuMapper {
     int deleteByPrimaryKey(Integer menuId);
@@ -14,4 +17,10 @@ public interface MenuMapper {
     int updateByPrimaryKeySelective(Menu record);
 
     int updateByPrimaryKey(Menu record);
+    
+    List<Menu> getAllMenus();
+    
+    void addRolePrivilege(RolePrivilege rolePrivilege);
+    
+    void deletePrivilegesByRoleId(Integer role_id);
 }

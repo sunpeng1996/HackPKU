@@ -12,7 +12,17 @@
 	});
 	// 我的社团页面
 	$("#myCommunity").bind("click",function() {
-		$("#page-inner").load("myCommunity.html");
+		$.ajax({ 
+            url:basePath + "/getUserClubs.do", 
+            type:'GET', 
+            contentType:'application/json;charset=utf-8',
+            success: function(data){ 
+            	$("#page-inner").html(data);
+            },
+            error: function(data){
+                alert("gg");
+            }
+        }); 
 		addActive('#myCommunity');
 	});
 	// 我的任务页面
