@@ -11,9 +11,9 @@
 		addActive('#confirm');
 	});
 	// 我的社团页面
-	$("#myCommunity").bind("click",function() {
-		$("#page-inner").load("myCommunity.html");
-		addActive('#myCommunity');
+	$("#communityNews").bind("click",function() {
+		$("#page-inner").load("communityNews.html");
+		addActive('#communityNews');
 	});
 	// 我的任务页面
 	$("#myTask").bind("click",function() {
@@ -25,6 +25,14 @@
 		$("#page-inner").load("messageManage.html");
 		addActive('#messageManage');
 	});
+	// 社团管理添加active类
+	$("#communityManage").bind("click",function() {
+		addActive('#communityManage');
+	});
+	// 社团活动添加active类
+	$("#communityActivity").bind("click",function() {
+		addActive('#communityActivity');
+	});
 	// 编辑信息页面
 	$("#edit-Info").bind("click",function() {
 		$("#page-inner").load("addInfo.html");
@@ -32,6 +40,10 @@
 	// 查看日程页面
 	$("#myEvents").bind("click",function() {
 		$("#page-inner").load("myEvents.html");
+	})
+	// 社团日志更新
+	$("#publishNews").bind("click",function() {
+		$("#page-inner").load("publishNews.html");
 	})
 	// 社团信息变更页面
 	$("#communityInfoChange").bind("click",function() {
