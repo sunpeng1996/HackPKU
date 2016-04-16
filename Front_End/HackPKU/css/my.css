@@ -697,6 +697,7 @@ body {
 	border: solid 1px #FFF;
 }
 #pageInfo #taskCommon table tr a {
+	position: relative;
 	display: block;
 	width: 660px;
 	height: 30px;
@@ -731,4 +732,191 @@ body {
 	padding-left: 300px;
 	padding-top: 0px;
 	top: -100px;
+}
+/*社团日志*/
+#pageInfo #communityNews {
+	position: relative;
+	width: 100%;
+	height: auto;
+	font-size: 20px;
+	padding: 20px 0px;
+}
+#pageInfo #communityNews table {
+	width: 100%;
+}
+#pageInfo #communityNews table tr {
+	width: 100%;
+	height: 50px;
+	margin: 30px 0px;
+	border-bottom: solid 1px #77C0FD;
+}
+#pageInfo #communityNews table tr:first-child {
+	background: #09192A;
+	color: #77C0FD;
+	border: solid 1px #77C0FD;
+}
+#pageInfo #communityNews table tr td {
+	text-align: center;
+}
+#pageInfo #communityNews table tr td:first-child {
+	width: 60%;
+	padding: 0 10px;
+	position: relative;
+}
+#pageInfo #communityNews table tr a {
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 30px;
+	margin-top: -15px;
+	white-space: nowrap;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+#pageInfo #communityNews .modal-dialog {
+	width: 65%;
+}
+#pageInfo #communityNews .modal-title {
+	width: 100px;
+}
+#pageInfo #communityNews .modal-body {
+	max-height: 600px;
+	overflow-y: auto;
+}
+#pageInfo #communityNews .modal-body .news-body {
+	text-align: left;
+}
+#pageInfo #communityNews .modal-body .news-info {
+	font-size: 15px;
+	margin: 10px 0px;
+}
+/*社团日志更新*/
+#pageInfo #publishNews {
+	position: relative;
+}
+#pageInfo #publishNews .publish-Info {
+	font-size: 20px;
+	margin: 30px 20px;
+}
+#pageInfo #publishNews .publish-Info > span {
+	display: inline-block;
+	width: 90px;
+}
+#pageInfo #publishNews .publish-Info > input {
+	width: 250px;
+	margin: 5px;
+	height: 30px;
+}
+#pageInfo #publishNews .hero-unit {
+	margin-bottom: 30px;
+	font-size: 18px;
+	font-weight: 200;
+	line-height: 30px;
+	color: inherit;
+	border: solid 1px #cfcfcf;
+	margin: 20px 0px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+#pageInfo #publishNews .btn-toolbar {
+	font-size: 0;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 0px 20px;
+}
+#pageInfo #publishNews .btn-toolbar>.btn+.btn,
+#pageInfo #publishNews .btn-toolbar>.btn-group+.btn,
+#pageInfo #publishNews .btn-toolbar>.btn+.btn-group {
+	margin-left: 5px;
+}
+#pageInfo #publishNews .btn-group {
+	position: relative;
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	font-size: 0;
+	vertical-align: middle;
+	white-space: nowrap;
+	*margin-left: .3em;
+}
+#pageInfo #publishNews .btn-group:first-child {
+	*margin-left: 0;
+}
+#pageInfo #publishNews .btn-group>.btn:first-child {
+	margin-left: 0;
+	-webkit-border-top-left-radius: 4px;
+	-moz-border-radius-topleft: 4px;
+	border-top-left-radius: 4px;
+	-webkit-border-bottom-left-radius: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	border-bottom-left-radius: 4px;
+}
+#pageInfo #publishNews .btn-group>.btn:last-child,
+#pageInfo #publishNews .btn-group>.dropdown-toggle {
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-radius-topright: 4px;
+	border-top-right-radius: 4px;
+	-webkit-border-bottom-right-radius: 4px;
+	-moz-border-radius-bottomright: 4px;
+	border-bottom-right-radius: 4px;
+}
+#pageInfo #publishNews .btn {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	padding: 4px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	color: #333333;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	background-color: #f5f5f5;
+	background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+	background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+	background-repeat: repeat-x;
+	filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+	border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	*background-color: #e6e6e6;
+	filter: progid: DXImageTransform.Microsoft.gradient(enabled = false);
+	border: 1px solid #cccccc;
+	*border: 0;
+	border-bottom-color: #b3b3b3;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	*margin-left: .3em;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+	box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+}
+#pageInfo #publishNews .btn:hover,
+#pageInfo #publishNews .btn:focus,
+#pageInfo #publishNews .btn:active,
+#pageInfo #publishNews .btn.active,
+#pageInfo #publishNews .btn.disabled,
+#pageInfo #publishNews .btn[disabled] {
+	color: #333333;
+	background-color: #e6e6e6;
+	*background-color: #d9d9d9;
+}
+#pageInfo #publishNews .submit > input{
+	width: 100px;
+	height: 40px;
+	font-size: 18px;
+	border: solid 1px #09192A;
+	margin: 0px 30px;
+}
+#pageInfo #publishNews .submit > input:hover {
+	background: #FF7B36;
+}
+#pageInfo #publishNews .submit > input:active {
+	background: #FFF;
 }

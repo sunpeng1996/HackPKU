@@ -9,12 +9,17 @@
 		<nav>
 			<span>社团日志</span>
 		</nav>
-		<div id="taskCommon">
-			<table>
+		<div id="communityNews">
+			<table >
+				<tr>
+					<td>内容</td>
+					<td>时间</td>
+					<td>发布者</td>
+				</tr>
 				<tr>
 						<td>
 							<a href="javascript:void(0);"  data-toggle="modal" data-target="#myModal">提交form表单如何让页面在提交后不发生跳转-CSDN论坛-CSDN.NET-...</a>
-							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
+							<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
 					        <div class="modal-dialog">  
 					        	<div class="modal-content">  
 					                <div class="modal-header">  
@@ -22,7 +27,16 @@
 					                	<h4 class="modal-title">日志详情</h4>  
 					                </div>  
 					                <div class="modal-body"> 
-					                	<div>呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵我擦了我擦了我擦了我擦了我擦了我擦我查我草我擦我我</div>
+					                	<div class="news-title">
+					                		<h2>我是这条新闻的标题</h2>
+					                	</div>
+					                	<div class="news-info">
+					                		<span><i>黄运智</i></span>
+					                		<span><i>2015/4/16 18:10</i></span>
+					                	</div>
+					                	<div class="news-body" >
+					                		重磅来袭，虽然我也不知到是很么鬼。但是为了填满这个框框我必须啊要写一些东西来，重点是呢我觉得吧，写满挺不容易的。时间的话在新活动中心的222房间，时间是18:30到21:30分。
+					                	</div>
 					                </div> 
 					                <div class="modal-footer">  
 					                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
@@ -32,7 +46,10 @@
 					    </div><!-- /.modal -->
 						</td>
 						<td>
-							<span><i>2016-04-15</i></span>
+							<span class="time"><i>2016-04-15</i></span>
+						</td>
+						<td>
+							<span class="author">黄运智</span>
 						</td>
 				</tr>
 				<tr>
@@ -40,15 +57,24 @@
 						<a href="javascript:void(0);" data-toggle="modal" data-target="#myModal">
 							为此，360网站卫士推出一项字体加速服务，站长只要修改一行代码，就可以免费使用到由360网站卫士CDN加速的字体服务。
 						</a>
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
+						<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
 					        <div class="modal-dialog">  
 					        	<div class="modal-content">  
 					                <div class="modal-header">  
 					               		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>  
 					                	<h4 class="modal-title">日志详情</h4>  
 					                </div>  
-					                <div class="modal-body"> 
-					                	<div>呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵我擦了我擦了我擦了我擦了我擦了我擦我查我草我擦我我</div>
+					                <div class="modal-body">
+					                	<div class="news-title">
+					                		<h2>我是这条新闻的标题</h2>
+					                	</div>
+					                	<div class="news-info">
+					                		<span><i>孙鹏</i></span>
+					                		<span><i>2015/4/16 18:10</i></span>
+					                	</div>
+					                	<div class="news-body" >
+					                		呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵我擦了我擦了我擦了我擦了我擦了我擦我查我草我擦我我
+					                	</div>
 					                </div> 
 					                <div class="modal-footer">  
 					                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
@@ -58,7 +84,10 @@
 					    </div><!-- /.modal -->
 					</td>
 					<td>
-						<span><i>2016-04-15</i></span>
+						<span class="time"><i>2016-04-15</i></span>
+					</td>
+					<td>
+						<span class="author">孙鹏</span>
 					</td>
 				</tr>
 			</table>
@@ -69,15 +98,17 @@
     <script src="js/bootstrap.min.js"></script> 
     <script type="text/javascript">
     	(function () {
-			$("a[data-toggle='modal']").bind("click",function() {
-				var trs = $("#pageInfo").find("#taskCommon").find("table").children();
-				// var father = $(this).parent();
-				// var target = father.find("#myModal");
-				// target.attr("class","target-Modal");
+    		//消除多个模态框之间的点击冲突
+			$("a[data-toggle='modal']").click(function() {
+				var trs = $("#pageInfo").find("#communityNews").find("table").children();
+				var father = $(this).parent();
+				var target = father.find(".modal");
 				trs.each(function() {
 					trs.find("#myModal").removeAttr("id","myModal");
 				});
+				target.attr("id","myModal");
 			});
+			//处理每次点击进入页面模态框背景层数增多的BUG
 		})();
     </script>
 </body>
