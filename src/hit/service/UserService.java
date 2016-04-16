@@ -45,5 +45,13 @@ public interface UserService {
 		 *创建时间:2016年4月16日下午8:46:07
 		 */
 		public void joinClub(Integer user_id, Integer clubId);
+
+		/**
+		 * 
+		 * @author 作者: 如今我已·剑指天涯
+		 * @Description:判断用户是否已经提交请求的方法
+		 *创建时间:2016年4月16日下午9:58:34
+		 */
+		public Boolean judgeRequest(Integer user_id, Integer clubId);
 		
 }

@@ -245,12 +245,19 @@ public class UserController extends AbstractController {
 	public @ResponseBody String joinClub(HttpServletRequest request,
 								@RequestParam(defaultValue="0") Integer clubId) {
 		User user = (User) request.getSession().getAttribute("user");
+		System.out.println("用户和请求的club分别是:"+user.getUsername()+ "-------"+clubId);
 		Integer user_id = user.getUserId();
-		userService.joinClub(user_id,clubId);	
-		System.out.println("该用户的请求已经插入到数据库中");
-		
-		return "success";
+		//判断该用户是否已经提交过请求
+		Boolean flag = true;
+		flag = userService.judgeRequest(user_id,clubId);
+		if (flag==false) {
+			userService.joinClub(user_id,clubId);	
+			System.out.println("该用户的请求已经插入到数据库中");
+			return "success";
+		}else {
+			System.out.println("重复提交请求");
+			return "error";
+		}
 	}
-	
 	
 }

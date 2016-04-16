@@ -24,5 +24,9 @@
   			insert into club_request (club_id,user_id,requestType) values
   							(#club_id#,#user_id#,#requestType#)
   	</insert>
+  	
+  	<select id="judgeRequest" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+  			select requestType from club_request where club_id = #club_id# and user_id = #user_id#
+  	</select>
 
 </sqlMap>

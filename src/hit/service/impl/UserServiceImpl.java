@@ -216,6 +216,30 @@ public class UserServiceImpl extends BaseDao implements UserService {
 				e.printStackTrace();
 			}
 	}
+
+	/**
+	 * @author sunpeng123
+	 * 判断用户是否已经提交过请求
+	 */
+	@SuppressWarnings("deprecation")
+	@Override
+	public Boolean judgeRequest(Integer user_id, Integer clubId) {
+		Map map = new HashMap();
+		map.put("user_id", user_id);
+		map.put("club_id", clubId);
+		List list = getSqlMapClientTemplate().queryForList("judgeRequest",map);
+		if(list!=null){
+			if(!list.isEmpty()){
+				return true;//证明已经提交过一次
+			}else {
+				return false;//证明没有请求过
+			}
+		}else {
+			return false;
+		}
+		
+		
+	}
 }
 
 	

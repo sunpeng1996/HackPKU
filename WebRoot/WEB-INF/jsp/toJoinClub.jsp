@@ -36,9 +36,9 @@ request.setAttribute("basePath", basePath);
     
     <script type="text/javascript">
     		function joinClub(data){
-    			alert("即将加入社团");
+    			//alert("即将加入社团");
     			var clubId = $(data).attr('id').replace('button_','');
-    			alert(clubId);
+    			//alert(clubId);
     			$.ajax({
     				 url:basePath+"/joinClub.do", 
     				 type:'GET',
@@ -46,11 +46,15 @@ request.setAttribute("basePath", basePath);
 			            	clubId:clubId
 			            },
 			            success: function(data){ 
-			            	alert('申请加入该社团成功 ');
+			            	if(data=='success')
+			            		alert('您已经申请成功，请耐心等待');
+			            	else{
+			            		alert('请勿重复提交');
+			            	}
 			            	/* $("#page-inner").html(data); */
 			            },
 			            error: function(data){
-			                alert("gg了吧");
+			                alert("something wrong");
 			            }
     			})
     		}
