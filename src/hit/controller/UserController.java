@@ -58,14 +58,14 @@ public class UserController extends AbstractController {
 //			return "jsp/error";
 //			return "用户名或密码错误!";
 			return "wrong username or password!";
-		}else{
+		}else {
 			User temp = userService.login(password, email);
 			if(temp==null){
 				request.getSession().setAttribute("error","邮箱或密码错误");
 //				return "用户名或密码错误!";
 
 				return "wrong username or password!";
-			}else{
+			}else if(temp.getValidationstate()==1){
 				temp.setUserId(user.getUserId());//妈的，这句话不加就有问题，，，，，bug终于找到了
 				request.getSession().setAttribute("user",temp);
 				request.getSession().setAttribute("user_id", user.getUserId());
@@ -77,6 +77,8 @@ public class UserController extends AbstractController {
 				System.out.println(temp.getEmail()+"我他妈想看看是谁的邮箱");
 				System.out.println("登录成功，强行调转到主页");
 				return "success";
+			}else {
+				return "Your mailbox has not been activated.";
 			}
 		}			
 	}
@@ -229,6 +231,25 @@ public class UserController extends AbstractController {
 			return "jsp/error";
 		}
 		
+	}
+	
+	
+	/**
+	 * 
+	 * @author 作者: 如今我已·剑指天涯
+	 * @Description:这是用户选择请求加入社团的方法
+	 *创建时间:2016年4月16日下午8:40:42
+	 * @return
+	 */
+	@RequestMapping(value="/joinClub.do",method={RequestMethod.GET})
+	public @ResponseBody String joinClub(HttpServletRequest request,
+								@RequestParam(defaultValue="0") Integer clubId) {
+		User user = (User) request.getSession().getAttribute("user");
+		Integer user_id = user.getUserId();
+		userService.joinClub(user_id,clubId);	
+		System.out.println("该用户的请求已经插入到数据库中");
+		
+		return "success";
 	}
 	
 	

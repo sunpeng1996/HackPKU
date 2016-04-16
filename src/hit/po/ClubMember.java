@@ -4,7 +4,14 @@ public class ClubMember{
 	private  User user;
 	private Role role;
 	private Club club;
+	private Integer score;
 	
+	public Integer getScore() {
+		return score;
+	}
+	public void setScore(Integer score) {
+		this.score = score;
+	}
 	public Club getClub() {
 		return club;
 	}

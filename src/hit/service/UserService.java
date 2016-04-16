@@ -39,5 +39,11 @@ public interface UserService {
 				String province, MultipartFile image, String scholar);
 
 		public void updateUserByEmail(User user);
+
+		/**
+		 * @author 作者: 如今我已·剑指天涯
+		 *创建时间:2016年4月16日下午8:46:07
+		 */
+		public void joinClub(Integer user_id, Integer clubId);
 		
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap>
+	
+	<typeAlias alias="User" type="hit.po.User" />
+	<typeAlias alias="School" type="hit.po.School"/>
+	<typeAlias alias="Club" type="hit.po.Club"/>
+	
+
+	<select id="queryClubidByClubnameAndUserId" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+			select club_id from club where clubname = #clubname# and user_id_leader = #userId#
+	</select>
+	
+	<!-- <select id="queryAllClubs" resultMap="BaseResultMap" >
+			select * from club 这快后期加上验证状态可以进行局限查询
+	</select>
+	
+	
+			<resultMap id="BaseResultMap" class="hit.po.Club" >
+				    <result column="club_id" jdbcType="INTEGER" property="clubId" />
+				    <result column="clubname" jdbcType="VARCHAR" property="clubname" />
+				    <result column="description" jdbcType="VARCHAR" property="description" />
+				    <result column="image" jdbcType="VARCHAR" property="image" />
+				    <result column="setuptime" jdbcType="TIMESTAMP" property="setuptime" />
+				    <result column="validationState" jdbcType="INTEGER" property="validationstate" />
+				    <result column="user_id_leader" jdbcType="INTEGER" property="userIdLeader" />
+				    
+		  </resultMap> -->
+	
+</sqlMap>

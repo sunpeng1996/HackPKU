@@ -10,4 +10,6 @@
         maxSessions="10" maxTransactions="5" useStatementNamespaces="false" />
  		<sqlMap resource="hit/maps/User.xml"/>
  		<sqlMap resource="hit/maps/School.xml"/>
+ 		<sqlMap resource="hit/maps/Club.xml"/>
+ 		<sqlMap resource="hit/maps/Role.xml"/>
 </sqlMapConfig>

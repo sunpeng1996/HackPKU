@@ -25,6 +25,23 @@
         }); 
 		addActive('#myCommunity');
 	});
+	
+	//加入社团界面,获取所有的社团
+	$("#joinCommunity").bind("click",function() {
+		$.ajax({ 
+            url:basePath + "/getAllClubs.do", 
+            type:'GET', 
+            contentType:'application/json;charset=utf-8',
+            success: function(data){ 
+            	$("#page-inner").html(data);
+            },
+            error: function(data){
+                alert("gg");
+            }
+        }); 
+		addActive('#joinCommunity');
+	});
+	
 	// 我的任务页面
 	$("#myTask").bind("click",function() {
 		$("#page-inner").load("myTask.html");

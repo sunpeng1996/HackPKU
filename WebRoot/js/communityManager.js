@@ -1,4 +1,4 @@
-var basePath = "http://localhost:8080/QuickClub2";
+
 (function (){
 	//异步加载页面
 	//个人信息页面
@@ -7,8 +7,7 @@ var basePath = "http://localhost:8080/QuickClub2";
 		addActive('#personInfo');
 	});
 	//认证页面
-	$("#confirm").bind("click",function() {
-		
+	$("#confirm").bind("click",function() {		
 		$("#page-inner").load("confirm.html");
 		addActive('#confirm');
 	});

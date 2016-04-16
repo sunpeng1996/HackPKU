@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class ClubController{
 	
@@ -36,11 +37,10 @@ public class ClubController{
 	private ClubService clubService;
    @Autowired
    private UserService userService;
+   
+   //用来存储用户所加入的俱乐部
+   private List<Club> clubs = new ArrayList<Club>();
 
-	/*@RequestMapping(value="/login.do",method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(){
-			
-	}*/
 
    private Integer user_id;
    private Integer club_id;
@@ -285,7 +285,6 @@ public class ClubController{
 			@RequestParam(defaultValue="0") Integer roleId,
 			@RequestParam(defaultValue="userId") Integer userId){
 //		Integer club_id = (Integer)request.getSession().getAttribute("club_id");
-
 		loadIds(request);
 		clubService.editUserRole(userId, club_id, roleId);
 		List<Role> roles = clubService.getRoles(club_id);
@@ -365,5 +364,64 @@ public class ClubController{
 		request.setAttribute("requests", requests);
 		return "adjustclubmember";
 	}
+	
+	/**
+	 * 
+	 * @author 作者: 如今我已·剑指天涯
+	 * @Description:
+	TODO创建社团
+	 *创建时间:2016年4月16日上午8:52:14
+	 * @return
+	 */
+	@RequestMapping(value="/club_create.do",method={RequestMethod.POST})
+	public   @ResponseBody String club_create(HttpServletRequest request,
+			@RequestParam(defaultValue="") String clubname,
+			@RequestParam(defaultValue="") String description,
+			@RequestParam(defaultValue="") Date setuptime,
+			@RequestParam(value = "clubImage", required = false) MultipartFile clubImage) {		
+		Club club = new Club();		
+		User user = (User) request.getSession().getAttribute("user");		
+		Club club2 = clubService.createClub(request,club,clubname,description,setuptime,user, clubImage);
+		Integer clubId = clubService.queryClubidByClubnameAndUserId(club2.getClubname(),user.getUserId());
+		club2.setClubId(clubId);//id设置进去
+		//System.out.println("这把让我看看id,老铁+"+ clubId);
+		clubs.add(club2);
+		request.getSession().setAttribute("clubs", clubs);
+		request.getSession().setAttribute("user_id", user.getUserId());
+		//调用service层绑定user和Club的方法
+		clubService.bindUserAndClub(club2,user);
+	
+		return "successCreate";
+	}
+	
+	/**
+	 * 
+	 * @author 作者: 如今我已·剑指天涯
+	 * @Description:
+	TODO：toCreateCommunity
+	 *创建时间:2016年4月16日上午9:43:21
+	 * @return
+	 */
+	@RequestMapping(value="/toCreateCommunity.do")
+	public String toCreateCommunity() {
+		return "jsp/creatCommunity";
+	}
+	
+	/**
+	 * 
+	 * @author 作者: 如今我已·剑指天涯
+	 * @Description:获取所有的社团，用于用户加入社团
+	 *创建时间:2016年4月16日下午7:11:09
+	 */
+	@RequestMapping(value="/getAllClubs.do")
+	public String getAllClubs(HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute("user");
+		List<Club> clubs = clubService.getAllClubs();
+		
+		request.getSession().setAttribute("clubs", clubs);
+		
+		return "jsp/toJoinClub";
+	}
+	
 	
 }

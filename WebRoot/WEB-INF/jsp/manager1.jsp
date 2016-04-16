@@ -94,6 +94,10 @@ request.setAttribute("basePath", basePath);
                             我的社团</a>
                     </li>
                     <li>
+                        <a href="javascript:void(0);"  id="joinCommunity"><i class="fa fa-bar-chart-o"></i>
+                           加入社团</a>
+                    </li>                    
+                    <li>
                         <a href="javascript:void(0);" id="myTask"><i class="fa fa-qrcode"></i> 
                             我的任务</a>
                     </li>

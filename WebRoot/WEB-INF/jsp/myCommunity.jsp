@@ -15,11 +15,13 @@ request.setAttribute("basePath", basePath);
 <body>
     <div id="pageInfo">
         <nav>
-            <span>我的社团</span>
+            <span>我的社团 </span>
         </nav>
-        <c:forEach items="${clubs }" var="club">
+        <c:forEach items="${clubs}" var="club">
 	        <div class="communitydiv community${club.clubId}">
-	            <img src="images/hit_logo.png">
+	            <img src="<%=basePath%>fileupload/${club.image}">
+	               <h2>${club.clubname }</h2>
+	                <p>${club.description }</p>
 	            <div class="communitySum " >
 	                <h2>${club.clubname }</h2>
 	                <p>${club.description }</p>
@@ -29,7 +31,7 @@ request.setAttribute("basePath", basePath);
         </c:forEach>
         <div class="communitydiv">
             <div>
-               <a href="">创建社团</a> 
+               <a href="<%=path %>/toCreateCommunity.do">创建社团</a> 
             </div>
             
             <div>

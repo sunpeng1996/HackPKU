@@ -5,6 +5,7 @@ import java.util.List;
 
 
 
+
 import hit.po.Club;
 import hit.po.ClubMember;
 import hit.po.ClubMemberRequest;
@@ -40,4 +41,10 @@ public interface ClubMapper {
     Role getUserRoleInClub(ClubMember clubMember);
     
     List<Club> getClubsByUser(Integer userId);
+    /**
+     * @author 作者: 如今我已·剑指天涯
+     *创建时间:2016年4月16日下午8:00:42
+     */
+	List<Club> queryAllClubs();
+    
 }

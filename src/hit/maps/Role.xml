@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap>
+	
+	<typeAlias alias="User" type="hit.po.User" />
+	<typeAlias alias="School" type="hit.po.School"/>
+	<typeAlias alias="Club" type="hit.po.Club"/>
+	<typeAlias alias="Role" type="hit.po.Role"/>
+	
+	<select id="queryRoleidByRolenameAndClubname" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+			select role_id from role where rolename = #rolename# and club_id = #club_id# 
+	</select>
+	
+	
+</sqlMap>

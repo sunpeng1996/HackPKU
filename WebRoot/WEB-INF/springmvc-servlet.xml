@@ -12,12 +12,11 @@
  	
  	<!-- spring MVC的核心配置文件 ，配置controller。handlermapping，viewresolve。拦截器-->
  	
- <!--  	<bean id="myController" name="/hello.do" class="hit.controller.TestController" >
-	</bean> -->
+
 	
 	
 		<!-- spring mvc注解驱动 -->
-		<mvc:annotation-driven />
+	<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
        <!-- 把标记了@Controller注解的类转换为bean -->  
       <context:component-scan base-package="hit.controller" />  
       <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->  
@@ -39,6 +38,17 @@
 		    </property>   		  
           </bean>  
           
-          
+          <!-- 自定义参数绑定 -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<!-- 转换器 -->
+		<property name="converters">
+			<list>
+				<!-- 日期类型转换 -->
+				<bean class="hit.common.DateConverter"/>
+			</list>
+		</property>
+		
+	
+	</bean>
 
  </beans>

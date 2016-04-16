@@ -21,6 +21,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -69,8 +70,7 @@ public class UserServiceImpl extends BaseDao implements UserService {
 	public void updateUser(User user) {
 		try {
 			System.out.println("我想看看id，fuck"+user.getUserId());
-		/*	userMapper.deleteByPrimaryKey(user.getUserId());
-			userMapper.insertSelective(user);*/
+		
 			userMapper.updateByPrimaryKeySelective(user);
 			System.out.println("正在更新用户："+user.getUsername());
 			System.out.println(user.getUsername() + " 和  "+ user.getEmail());
@@ -194,7 +194,27 @@ public class UserServiceImpl extends BaseDao implements UserService {
 	@Override
 	public void updateUserByEmail(User user) {
 		userCustomMapper.updateUserByEmail(user);
-		
+	}
+
+	
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	/**
+	 * @author sunpeng123
+	 * 这是用户加入俱乐部方法
+	 */
+	public void joinClub(Integer user_id, Integer clubId) {
+			Map map = new HashMap();
+			map.put("user_id", user_id);
+			map.put("club_id", clubId);
+			int requestType = 0;//这个字段在数据库中存在，为了以后扩充使用
+			map.put("requestType", 0);
+			try {
+				getSqlMapClientTemplate().insert("insertIntoClubRequest",map);
+			} catch (DataAccessException e) {
+				e.printStackTrace();
+			}
 	}
 }
 
