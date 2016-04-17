@@ -12,4 +12,5 @@
  		<sqlMap resource="hit/maps/School.xml"/>
  		<sqlMap resource="hit/maps/Club.xml"/>
  		<sqlMap resource="hit/maps/Role.xml"/>
+ 		<sqlMap resource="hit/maps/News.xml"/>
 </sqlMapConfig>

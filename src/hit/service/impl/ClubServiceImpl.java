@@ -3,17 +3,20 @@ package hit.service.impl;
 import hit.common.BaseDao;
 import hit.mapper.ClubMapper;
 import hit.mapper.MenuMapper;
+import hit.mapper.NewsMapper;
 import hit.mapper.RoleMapper;
 import hit.po.Club;
 import hit.po.ClubMember;
 import hit.po.ClubMemberRequest;
 import hit.po.Menu;
+import hit.po.News;
 import hit.po.Role;
 import hit.po.RolePrivilege;
 import hit.po.User;
 import hit.service.ClubService;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,6 +37,9 @@ public class ClubServiceImpl extends BaseDao implements ClubService {
 		private MenuMapper menuMapper;
 		@Autowired
 		private RoleMapper roleMapper;
+		@Autowired
+		private NewsMapper newsMapper;
+		
 		@Override
 	    public Club getClubById(Integer club_id) {
 			return clubMapper.selectByPrimaryKey(club_id);
@@ -233,5 +239,46 @@ public class ClubServiceImpl extends BaseDao implements ClubService {
 			return clubs;
 		}
 		return null;
+	}
+	
+	/**
+	 * @author sunpeng123
+	 * 发布新闻，新闻入库
+	 */
+	@Override
+	public News addNews(String title, String blob, Integer user_id, Integer club_id) {
+			News news = new News();
+			Date time = new Date();//自动创建新闻创建的时间
+			//SimpleDateFormat format = new SimpleDateFormat();
+			//String formateDate = format.format(time);
+			news.setTime(time);
+			news.setClubId(club_id);
+			news.setPublisherId(user_id);
+			news.setSummary(blob.getBytes());
+			news.setTitle(title);
+			newsMapper.insertSelective(news);//入库
+			System.out.println("获取到新闻的id"+news.getNewId());
+			return news;
+		
+	}
+	
+	/**
+	 * @author sunpeng123
+	 * 通过一系列参数获取新闻的ID
+	 */
+	@Override
+	public Integer queryNewsIdByTitleAndUser(String title, Integer user_id,
+			Integer club_id) {
+		Map map = new HashMap();
+		map.put("title", title);
+		map.put("user_id", user_id);
+		map.put("club_id", club_id);
+		//map.put("date", date);
+		List list = getSqlMapClientTemplate().queryForList("queryNewsId",map);
+		if (list.size() == 0 || list == null) {
+			return null;
+		} else {
+			return (Integer)list.get(0);
+		}
 	}
 }

@@ -16,7 +16,9 @@ import hit.service.UserService;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,7 +65,6 @@ public class UserController extends AbstractController {
 			if(temp==null){
 				request.getSession().setAttribute("error","邮箱或密码错误");
 //				return "用户名或密码错误!";
-
 				return "wrong username or password!";
 			}else if(temp.getValidationstate()==1){
 				temp.setUserId(user.getUserId());//妈的，这句话不加就有问题，，，，，bug终于找到了
@@ -83,39 +84,56 @@ public class UserController extends AbstractController {
 		}			
 	}
 	@RequestMapping(value="/user_regist.do",method={RequestMethod.POST})
-	public String regist(HttpServletRequest request , @RequestParam String email ,@RequestParam String password ){
-		
-		
-		
-		
-		User temp = userService.selectByEmail(email);
-		if (temp!=null) {
-			System.out.println("该邮箱已经被注册");
-			request.getSession().setAttribute("error", "该邮箱已经被注册");
-			return "index";
+	public String regist(HttpServletRequest request , @RequestParam String email ,@RequestParam String password,
+			@RequestParam String verifyCode){
+		Boolean Verifyflag = true;
+		String sessionVerifyCode = (String) request.getSession().getAttribute("session_vcode");
+		if(verifyCode == null || verifyCode.trim().isEmpty()) {
+			request.setAttribute("error", "验证码不能为空！");
+			Verifyflag = false;
+		} else if(verifyCode.length() != 4) {
+			request.setAttribute("error", "验证码长度必须为4！");
+			Verifyflag = false;
+		} else if(!verifyCode.equalsIgnoreCase(sessionVerifyCode)) {
+			request.setAttribute("error", "验证码错误！");
+			Verifyflag = false;
 		}
-		else {				
-		   User user = new User();
-			user.setEmail(email);
-			user.setPassword(password);
-			System.out.println("创建用户user");
-			user.setValidationstate(0);//未激活，此时是0
-			//调用创建用户的方法
-			String flag = userService.addUser(user);	
-			String keyCode = UUID.randomUUID().toString().replace("-","") +""+ UUID.randomUUID().toString().replace("-", "");     //激活key，用于激活邮件
-			
-			String url = "http://localhost:8080/Quiclub/user_active.do?key="   ;
-			
-			JavaMailUtils.sendMail(user.getEmail(), "激活邮件，请点击下面链接完成激活操作！",
-					"<a href='" + url +keyCode+ "&email=" + user.getEmail() +"'>" + "</a><br/>");//发送激活邮件
-			user.setKeyCode(keyCode);//入库
-			userService.updateUserByEmail(user);
-			request.getSession().setAttribute("user", user);//将用户放入到session域中
-			request.getSession().setAttribute("user_id", user.getUserId());
-			if (flag.equals("success")) {
-				return "jsp/toActive";
+		
+		/*
+		 * 判断map是否为空，不为空，说明存在错误
+		 */
+		if(Verifyflag==false) {
+			return "jsp/error";
+		}else {
+			User temp = userService.selectByEmail(email);
+			if (temp!=null) {
+				System.out.println("该邮箱已经被注册");
+				request.getSession().setAttribute("error", "该邮箱已经被注册");
+				return "index";
 			}
-			return "";		
+			else {				
+			   User user = new User();
+				user.setEmail(email);
+				user.setPassword(password);
+				System.out.println("创建用户user");
+				user.setValidationstate(0);//未激活，此时是0
+				//调用创建用户的方法
+				String flag = userService.addUser(user);	
+				String keyCode = UUID.randomUUID().toString().replace("-","") +""+ UUID.randomUUID().toString().replace("-", "");     //激活key，用于激活邮件
+				
+				String url = "http://localhost:8080/Quiclub/user_active.do?key="   ;
+				
+				JavaMailUtils.sendMail(user.getEmail(), "激活邮件，请点击下面链接完成激活操作！",
+						"<a href='" + url +keyCode+ "&email=" + user.getEmail() +"'>" + "</a><br/>");//发送激活邮件
+				user.setKeyCode(keyCode);//入库
+				userService.updateUserByEmail(user);
+				request.getSession().setAttribute("user", user);//将用户放入到session域中
+				request.getSession().setAttribute("user_id", user.getUserId());
+				if (flag.equals("success")) {
+					return "jsp/toActive";
+				}
+				return "";		
+			}
 		}
 	}
 	
@@ -162,6 +180,7 @@ public class UserController extends AbstractController {
 	@RequestMapping(value="/MyInfo.do")
 	public String MyInfo(HttpServletRequest request) {
 		if (request.getSession().getAttribute("user") == null) {
+			request.getSession().setAttribute("error", "您还没有登录");
 			return "jsp/error";
 		}else{
 			return "jsp/manager1";			

@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
+encoding//WebRoot/WEB-INF/jsp/communityNews.jsp=UTF-8
 encoding//WebRoot/WEB-INF/jsp/confirm.jsp=UTF-8
 encoding//WebRoot/WEB-INF/jsp/error.jsp=UTF-8
+encoding//WebRoot/WEB-INF/jsp/myCommunity.jsp=UTF-8
+encoding//WebRoot/WEB-INF/jsp/publishNews.jsp=UTF-8
 encoding//WebRoot/WEB-INF/jsp/success.jsp=UTF-8
+encoding//config/CustomValidationMessages.properties=UTF-8

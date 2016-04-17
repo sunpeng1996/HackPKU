@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hit.mapper.NewsMapper" >
+
+<select id="queryAllNews" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select * from news where club_id =  #{club_id,jdbcType=INTEGER}
+</select>
+
+
+  <resultMap id="BaseResultMap" type="hit.po.News" >
+    <id column="new_id" property="newId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="publisher_id" property="publisherId" jdbcType="INTEGER" />
+    <result column="club_id" property="clubId" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hit.po.News" extends="BaseResultMap" >
+    <result column="summary" property="summary" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    new_id, title, publisher_id, club_id, time
+  </sql>
+  <sql id="Blob_Column_List" >
+    summary
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news
+    where new_id = #{newId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from news
+    where new_id = #{newId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="hit.po.News" >
+    insert into news (new_id, title, publisher_id, 
+      club_id, time, summary
+      )
+    values (#{newId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{publisherId,jdbcType=INTEGER}, 
+      #{clubId,jdbcType=INTEGER}, #{time,jdbcType=DATE}, #{summary,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hit.po.News" >
+    insert into news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="newId != null" >
+        new_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="publisherId != null" >
+        publisher_id,
+      </if>
+      <if test="clubId != null" >
+        club_id,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="newId != null" >
+        #{newId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherId != null" >
+        #{publisherId,jdbcType=INTEGER},
+      </if>
+      <if test="clubId != null" >
+        #{clubId,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=DATE},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hit.po.News" >
+    update news
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherId != null" >
+        publisher_id = #{publisherId,jdbcType=INTEGER},
+      </if>
+      <if test="clubId != null" >
+        club_id = #{clubId,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=DATE},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where new_id = #{newId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hit.po.News" >
+    update news
+    set title = #{title,jdbcType=VARCHAR},
+      publisher_id = #{publisherId,jdbcType=INTEGER},
+      club_id = #{clubId,jdbcType=INTEGER},
+      time = #{time,jdbcType=DATE},
+      summary = #{summary,jdbcType=LONGVARBINARY}
+    where new_id = #{newId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hit.po.News" >
+    update news
+    set title = #{title,jdbcType=VARCHAR},
+      publisher_id = #{publisherId,jdbcType=INTEGER},
+      club_id = #{clubId,jdbcType=INTEGER},
+      time = #{time,jdbcType=DATE}
+    where new_id = #{newId,jdbcType=INTEGER}
+  </update>
+</mapper>

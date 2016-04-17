@@ -113,6 +113,9 @@ request.setAttribute("basePath", basePath);
                             <li>
                                 <a href="javascript:void(0);" menu_id="2" class="menu" id="communityMemChange">社团成员调整2</a>
                             </li>
+                             <li>
+                                <a href="javascript:void(0);" menu_id="11" class="menu" id="communityNewsPublish">社团日志发布11</a>
+                            </li>
                             <li>
                                 <a href="javascript:void(0);" menu_id="4">社团职位调整4<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">

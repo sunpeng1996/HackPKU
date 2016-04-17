@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap>
+	
+	<typeAlias alias="User" type="hit.po.User" />
+	<typeAlias alias="School" type="hit.po.School"/>
+	<typeAlias alias="Club" type="hit.po.Club"/>
+	<typeAlias alias="News" type="hit.po.News"/>
+
+	<select id="queryNewsId" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+			select new_id from news where title =#title# and publisher_id = #user_id# and  club_id= #club_id# 
+	</select>
+	
+	
+	
+</sqlMap>

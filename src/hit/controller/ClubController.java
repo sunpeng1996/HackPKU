@@ -8,10 +8,12 @@ import hit.po.Club;
 import hit.po.ClubMember;
 import hit.po.ClubMemberRequest;
 import hit.po.Menu;
+import hit.po.News;
 import hit.po.Role;
 import hit.po.RolePrivilege;
 import hit.po.User;
 import hit.service.ClubService;
+import hit.service.NewsService;
 import hit.service.UserService;
 
 import java.text.SimpleDateFormat;
@@ -37,6 +39,12 @@ public class ClubController{
 	private ClubService clubService;
    @Autowired
    private UserService userService;
+   @Autowired
+   private NewsService newsService;
+   
+   
+   //用来存储所有新闻的集合
+   private List<News> newsList = new ArrayList<News>();
 
 
    //用来存储用户所加入的俱乐部
@@ -248,9 +256,18 @@ public class ClubController{
 	}
 	
 	
+	/**
+	 * 
+	 * @author 作者: 如今我已·剑指天涯
+	 * @Description:这是获取该社团的所有新闻
+	 *创建时间:2016年4月18日上午1:05:49
+	 */
 	@RequestMapping(value="clubnews.do",method={RequestMethod.GET})
 	public String clubnews(HttpServletRequest request){
-		return "jsp/clubnews";
+		loadIds(request);
+		newsList = newsService.getAllNews(club_id);
+		request.setAttribute("newsList", newsList);
+		return "jsp/communityNews";
 	}
 	
 	/**
@@ -430,5 +447,34 @@ public class ClubController{
 	
 		return "successCreate";
 	}
+	
+	
+	
+	/**
+	 * 
+	 * @author 作者: 如今我已·剑指天涯
+	 * @Description:发布新闻的方法，入库
+	 *创建时间:2016年4月17日下午10:04:01
+	 */
+	@RequestMapping(value="/publishNews.do")
+	public  String publishNews(HttpServletRequest request,
+			@RequestParam(defaultValue="") String title,
+			@RequestParam(defaultValue="") String blob ) {
+		loadIds(request);
+		News news = clubService.addNews(title,blob,user_id,club_id);
+		Integer newsId = clubService.queryNewsIdByTitleAndUser(title,user_id,club_id);
+		news.setNewId(newsId);//将查询出来的newsid存储到new对象中
+		newsList.add(news);//将新闻添加到集合中
+		request.setAttribute("newsList", newsList);
+		User user = userService.getUserById(user_id);
+		request.setAttribute("user",user);
+		System.out.println("现在再获取到新闻的id"+news.getNewId());
+		if (newsId!=null) {
+			return "jsp/communityNews";
+		}else {
+			return "error";
+		}
+	}
+	
 	
 }
