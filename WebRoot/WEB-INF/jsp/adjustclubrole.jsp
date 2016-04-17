@@ -47,7 +47,7 @@
 						</div>
 						<div class="button">
 							<a href="javascript:void(0);"  data-toggle="modal" data-target="#myModal" name="menu_ids" onclick="getPrlg(this)">权限分配/确认</a>
-							<input type="button" name="delete" value="删除">
+							<input type="button" id="btn_delete_${role.roleId }" name="delete" onclick="deleteRole(this)" value="删除">
 						</div>
 					</form>
 				</div>
@@ -82,6 +82,22 @@
 		            data:cmplt_form,
 		            success: function(data){ 
 		            	$('.modal-backdrop').remove();
+		            	$("#page-inner").html(data);
+		            },
+		            error: function(data){
+		                alert("gg");
+		            }
+		        }); 				
+			}
+			function deleteRole(btn){
+			    
+			    var form = $(btn).parent('.button').parent().serialize();
+			    cur_btn_form = form;
+				$.ajax({ 
+		            url:basePath + "/deleteRole.do", 
+		            type:'GET', 
+		            data:cur_btn_form,
+		            success: function(data){ 
 		            	$("#page-inner").html(data);
 		            },
 		            error: function(data){

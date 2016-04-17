@@ -1,5 +1,6 @@
 body {
 	min-width: 1200px;
+	font-family: 'Microsoft YaHei';
 }
 #loginbg{
 	display: none;
@@ -663,3 +664,70 @@ body {
 #pageInfo #myModal .communityPower:nth-child(15) {
 	background: #CD3278;
 }
+/*任务评分*/
+#pageInfo #taskCommon {
+	position: relative;
+	width: 100%;
+	height: auto;
+	font-size: 20px;
+	padding: 30px 50px;
+}
+#pageInfo #taskCommon table {
+	width: 100%;
+}
+#pageInfo #taskCommon table tr {
+	width: 100%;
+	height: 50px;
+	margin: 30px 0px;
+}
+#pageInfo #taskCommon table tr td:last-child {
+	position: relative;
+}
+#pageInfo #taskCommon table tr input[type="submit"] {
+	position: absolute;
+	display: block;
+	width: 100px;
+	top: 10px;
+	right: 20px;
+	border: solid 1px #000;
+}
+#pageInfo #taskCommon table tr input[type="submit"]:hover {
+	background: #09192A;
+	color: #FFF;
+	border: solid 1px #FFF;
+}
+#pageInfo #taskCommon table tr a {
+	display: block;
+	width: 660px;
+	height: 30px;
+	white-space: nowrap;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+#pageInfo #taskCommon table tr a:hover {
+	color: #FF7B36;
+}
+#pageInfo #taskCommon #myModal .modal-body .scores {
+	position: relative;
+	width: 300px;
+	margin: 20px auto;
+}
+#pageInfo #taskCommon #myModal .modal-body .scores input{
+	float: right;
+}
+
+/*首页展示*/
+#carousel-example-generic .carousel-inner {
+	background: #2c3e50;
+}
+#carousel-example-generic .item img{
+	display: block;
+	width: 450px;
+	height: 300px;
+	margin: 100px;
+}
+#carousel-example-generic .carousel-caption {
+	position: absolute;
+	padding-left: 300px;
+	padding-top: 0px;
+	top: -100px;

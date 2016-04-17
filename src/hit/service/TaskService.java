@@ -10,6 +10,7 @@ import hit.po.Menu;
 import hit.po.Role;
 import hit.po.RolePrivilege;
 import hit.po.User;
+import hit.service.exception.TaskException;
 import hit.vo.EventVo;
 
 import org.springframework.stereotype.Component;
@@ -28,4 +29,11 @@ public interface TaskService {
     List<EventVo> getAdminEvents(Integer month,Integer day,Integer user_id,Integer club_id);
     
     Integer addTask(Integer club_id,Integer user_id,Integer[] memberIds,EventVo eventVo);
+    
+    List<EventVo> getAllTaskAdmin(Integer club_id,Integer user_id);
+    
+    List<User> getTaskPtcs(Integer task_id);
+    
+    void updateUserScores(Integer club_id,Integer task_id,Integer[] scores) throws TaskException;
+    
 }

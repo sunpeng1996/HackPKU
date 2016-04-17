@@ -16,5 +16,4 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
     
     String getface(String face_id);
-
 }

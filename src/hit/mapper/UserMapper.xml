@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="hit.mapper.UserMapper" >
+	
+	<select id="getface" parameterType="java.lang.String" resultType="java.lang.String">
+		select face.realname from face where face_id = '${value}'
+	</select>
+
   <resultMap id="BaseResultMap" type="hit.po.User" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
@@ -17,11 +22,10 @@
     <result column="time" property="time" jdbcType="VARCHAR" />
     <result column="schoolname" property="schoolname" jdbcType="VARCHAR" />
     <result column="scholar" property="scholar" jdbcType="VARCHAR" />
-    <result column="keyCode" property="keyCode" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     user_id, username, password, email, phone, image, validationState, province, sch_id, 
-    major, institute, sex, time, schoolname, scholar, keyCode
+    major, institute, sex, time, schoolname, scholar
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -38,14 +42,14 @@
       email, phone, image, 
       validationState, province, sch_id, 
       major, institute, sex, 
-      time, schoolname, scholar, 
-      keyCode)
+      time, schoolname, scholar
+      )
     values (#{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
       #{validationstate,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{schId,jdbcType=INTEGER}, 
       #{major,jdbcType=VARCHAR}, #{institute,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{time,jdbcType=VARCHAR}, #{schoolname,jdbcType=VARCHAR}, #{scholar,jdbcType=VARCHAR}, 
-      #{keyCode,jdbcType=VARCHAR})
+      #{time,jdbcType=VARCHAR}, #{schoolname,jdbcType=VARCHAR}, #{scholar,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="hit.po.User" >
     insert into user
@@ -95,9 +99,6 @@
       <if test="scholar != null" >
         scholar,
       </if>
-      <if test="keyCode != null" >
-        keyCode,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -144,9 +145,6 @@
       </if>
       <if test="scholar != null" >
         #{scholar,jdbcType=VARCHAR},
-      </if>
-      <if test="keyCode != null" >
-        #{keyCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -195,9 +193,6 @@
       <if test="scholar != null" >
         scholar = #{scholar,jdbcType=VARCHAR},
       </if>
-      <if test="keyCode != null" >
-        keyCode = #{keyCode,jdbcType=VARCHAR},
-      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -216,59 +211,7 @@
       sex = #{sex,jdbcType=VARCHAR},
       time = #{time,jdbcType=VARCHAR},
       schoolname = #{schoolname,jdbcType=VARCHAR},
-      scholar = #{scholar,jdbcType=VARCHAR},
-      keyCode = #{keyCode,jdbcType=VARCHAR}
+      scholar = #{scholar,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  
-  <update id="updateUserByEmail" parameterType="hit.po.User" >
-    update user
-    <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="image != null" >
-        image = #{image,jdbcType=VARCHAR},
-      </if>
-      <if test="validationstate != null" >
-        validationState = #{validationstate,jdbcType=INTEGER},
-      </if>
-      <if test="province != null" >
-        province = #{province,jdbcType=VARCHAR},
-      </if>
-      <if test="schId != null" >
-        sch_id = #{schId,jdbcType=INTEGER},
-      </if>
-      <if test="major != null" >
-        major = #{major,jdbcType=VARCHAR},
-      </if>
-      <if test="institute != null" >
-        institute = #{institute,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null" >
-        time = #{time,jdbcType=VARCHAR},
-      </if>
-      <if test="schoolname != null" >
-        schoolname = #{schoolname,jdbcType=VARCHAR},
-      </if>
-      <if test="scholar != null" >
-        scholar = #{scholar,jdbcType=VARCHAR},
-      </if>
-      <if test="keyCode != null" >
-        keyCode = #{keyCode,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where email = #{email,jdbcType=INTEGER}
-  </update>
-  
-  
 </mapper>

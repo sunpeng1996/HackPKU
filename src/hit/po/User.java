@@ -1,7 +1,5 @@
 package hit.po;
 
-import javax.persistence.Transient;
-
 public class User {
     private Integer userId;
 
@@ -32,18 +30,17 @@ public class User {
     private String schoolname;
 
     private String scholar;
-
+    
     private String keyCode;
     
-    @Transient  //不需要持久到DB的属性使用该注解 
-    private String code;//验证码啊
-
-    public String getCode() {
-		return code;
+    
+    
+    public String getKeyCode() {
+		return keyCode;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setKeyCode(String keyCode) {
+		this.keyCode = keyCode;
 	}
 
 	public Integer getUserId() {
@@ -164,13 +161,5 @@ public class User {
 
     public void setScholar(String scholar) {
         this.scholar = scholar == null ? null : scholar.trim();
-    }
-
-    public String getKeyCode() {
-        return keyCode;
-    }
-
-    public void setKeyCode(String keyCode) {
-        this.keyCode = keyCode == null ? null : keyCode.trim();
     }
 }

@@ -90,7 +90,7 @@ request.setAttribute("basePath", basePath);
         		function findMyPassword(){
         		//	var email = document.getElementById("email").value;
         		var email = $("#input_email").val();
-        			alert(email);
+        			alert("您的邮件已发送，请注意查收!(没收到，是你自己网络问题)");
         			/* alert("还我密码"); */
         			$.ajax({
         				 url:basePath+"/findPasswordByEmail.do", 
@@ -105,9 +105,6 @@ request.setAttribute("basePath", basePath);
 			            	else{
 			            		alert('您的邮箱不正确！');
 			            	}
-			            },
-			            error: function(data){
-			                alert("something wrong");
 			            }
         			});
         		}

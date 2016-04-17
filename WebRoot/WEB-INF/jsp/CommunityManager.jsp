@@ -23,6 +23,8 @@ request.setAttribute("basePath", basePath);
     <link rel="stylesheet" href="css/myEvents.css" type="text/css" />
     <!-- myEvents CSS -->
     <link rel="stylesheet" href="css/my.css" type="text/css" />
+    
+    <script type="text/javascript" src="js/common.js"></script>
 </head>
 
 <body>
@@ -68,7 +70,7 @@ request.setAttribute("basePath", basePath);
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="<%=path%>/MyInfo.do" aria-expanded="false"><!-- data-toggle="dropdown"  -->
-                       <i class="fa fa-user fa-fw"></i>${user.email }
+                       <i class="fa fa-user fa-fw"></i>${user.username }
                     </a>
                 </li>
                 <li class="dropdown">
@@ -81,16 +83,19 @@ request.setAttribute("basePath", basePath);
         </nav>
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
+            <div class="sidebar-collapse">   
                 <ul class="nav" id="main-menu">
                     <li>
                         <a class="active-menu" href="javascript:void(0);" id="personInfo"><i class="fa fa-dashboard"></i>社团主页</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" menu_id="12" class="menu" id="confirm"><i class="fa fa-desktop"></i>社团信息12</a>
+                        <a href="javascript:void(0);" menu_id="12" class="menu" id="clubmessage"><i class="fa fa-desktop"></i>社团信息12</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" menu_id="16" class="menu" id="clubmember"><i class="fa fa-desktop"></i>社团成员16</a>
                     </li>
 					<li>
-                        <a href="javascript:void(0);" menu_id="14" class="menu"  id="myCommunity"><i class="fa fa-bar-chart-o"></i>
+                        <a href="javascript:void(0);" menu_id="14" class="menu"  id="communityNews"><i class="fa fa-bar-chart-o"></i>
                             社团日志14</a>
                     </li>
                     <li>
@@ -133,7 +138,7 @@ request.setAttribute("basePath", basePath);
                                 <a href="javascript:void(0);" menu_id="9" class="menu" id="distributeActivity">分配活动9</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" menu_id="10" class="menu">编辑活动状态10</a>
+                                <a href="javascript:void(0);" menu_id="10" class="menu" id="evaluateActivity">编辑活动状态10</a>
                             </li>
                         </ul>
                     </li>
@@ -156,7 +161,7 @@ request.setAttribute("basePath", basePath);
     <!-- JS Scripts-->
     <script src="js/communityManager.js"></script> 
     <!-- Bootstrap Js -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.js"></script>
     <!-- Metis Menu Js -->
     <script src="js/jquery.metisMenu.js"></script>
     <!-- Morris Chart Js -->

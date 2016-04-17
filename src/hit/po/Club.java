@@ -2,7 +2,6 @@ package hit.po;
 
 import java.util.Date;
 
-
 public class Club {
     private Integer clubId;
 

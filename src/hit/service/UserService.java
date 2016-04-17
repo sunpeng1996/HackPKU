@@ -31,7 +31,7 @@ public interface UserService {
 
 		
 		public User getUserById(Integer userId);
-
+		
 		//在第一次注册后自动调用的方法
 		public User update(HttpServletRequest request, User user,
 				String username, String schoolname, String institute,
@@ -55,5 +55,4 @@ public interface UserService {
 		public Boolean judgeRequest(Integer user_id, Integer clubId);
 
 		public Boolean findPasswordByEmail(String email);
-		
 }

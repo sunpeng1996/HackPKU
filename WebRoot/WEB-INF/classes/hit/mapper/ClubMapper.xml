@@ -2,10 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hit.mapper.ClubMapper">
 
+    <!-- @author: sunpeng -->
 	<select id="queryAllClubs" resultMap="BaseResultMap">
 			select * from club
 	</select>
-    
+   <update id="updateUserClubScore" parameterType="hit.po.ClubMember">
+   	 update   `club_membership`    
+   	 set   score = score + #{score}
+	 where user_id = #{user.userId}  and  club_id = #{club.clubId}
+  </update>
+	<select id="calcTotalRequest" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		SELECT COUNT(*) count from `club_request` where club_id = #{club_id}
+	</select>
     <select id="getClubsByUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     	SELECT
 		`club`.`club_id`,
@@ -39,7 +47,7 @@
 		`club_request`,
 		`user`
 		WHERE
-		user.user_id = club_request.user_id  AND club_request.club_id = #{club_id}
+		user.user_id = club_request.user_id  AND club_request.club_id = #{club_id}   
 	
 	</select>
 	<select id="getUserRoleInClub" parameterType="hit.po.ClubMember" resultType="hit.po.Role">
@@ -233,8 +241,5 @@
       user_id_leader = #{userIdLeader,jdbcType=INTEGER}
     where club_id = #{clubId,jdbcType=INTEGER}
   </update>
-  
- 
-  
  
 </mapper>

@@ -3,7 +3,6 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -93,7 +92,7 @@ request.setAttribute("basePath", basePath);
 					<li>
                         <a href="javascript:void(0);"  id="myCommunity"><i class="fa fa-bar-chart-o"></i>
                             我的社团</a>
-                    </li>
+                    </li>	
                     <li>
                         <a href="javascript:void(0);"  id="createCommunity"><i class="fa fa-bar-chart-o"></i>
                             创建社团</a>
@@ -151,22 +150,22 @@ request.setAttribute("basePath", basePath);
             </div>
              <div>
                 <span>所在地：</span>
-                <input class="inner-div" type="text"  name="province"  value="${sessionScope.user.province }">
+                <input class="inner-div" type="text"  name="province"  value="${sessionScope.user.phone }">
             </div>
             <div>
                 <span>学历：</span>
                 <div class="inner-div">
-                            		<select name="scholar" value="${sessionScope.user.scholar}">
-                            			<option value="0" >-请选择-</option>  
-				                        <option value="初中" <c:if test="${sessionScope.user.scholar == '初中' }">selected="selected"</c:if>>初中</option>
-				                        <option value="高中" <c:if test="${sessionScope.user.scholar == '高中' }">selected="selected"</c:if> >高中</option>
-				                        <option value="本科" <c:if test="${sessionScope.user.scholar == '本科' }">selected="selected"</c:if> >本科</option>
-				                        <option value="研究生" <c:if test="${sessionScope.user.scholar == '研究生' }">selected="selected"</c:if> >研究生</option>
-				                        <option value="博士" <c:if test="${sessionScope.user.scholar == '博士' }">selected="selected"</c:if> >博士</option>
-				                	</select>
+               		<select name="scholar" value="${sessionScope.user.scholar}">
+               			<option value="0" >-请选择-</option>  
+                        <option value="初中" <c:if test="${sessionScope.user.scholar == '初中' }">selected="selected"</c:if>>初中</option>
+                        <option value="高中" <c:if test="${sessionScope.user.scholar == '高中' }">selected="selected"</c:if> >高中</option>
+                        <option value="本科" <c:if test="${sessionScope.user.scholar == '本科' }">selected="selected"</c:if> >本科</option>
+                        <option value="研究生" <c:if test="${sessionScope.user.scholar == '研究生' }">selected="selected"</c:if> >研究生</option>
+                        <option value="博士" <c:if test="${sessionScope.user.scholar == '博士' }">selected="selected"</c:if> >博士</option>
+                	</select>
                 </div>
             </div>
-          
+           
             <div>
                 <span>性别：</span>
                 <div class="inner-div" >

@@ -2,6 +2,7 @@ package hit.mapper;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import hit.po.ClubMember;
 import hit.po.EventPo;
@@ -39,4 +40,10 @@ public interface TaskMapper {
     void addTaskParticiparors(TaskParticipator taskParticipator);
     
     void deleteTaskParticiparors(Integer task_id);
+    
+    void updateTaskScore(Map<String, Integer> usertaskMap);
+    
+    Integer getTaskTotalscore(Integer task_id);
+
+    void toggleTaskTag(Integer task_id);
 }

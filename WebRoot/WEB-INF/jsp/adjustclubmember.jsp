@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<span>&nbsp;&nbsp;</span>
 								<span><button id="btn_agree_${request.user.userId }" class="btn btn-primary btn-sm" onclick="agree(this)">同意</button></span>
 								<span>&nbsp;&nbsp;</span>
-								<span><button class="btn btn-primary btn-sm">拒绝</button></span>
+								<span><button id="btn_reject_${request.user.userId }" class="btn btn-primary btn-sm" onclick="reject(this)">拒绝</button></span>
 								<span>        分配职位:</span>
 							</div>
 						</form>
@@ -79,14 +79,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    type:'POST', 
                    data:data,
                    success: function(data){
-                   		alert('success');
+                   		alert(data);
                    		$(btn).parent().parent().parent().remove();
+                   		calcTotalRequest();
                    },
                    error: function(data){
                        alert("fail");
                    }
             }); 
     	}
+    	function reject(btn){
+    		var data = $(btn).parent().parent().parent().serialize();
+			$.ajax({ 
+                   url:basePath+"/rejectRequest.do", 
+                   type:'POST', 
+                   data:data,
+                   success: function(data){
+                   		alert(data);
+                   		$(btn).parent().parent().parent().remove();
+                   		calcTotalRequest();
+                   },
+                   error: function(data){
+                       alert("fail");
+                   }
+            }); 
+    	}
+    	function calcTotalRequest(){
+    		$.ajax({ 
+                   url:basePath+"/calcTotalRequest.do", 
+                   type:'POST', 
+                   success: function(data){
+			    	   $('#requestNum').html(function(){return data;});
+                   },
+                   error: function(data){
+                       alert("fail");
+                   }
+            }); 
+    	}
+    	calcTotalRequest();
     	function kick(a){
     		var userId = $(a).attr('id').replace('a_','');
     		var roleId = $(a).attr('name').replace('a_','');

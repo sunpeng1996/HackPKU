@@ -65,7 +65,7 @@
 	$("#createCommunity").bind("click",function() {
 		$.ajax({ 
             url:basePath + "/toCreateCommunity.do", 
-            type:'GET', 
+            type:'POST', 
             contentType:'application/json;charset=utf-8',
             success: function(data){ 
             	$("#page-inner").html(data);

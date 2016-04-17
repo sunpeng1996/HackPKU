@@ -1,4 +1,4 @@
-var basePath = "http://localhost:8080/QuickClub2";
+
 
 $(function () {    
     (function ($) {
@@ -192,6 +192,7 @@ $(function () {
                     month++;   
                 }
                 calcMonth();
+                loadEventDays();
                 prevAddEvent();
             });
             arrows[0].on('click', function () {
@@ -203,6 +204,7 @@ $(function () {
                     month--;   
                 }
                 calcMonth();
+                loadEventDays();
                 prevAddEvent();
             });            
             
@@ -233,58 +235,61 @@ $(function () {
                 $this.find('.events-list').scrollTop(0);
                 dataId++;
             };
-            //动态加载New标签
-            $.ajax({ 
-                url:basePath + "/getDateList.do", 
-                type:'GET', 
-                contentType:'application/json;charset=utf-8',
-                data:{
-                	month_now:month+1
-                },
-                success: function(data){ 
-                	for(var i in data){
-                		$this.find(".day").map(function(){
-                			var day_selected = $(this).text();
-                			if(day_selected == data[i]){
-                				$(this).on('click',function () {
-                	                prevAddEvent();
+            //动态加载New标签,并注册点击事件
+            function loadEventDays(){
+            	$.ajax({ 
+                    url:basePath + "/getDateList.do", 
+                    type:'GET', 
+                    contentType:'application/json;charset=utf-8',
+                    data:{
+                    	month_now:month+1
+                    },
+                    success: function(data){ 
+                    	for(var i in data){
+                    		$this.find(".day").map(function(){
+                    			var day_selected = $(this).text();
+                    			if(day_selected == data[i]){
+                    				$(this).on('click',function () {
+                    	                prevAddEvent();
 
-                	                $(this).addClass('selected').css({'background-color': settings.color});
-                	                $this.children('.jalendar-wood').animate('', 200, function() {
-                	                	$.ajax({ 
-                	                        url:basePath+"/getUserEventPerDay.do", 
-                	                        type:'GET', 
-                	                        contentType:'application/json;charset=utf-8',
-                	                        data:{
-                	                        	month_now: month+1,
-                	                        	day_now:day_selected
-                	                        },
-                	                        success: function(data){
-                	                            $this.find('.event-single').remove();
-                	                        	for(var i in data){
-                	                        		addEvent(data[i].taskname,data[i].summary,data[i].totalscore,data[i].members,data[i].start_hour,data[i].start_min,data[i].end_hour,data[i].end_min,data[i].thisDay);
-                	                        	}
-                	                        },
-                	                        error: function(data){
-                	                            alert("fail");
-                	                        }
-                	                    }); 
-                	                    $this.find('.add-event').show().find('.events-list');
-                	                    $this.find('.add-new input').select();
-                	                    calcTotalDayAgain();
-                	                    calcScroll();
-                	                    $close.show();
-                	                });
-                	            });
-                				return this;
-                			}
-                		}).removeClass('have-event').prepend(div('i','').text('New')); 
-                	}
-                },
-                error: function(data){
-                    alert("fail");
-                }
-            }); 
+                    	                $(this).addClass('selected').css({'background-color': settings.color});
+                    	                $this.children('.jalendar-wood').animate('', 200, function() {
+                    	                	$.ajax({ 
+                    	                        url:basePath+"/getUserEventPerDay.do", 
+                    	                        type:'GET', 
+                    	                        contentType:'application/json;charset=utf-8',
+                    	                        data:{
+                    	                        	month_now: month+1,
+                    	                        	day_now:day_selected
+                    	                        },
+                    	                        success: function(data){
+                    	                            $this.find('.event-single').remove();
+                    	                        	for(var i in data){
+                    	                        		addEvent(data[i].taskname,data[i].summary,data[i].totalscore,data[i].members,data[i].start_hour,data[i].start_min,data[i].end_hour,data[i].end_min,data[i].thisDay);
+                    	                        	}
+                    	                        },
+                    	                        error: function(data){
+                    	                            alert("fail");
+                    	                        }
+                    	                    }); 
+                    	                    $this.find('.add-event').show().find('.events-list');
+                    	                    $this.find('.add-new input').select();
+                    	                    calcTotalDayAgain();
+                    	                    calcScroll();
+                    	                    $close.show();
+                    	                });
+                    	            });
+                    				return this;
+                    			}
+                    		}).removeClass('have-event').prepend(div('i','').text('New')); 
+                    	}
+                    },
+                    error: function(data){
+                        alert("fail");
+                    }
+                }); 
+            }
+            loadEventDays();
             $close.on('click', function(){
                 prevAddEvent(); 
             });

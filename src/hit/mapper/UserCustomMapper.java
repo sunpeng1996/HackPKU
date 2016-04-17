@@ -6,8 +6,7 @@ import hit.po.UserCustom;
 public interface UserCustomMapper {
 
 	UserCustom selectUserByEmail(String email);
+	
 
 	void updateUserByEmail(User user);
-	
-	
 }

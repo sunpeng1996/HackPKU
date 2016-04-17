@@ -37,25 +37,23 @@ public class ClubController{
 	private ClubService clubService;
    @Autowired
    private UserService userService;
-   
+
+
    //用来存储用户所加入的俱乐部
    private List<Club> clubs = new ArrayList<Club>();
-
 
    private Integer user_id;
    private Integer club_id;
    private void loadIds(HttpServletRequest request){
+	  
+	   user_id = (Integer)request.getSession().getAttribute("user_id");
 	   if (user_id == null) {
-		   user_id = (Integer)request.getSession().getAttribute("user_id");
-		   if (user_id == null) {
-			   user_id = 3;
-		   }
+		   throw new RuntimeException("user_id不存在");
 	   }
+   
+	   club_id = (Integer)request.getSession().getAttribute("club_id");
 	   if (club_id == null) {
-		   club_id = (Integer)request.getSession().getAttribute("club_id");
-		   if (club_id == null) {
-			   club_id = 1;
-		   }
+		   throw new RuntimeException("user_id不存在");
 	   }
    }
    
@@ -63,14 +61,12 @@ public class ClubController{
 	 * 
 	 * @author sunyiyou
 	 * @param request
-	 * @param club_id
 	 * @return "clubmessage"
 	 * 点击社团信息，获取社团的基本信息，显示至clubmessage.jsp页面
 	 */
 	@RequestMapping(value="/clubmessage.do",method={RequestMethod.GET})
-	public String showClubMessage(HttpServletRequest request ,
-			@RequestParam(defaultValue = "0") Integer club_id
-	){
+	public String showClubMessage(HttpServletRequest request){
+		loadIds(request);
 	   Club club = clubService.getClubById(club_id);
 	   request.setAttribute("club", club);
 	   User user = userService.getUserById(club.getUserIdLeader());
@@ -78,8 +74,7 @@ public class ClubController{
 	   Date setuptimeDate =  club.getSetuptime();
 	   SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
 	   request.setAttribute("setupdate", simpleDateFormat.format(setuptimeDate));
-	   request.getSession().setAttribute("club_id", 1);
-		return "clubmessage";		
+		return "jsp/clubmessage";		
 	}
 	/**
 	 * @author sunyiyou
@@ -89,14 +84,14 @@ public class ClubController{
 	 * 点击社团成员，获取社团成员列表以及他们的职位，显示在clubmembership页面
 	 * 
 	 */
-	@RequestMapping(value="/clubmembership.do",method={RequestMethod.GET})
+	@RequestMapping(value="/clubmember.do",method={RequestMethod.GET})
 	public String showClubMembership(HttpServletRequest request ,
 			@RequestParam(defaultValue = "0") Integer club_id
 	){
 		List<ClubMember> clubMembership = clubService.getMembershipByClubId((Integer)request.getSession().getAttribute("club_id"));
 		request.setAttribute("clubMembership", clubMembership);
 		
-		return "clubmembership";
+		return "jsp/clubmember";
 	}
 	/**
 	 * @author sunyiyou
@@ -146,7 +141,7 @@ public class ClubController{
 		List<Role> roles = clubService.getRoles(club_id);
 		request.getSession().setAttribute("menus", menus);
 		request.setAttribute("roles", roles);
-		return "/jsp/adjustclubrole";
+		return "jsp/adjustclubrole";
 	}
 	/**
 	 * @author sunyiyou
@@ -160,8 +155,6 @@ public class ClubController{
 			@RequestParam(defaultValue = "12") String[] menu_ids,
 			Role role
 	){
-		
-
 		loadIds(request);
 		role.setClubId(club_id);
 		clubService.addRole(role);
@@ -172,15 +165,14 @@ public class ClubController{
 			if (r.getRoleId() > max_id) {
 				max_id = r.getRoleId();
 			}
-		}
-		
+		}		
 		List<RolePrivilege> roleprivileges = new ArrayList<RolePrivilege>();
 		for (String string : menu_ids) {
 			Integer menu_id = Integer.parseInt(string);
 			roleprivileges.add(new RolePrivilege(menu_id,max_id));
 		}
 		clubService.addRolePrivileges(roleprivileges);
-		return "adjustclubrole";
+		return "jsp/adjustclubrole";
 	}
 
 	/**
@@ -237,7 +229,7 @@ public class ClubController{
 		List<Role> roles = clubService.getRoles(club_id);
 		request.getSession().setAttribute("menus", menus);
 		request.setAttribute("roles", roles);
-		return "/jsp/adjustclubrole";
+		return "jsp/adjustclubrole";
 	}
 	/**
 	 * @author sunyiyou
@@ -252,14 +244,20 @@ public class ClubController{
 		clubService.deleteRole(role, (Integer)request.getSession().getAttribute("club_id"));
 		List<Role> roles = clubService.getRoles((Integer)request.getSession().getAttribute("club_id"));
 		request.setAttribute("roles", roles);
-		return "adjustclubrole";
+		return "jsp/adjustclubrole";
+	}
+	
+	
+	@RequestMapping(value="clubnews.do",method={RequestMethod.GET})
+	public String clubnews(HttpServletRequest request){
+		return "jsp/clubnews";
 	}
 	
 	/**
 	 * @author sunyiyou
 	 * @param request
 	 * @param role
-	 * @return delegateclubrole
+	 * @return forward: delegateclubrole
 	 * 分配用户角色
 	 */
 	@RequestMapping(value="/delegateclubrole.do",method={RequestMethod.GET})
@@ -271,7 +269,7 @@ public class ClubController{
 		request.setAttribute("roles",roles);
 		List<ClubMember> clubmembers = clubService.getClubMembership(club_id);
 		request.setAttribute("clubmembers", clubmembers);
-		return "/jsp/delegateclubrole";
+		return "jsp/delegateclubrole";
 	}
 	/**
 	 * @author sunyiyou
@@ -285,13 +283,14 @@ public class ClubController{
 			@RequestParam(defaultValue="0") Integer roleId,
 			@RequestParam(defaultValue="userId") Integer userId){
 //		Integer club_id = (Integer)request.getSession().getAttribute("club_id");
+
 		loadIds(request);
 		clubService.editUserRole(userId, club_id, roleId);
 		List<Role> roles = clubService.getRoles(club_id);
 		request.setAttribute("roles",roles);
 		List<ClubMember> clubmembers = clubService.getClubMembership(club_id);
 		request.setAttribute("clubmembers", clubmembers);
-		return "/jsp/delegateclubrole";
+		return "jsp/delegateclubrole";
 	}
 
 	
@@ -315,8 +314,9 @@ public class ClubController{
 		//show requests
 		List<ClubMemberRequest> requests = clubService.getClubMemberRequest(club_id);
 		request.setAttribute("requests", requests);
-		return "/jsp/adjustclubmember";
+		return "jsp/adjustclubmember";
 	}
+	
 	/**
 	 * @author sunyiyou
 	 * @param request
@@ -341,11 +341,11 @@ public class ClubController{
 		//show requests
 		List<ClubMemberRequest> requests = clubService.getClubMemberRequest(clubId);
 		request.setAttribute("requests", requests);
-		return "/jsp/adjustclubmember" ;
+		return "jsp/adjustclubmember" ;
 	}
 	
 	@RequestMapping(value="addClubMember.do",method={RequestMethod.POST})
-	public String addClubMember(HttpServletRequest request
+	public @ResponseBody String addClubMember(HttpServletRequest request
 			,@RequestParam(defaultValue="0") Integer userId
 			,@RequestParam(defaultValue="0") Integer roleId){
 //		Integer clubId = (Integer)request.getSession().getAttribute("club_id");
@@ -362,9 +362,46 @@ public class ClubController{
 		//show requests
 		List<ClubMemberRequest> requests = clubService.getClubMemberRequest(clubId);
 		request.setAttribute("requests", requests);
-		return "adjustclubmember";
+		return "success";
 	}
-	
+	@RequestMapping(value="rejectRequest.do",method={RequestMethod.POST})
+	public @ResponseBody String rejectRequest(HttpServletRequest request
+			,@RequestParam(defaultValue="0") Integer userId
+			,@RequestParam(defaultValue="0") Integer roleId){
+		clubService.rejectRequest(userId, club_id);		
+		 return "success";
+	}
+	@RequestMapping(value="calcTotalRequest.do",method={RequestMethod.POST})
+	public @ResponseBody String calcTotalRequest(HttpServletRequest request){
+		loadIds(request);
+		return clubService.calcTotalRequest(club_id) + "";
+	}
+	/**
+	 * 
+	 * @author 作者: 如今我已·剑指天涯
+	 * @Description:获取所有的社团，用于用户加入社团
+	 *创建时间:2016年4月16日下午7:11:09
+	 */
+	@RequestMapping(value="/getAllClubs.do")
+	public String getAllClubs(HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute("user");
+		List<Club> clubs = clubService.getAllClubs();
+		request.getSession().setAttribute("clubs", clubs);
+		return "jsp/toJoinClub";
+	}
+	/**
+	 * 
+	 * @author 作者: 如今我已·剑指天涯
+	 * @Description:
+	TODO：toCreateCommunity
+	 *创建时间:2016年4月16日上午9:43:21
+	 * @return
+	 */
+	@RequestMapping(value="/toCreateCommunity.do")
+	public String toCreateCommunity() {
+		return "jsp/creatCommunity";
+	}
+
 	/**
 	 * 
 	 * @author 作者: 如今我已·剑指天涯
@@ -393,33 +430,5 @@ public class ClubController{
 	
 		return "successCreate";
 	}
-	
-	/**
-	 * 
-	 * @author 作者: 如今我已·剑指天涯
-	 * @Description:
-	TODO：toCreateCommunity
-	 *创建时间:2016年4月16日上午9:43:21
-	 * @return
-	 */
-	@RequestMapping(value="/toCreateCommunity.do")
-	public String toCreateCommunity() {
-		return "jsp/creatCommunity";
-	}
-	
-	/**
-	 * 
-	 * @author 作者: 如今我已·剑指天涯
-	 * @Description:获取所有的社团，用于用户加入社团
-	 *创建时间:2016年4月16日下午7:11:09
-	 */
-	@RequestMapping(value="/getAllClubs.do")
-	public String getAllClubs(HttpServletRequest request) {
-		User user = (User) request.getSession().getAttribute("user");
-		List<Club> clubs = clubService.getAllClubs();
-		request.getSession().setAttribute("clubs", clubs);
-		return "jsp/toJoinClub";
-	}
-	
 	
 }

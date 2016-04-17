@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hit.mapper.TaskMapper">
-
+	<select id="getTaskTotalscore" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select `task`.`totalscore` from `task`
+		where task_id = #{task_id}
+	</select>
+	<update id="toggleTaskTag" parameterType="java.lang.Integer">
+		update `task` set `task`.`state` = 1
+		where task_id = #{task_id}
+		
+	</update>
+  <update id="updateTaskScore" parameterType="java.util.Map">
+  	update  `task_participators` 
+  	set contributeScore = contributeScore + #{score}
+	where user_id_participator = #{user_id} and task_id = #{task_id};
+  	
+  </update>
   <delete id="deleteTaskParticiparors" parameterType="java.lang.Integer">
     delete from task_participators
     where task_id = #{task_id,jdbcType=INTEGER}
@@ -11,7 +25,8 @@
 </insert>
 <select id="getTaskUsers" parameterType="java.lang.Integer" resultType="hit.po.User">
 	SELECT
-	`user`.`username`
+	`user`.`username`,
+	`user`.`user_id` userId
 	FROM
 	`task_participators`,
 	`user`

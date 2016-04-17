@@ -20,8 +20,6 @@ request.setAttribute("basePath", basePath);
         <c:forEach items="${clubs}" var="club">
 	        <div class="communitydiv community${club.clubId}">
 	            <img src="<%=basePath%>fileupload/${club.image}">
-	               <h2>${club.clubname }</h2>
-	                <p>${club.description }</p>
 	            <div class="communitySum " >
 	                <h2>${club.clubname }</h2>
 	                <p>${club.description }</p>

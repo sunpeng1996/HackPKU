@@ -1,4 +1,4 @@
-var basePath = "http://localhost:8080/QuickClub2";
+
 var memberIds = new Array();
 var members = new Array();
 $(function () {    
@@ -242,6 +242,7 @@ $(function () {
                     month++;   
                 }
                 calcMonth();
+                loadTaskFlag();
                 prevAddEvent();
             });
             arrows[0].on('click', function () {
@@ -253,6 +254,7 @@ $(function () {
                     month--;   
                 }
                 calcMonth();
+                loadTaskFlag();
                 prevAddEvent();
             });
 
@@ -333,32 +335,32 @@ $(function () {
                 var end_min = $(this).parents('.add-new ').find('.add-time:last').find('.min > span').text();
                 var thisDay = $this.find('.day.this-month.selected').attr('data-date');
               
-             $.ajax({ 
-                    url:basePath + "/addTask.do", 
-                    type:'GET', 
-                    contentType:'application/json;charset=utf-8',
-//                    data:'taskname='+title+'&totalscore='+totalscore+'&summary='+summary+'&members='+members+'&start_hour='+start_hour+'&start_min='+start_min+'&end_hour='+end_hour+'&end_min='+end_min+'&thisDay='+thisDay,
-                    data:{
-                    	memberIds:memberIds,
-                    	taskname:title,
-                    	totalscore:totalscore,
-                    	summary:summary,
-                    	start_hour:start_hour,
-                    	start_min:start_min,
-                    	end_hour:end_hour,
-                    	end_min:end_min,
-                    	thisDay:thisDay
-                    },
-                    success: function(data){    
-                    	
-                    	addEvent(data,title,summary,totalscore,members,start_hour,start_min,end_hour,end_min,thisDay);
-
-                        loadTaskFlag();
-                    },
-                    error: function(data){
-                        alert("请检查您的网络或者未添加成员!");
-                    }
-                }); 
+	             $.ajax({ 
+	                    url:basePath + "/addTask.do", 
+	                    type:'GET', 
+	                    contentType:'application/json;charset=utf-8',
+	//                    data:'taskname='+title+'&totalscore='+totalscore+'&summary='+summary+'&members='+members+'&start_hour='+start_hour+'&start_min='+start_min+'&end_hour='+end_hour+'&end_min='+end_min+'&thisDay='+thisDay,
+	                    data:{
+	                    	memberIds:memberIds,
+	                    	taskname:title,
+	                    	totalscore:totalscore,
+	                    	summary:summary,
+	                    	start_hour:start_hour,
+	                    	start_min:start_min,
+	                    	end_hour:end_hour,
+	                    	end_min:end_min,
+	                    	thisDay:thisDay
+	                    },
+	                    success: function(data){    
+	                    	
+	                    	addEvent(data,title,summary,totalscore,members,start_hour,start_min,end_hour,end_min,thisDay);
+	
+	                        loadTaskFlag();
+	                    },
+	                    error: function(data){
+	                        alert("请检查您的网络或者未添加成员!");
+	                    }
+	             }); 
             });
             var addEvent =  function(task_id,taskname,summary,totalscore,members,start_hour,start_min,end_hour,end_min,thisDay){
                 var start_time;

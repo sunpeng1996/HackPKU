@@ -122,7 +122,7 @@ request.setAttribute("basePath", basePath);
 			<ul class="nav navbar-top-links navbar-right">
 		                <li class="dropdown">
 		                    <a class="dropdown-toggle" href="<%=path%>/MyInfo.do"  aria-expanded="true">
-		                      	您好， <c:out value="${user.email }"/>
+		                      	您好， <c:out value="${user.username }"/>
 		                    </a>
 		                </li>
 		                 <li class="dropdown">
@@ -197,10 +197,10 @@ request.setAttribute("basePath", basePath);
                   <div id="user-code">
                   		<tr>
                   			<!-- <td>验证码</td> -->
-                  			<td><input id="index_code" name="verifyCode"  type="text"  placeholder="请输入验证码" style="width:111px"/></td>  
+                  			<td><input id="index_code" name="code" type="text"  placeholder="请输入验证码" style="width:111px"/></td>  
        						<td>
-       								 <img id="vCode"  alt="验证码" src="<c:url value='/VerifyCodeServlet'/>"  border="2"/> <!--  width="200px" --> 
-       								 <a href="javascript:_change()">换一张</a><br/>
+       								 <img id="imgObj" alt="验证码" src="admin/code" width="200px" />  
+       								 <a href="#" onclick="changeImg();">换一张</a>
        						 </td>
        					</tr>
                   </div>
@@ -216,19 +216,27 @@ request.setAttribute("basePath", basePath);
         </div>
     </div>
     
-    <script type="text/javascript">
-	/*
-	如果一个表单项的name和<img>的id相同，那么可能会出问题！一般只有IE出问题！
-	*/
-	function _change() {
-		/*
-		1. 获取<img>元素
-		*/
-		var ele = document.getElementById("vCode");
-		ele.src = "<c:url value='/VerifyCodeServlet'/>?xxx=" + new Date().getTime();
-		
-	}
-</script>
+    <!-- 这是为了验证码而准备的js -->
+    <script type="text/javascript">  
+    function changeImg() {  
+    	//ok  alert("换一张");
+        var imgSrc = $("#imgObj");  
+        var src = imgSrc.attr("src");  
+        imgSrc.attr("src", chgUrl(src));  
+    }  
+    //时间戳     
+    //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳     
+    function chgUrl(url) {  
+        var timestamp = (new Date()).valueOf();  
+        url = url.substring(0, 17);  
+        if ((url.indexOf("&") >= 0)) {  
+            url = url + "×tamp=" + timestamp;  
+        } else {  
+            url = url + "?timestamp=" + timestamp;  
+        }  
+        return url;  
+    }  
+</script>  
     
 
     <!-- Header -->

@@ -6,11 +6,15 @@
 		$("#page-inner").load("personInfo.html");
 		addActive('#personInfo');
 	});
-	//认证页面
-	$("#confirm").bind("click",function() {		
-		$("#page-inner").load("confirm.html");
-		addActive('#confirm');
+	//社团信息
+	$("#clubmessage").bind("click",function() {
+		loadPage("/clubmessage.do");
 	});
+	//社团成员
+	$("#clubmember").bind("click",function() {
+		loadPage("/clubmember.do");
+	});
+	
 	// 我的社团页面
 	$("#myCommunity").bind("click",function() {
 		$("#page-inner").load("myCommunity.html");
@@ -32,92 +36,38 @@
 	})
 	// 查看日程页面
 	$("#myEvents").bind("click",function() {
-		$.ajax({ 
-            url:basePath + "/scheduel.do", 
-            type:'GET', 
-            contentType:'application/json;charset=utf-8',
-            success: function(data){ 
-            	$("#page-inner").html(data);
-            },
-            error: function(data){
-                alert("gg");
-            }
-        }); 
+		loadPage("/scheduel.do");
+	});
+	// 社团日志
+	$("#communityNews").bind("click",function() {
+		loadPage("/clubnews.do");
 	});
 	// 社团信息变更页面
 	$("#communityInfoChange").bind("click",function() {
-		$.ajax({ 
-            url:basePath + "/editclubmessage.do", 
-            type:'GET', 
-            contentType:'application/json;charset=utf-8',
-            success: function(data){ 
-            	$("#page-inner").html(data);
-            },
-            error: function(data){
-                alert("gg");
-            }
-        }); 
+		loadPage("/editclubmessage.do");
 		
 	});
 	$("#distributeActivity").bind("click",function() {
-		
-		$.ajax({ 
-            url:basePath + "/distributeactivity.do", 
-            type:'GET', 
-            contentType:'application/json;charset=utf-8',
-            success: function(data){ 
-            	$("#page-inner").html(data);
-            },
-            error: function(data){
-                alert("gg");
-            }
-        }); 
+		loadPage("/distributeactivity.do");
 	});
 	// 社团成员调整
 	$("#communityMemChange").bind("click",function() {
-		
-		$.ajax({ 
-            url:basePath + "/adjustclubmember.do", 
-            type:'GET', 
-            contentType:'application/json;charset=utf-8',
-            success: function(data){ 
-            	$("#page-inner").html(data);
-            },
-            error: function(data){
-                alert("gg");
-            }
-        }); 
-	})
+		loadPage("/adjustclubmember.do");
+	});
 	// 社团角色分配
 	$("#communityPosChange").bind("click",function(menu_id) {
-		
-		$.ajax({ 
-            url:basePath + "/delegateclubrole.do", 
-            type:'GET', 
-            contentType:'application/json;charset=utf-8',
-            success: function(data){ 
-            	$("#page-inner").html(data);
-            },
-            error: function(data){
-                alert("gg");
-            }
-        }); 
+		loadPage("/delegateclubrole.do");
+	});
+	
+	// 编辑活动状态
+	$("#evaluateActivity").bind("click",function() {
+		loadPage("/evaluateactivity.do");
 	});
 	
 	// 社团角色管理
 	$("#communityPosManage").bind("click",function() {
-		$.ajax({ 
-            url:basePath + "/showRoles.do", 
-            type:'GET', 
-            contentType:'application/json;charset=utf-8',
-            success: function(data){ 
-            	$("#page-inner").html(data);
-            },
-            error: function(data){
-                alert("gg");
-            }
-        }); 
-	})
+		loadPage("/showRoles.do");
+	});
 })();
 
 //活跃的菜单按钮添加样式

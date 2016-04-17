@@ -5,7 +5,7 @@
 		select * from user where email = #{email}
 	
 	</select>
-	
+		
 	<update id="updateUserByEmail" parameterType="hit.po.User" >
     update user
     <set >
@@ -71,6 +71,5 @@
     <result column="time" property="time" jdbcType="VARCHAR" />
     <result column="schoolname" property="schoolname" jdbcType="VARCHAR" />
     <result column="scholar" property="scholar" jdbcType="VARCHAR" />
-    <result column="keyCode" property="keyCode" jdbcType="VARCHAR" />
   </resultMap>
 </mapper>

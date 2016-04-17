@@ -4,16 +4,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder.In;
 
 import org.apache.commons.lang.ObjectUtils.Null;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/*import com.sun.org.apache.regexp.internal.recompile;*/
-
+/*import com.sun.org.apache.regexp.internal.recompile;
+import com.sun.xml.internal.xsom.impl.scd.Iterators.Map;
+*/
 
 import hit.common.BaseDao;
 import hit.mapper.ClubMapper;
@@ -32,12 +35,14 @@ import hit.po.TaskParticipator;
 import hit.po.User;
 import hit.service.ClubService;
 import hit.service.TaskService;
+import hit.service.exception.TaskException;
 import hit.vo.EventVo;
 @Component
 public class TaskServiceImpl extends BaseDao implements TaskService {
 		@Autowired
 		private TaskMapper taskMapper;
-		
+		@Autowired
+		private ClubMapper clubMapper;
 		@Override
 		public void deleteTask(Integer task_id) {
 			taskMapper.deleteTaskParticiparors(task_id);
@@ -52,8 +57,9 @@ public class TaskServiceImpl extends BaseDao implements TaskService {
 			List<Integer> days = new ArrayList<Integer>();
 			for (Date date : dateList) {
 				//把四月份的event-day 加入List
-				if(month == Integer.parseInt(sFormat_month.format(date)));
-					days.add(Integer.parseInt(sFormat_day.format(date)));
+				if(month == Integer.parseInt(sFormat_month.format(date))){
+					days.add(Integer.parseInt(sFormat_day.format(date)));					
+				}
 			}
 			return days;
 		}
@@ -66,8 +72,9 @@ public class TaskServiceImpl extends BaseDao implements TaskService {
 			List<Integer> days = new ArrayList<Integer>();
 			for (Date date : dateList) {
 				//把四月份的event-day 加入List
-				if(month == Integer.parseInt(sFormat_month.format(date)));
-					days.add(Integer.parseInt(sFormat_day.format(date)));
+				if(month == Integer.parseInt(sFormat_month.format(date))){
+					days.add(Integer.parseInt(sFormat_day.format(date)));					
+				}
 			}
 			return days;
 		}
@@ -208,13 +215,56 @@ public class TaskServiceImpl extends BaseDao implements TaskService {
 			
 			return task;
 		}
-		
+		@Override
+		public List<EventVo> getAllTaskAdmin(Integer club_id, Integer user_id) {
+
+        	ClubMember clubMember = new ClubMember(user_id, club_id, 0);
+			List<EventPo> tasks = taskMapper.getUserTasksAdmin(clubMember);
+			List<EventVo> events  = new ArrayList<EventVo>();
+			for (EventPo eventPo : tasks) {
+				events.add((EventVo)eventPo);			
+			}
+			return events;
+		}
 		private String formatDateString(String code) {
 			if (code.length() == 1) {
 				return "0" + code;
 			}else{
 				return code;
 			}
+		}
+		@Override
+		public List<User> getTaskPtcs(Integer task_id) {
+			return taskMapper.getTaskUsers(task_id);
+		}
+		@Override
+		public void updateUserScores(Integer club_id,Integer task_id, Integer[] scores) throws TaskException {
+			Integer totalScore = 0;
+			for (Integer integer : scores) {
+				totalScore += integer;
+			}
+			if(taskMapper.getTaskTotalscore(task_id) != totalScore){
+				throw new TaskException("总分值不对!");
+			}
+			
+			//1、获取taskList的ptcs
+			List<User> userList = taskMapper.getTaskUsers(task_id);
+			//2、对于每个user在user_participator表中更新，同时对user的总分进行更新，发送提示邮件
+			HashMap<String, Integer> usertaskMap = new HashMap<String,Integer>();
+			usertaskMap.put("task_id", task_id);
+			int index = 0;
+			for (User user : userList) {
+				ClubMember clubMember = new ClubMember(user.getUserId(), club_id, 0);
+				clubMember.setScore(scores[index]);
+				clubMapper.updateUserClubScore(clubMember);
+				
+				usertaskMap.put("score", scores[index]);
+				usertaskMap.put("user_id", user.getUserId());
+				taskMapper.updateTaskScore(usertaskMap);
+				index++;
+			}
+			//3、将task的状态标为1
+			taskMapper.toggleTaskTag(task_id);
 		}
 		
 }

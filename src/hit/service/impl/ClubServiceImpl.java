@@ -1,30 +1,9 @@
 package hit.service.impl;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-
-
-
-import java.util.Map;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-
-import org.springframework.web.multipart.MultipartFile;
-
 import hit.common.BaseDao;
 import hit.mapper.ClubMapper;
 import hit.mapper.MenuMapper;
 import hit.mapper.RoleMapper;
-import hit.mapper.UserMapper;
 import hit.po.Club;
 import hit.po.ClubMember;
 import hit.po.ClubMemberRequest;
@@ -33,6 +12,20 @@ import hit.po.Role;
 import hit.po.RolePrivilege;
 import hit.po.User;
 import hit.service.ClubService;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 @Component
 public class ClubServiceImpl extends BaseDao implements ClubService {
 		@Autowired
@@ -41,7 +34,6 @@ public class ClubServiceImpl extends BaseDao implements ClubService {
 		private MenuMapper menuMapper;
 		@Autowired
 		private RoleMapper roleMapper;
-		
 		@Override
 	    public Club getClubById(Integer club_id) {
 			return clubMapper.selectByPrimaryKey(club_id);
@@ -115,6 +107,7 @@ public class ClubServiceImpl extends BaseDao implements ClubService {
 		  ClubMember clubMember = new ClubMember(user_id, club_id, role_id);
 		  clubMapper.addClubMember(clubMember);
 		  clubMapper.deleteClubRequest(clubMember);
+		  //send agree email
 	}
    @Override
 	public Role getUserRoleInClub(Integer userId, Integer clubId) {
@@ -124,6 +117,35 @@ public class ClubServiceImpl extends BaseDao implements ClubService {
 	public List<Club> getClubsByUser(Integer user_id) {
 	     return clubMapper.getClubsByUser(user_id);
 	}
+   @Override
+   public void rejectRequest(Integer user_id, Integer club_id) {
+		  ClubMember clubMember = new ClubMember(user_id, club_id, 0);
+		  clubMapper.deleteClubRequest(clubMember);
+		  //send reject email
+   }
+   @Override
+	public Integer calcTotalRequest(Integer club_id) {
+		return clubMapper.calcTotalRequest(club_id);
+   }
+   
+	@Override
+	/**
+	 * @author sunpeng123
+	 * queryClubidByClubnameAndUserId
+	 */
+	public Integer queryClubidByClubnameAndUserId(String clubname, Integer userId) {
+		Map map = new HashMap();
+		map.put("clubname", clubname);
+		map.put("userId", userId);
+		List list = getSqlMapClientTemplate().queryForList("queryClubidByClubnameAndUserId", map);
+		if (list.size() == 0 || list == null) {
+			return null;
+		} else {
+			return (Integer)list.get(0);
+		}
+	}
+	
+
 @Override
 /**
  * @author sunpeng123
@@ -164,68 +186,52 @@ public class ClubServiceImpl extends BaseDao implements ClubService {
 			 clubMapper.insert(club);
 			return club;
 		}
-		@Override
-		/**
-		 * @author sunpeng123
-		 * queryClubidByClubnameAndUserId
-		 */
-		public Integer queryClubidByClubnameAndUserId(String clubname, Integer userId) {
-			Map map = new HashMap();
-			map.put("clubname", clubname);
-			map.put("userId", userId);
-			List list = getSqlMapClientTemplate().queryForList("queryClubidByClubnameAndUserId", map);
-			if (list.size() == 0 || list == null) {
-				return null;
-			} else {
-				return (Integer)list.get(0);
+	@Override
+	/**
+	 * @author sunpeng123
+	 * 用户和社团的绑定方法，直接是主席，因为这社团是他创立的
+	 */
+	public void bindUserAndClub(Club club2, User user) {
+		Role role  = new Role();
+		role.setRolename("主席");
+		role.setDescription("");
+		role.setClubId(club2.getClubId());
+		roleMapper.insert(role);//插入到数据库中
+		
+		Map map = new HashMap();
+		map.put("rolename", "主席");
+		map.put("club_id", club2.getClubId());
+		
+		List list = getSqlMapClientTemplate().queryForList("queryRoleidByRolenameAndClubname",map);
+		if (list.size() == 0 || list == null) {
+			System.out.println("错误，roleid为空");
+		} else {
+			Integer roleid = (Integer) list.get(0);
+			addClubMember(user.getUserId(), club2.getClubId(), roleid);//增加用户成员
+			List<RolePrivilege> rolePrivileges = new ArrayList<RolePrivilege>();
+			List<Menu> menus = menuMapper.getAllMenus();
+			for(Menu temp : menus){
+				RolePrivilege rolePrivilege = new RolePrivilege(temp.getMenuId(), roleid);
+				rolePrivileges.add(rolePrivilege);
 			}
+			this.addRolePrivileges(rolePrivileges);
 		}
 		
-		
-		@Override
-		/**
-		 * @author sunpeng123
-		 * 用户和社团的绑定方法，直接是主席，因为这社团是他创立的
-		 */
-		public void bindUserAndClub(Club club2, User user) {
-			Role role  = new Role();
-			role.setRolename("主席");
-			role.setDescription("");
-			role.setClubId(club2.getClubId());
-			roleMapper.insert(role);//插入到数据库中
-			
-			Map map = new HashMap();
-			map.put("rolename", "主席");
-			map.put("club_id", club2.getClubId());
-			
-			List list = getSqlMapClientTemplate().queryForList("queryRoleidByRolenameAndClubname",map);
-			if (list.size() == 0 || list == null) {
-				System.out.println("错误，roleid为空");
-			} else {
-				Integer roleid = (Integer) list.get(0);
-				addClubMember(user.getUserId(), club2.getClubId(), roleid);//增加用户成员
-				List<RolePrivilege> rolePrivileges = new ArrayList<RolePrivilege>();
-				List<Menu> menus = menuMapper.getAllMenus();
-				for(Menu temp : menus){
-					RolePrivilege rolePrivilege = new RolePrivilege(temp.getMenuId(), roleid);
-					rolePrivileges.add(rolePrivilege);
-				}
-				this.addRolePrivileges(rolePrivileges);
-			}
-			
+	}
+   
+   /**
+	 * 获取所有的俱乐部
+	 * @author sunpeng123
+	 */
+
+	@Override
+	public List<Club> getAllClubs() {
+		List<Club> clubs  = clubMapper.queryAllClubs();
+		if (clubs.size() == 0 || clubs == null) {
+			System.out.println("错误，clubs为空");
+		} else {
+			return clubs;
 		}
-		@Override
-		/**
-		 * 获取所有的俱乐部
-		 * @author sunpeng123
-		 */
-		public List<Club> getAllClubs() {
-			List<Club> clubs  = clubMapper.queryAllClubs();
-			if (clubs.size() == 0 || clubs == null) {
-				System.out.println("错误，clubs为空");
-			} else {
-				return clubs;
-			}
-			return null;
-		}
+		return null;
+	}
 }

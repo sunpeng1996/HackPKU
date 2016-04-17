@@ -17,7 +17,15 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
-	
+	<!-- 这是验证码的servlet配置，！！！ -->
+	<servlet>
+		<servlet-name>VerifyCodeServlet</servlet-name>
+		<servlet-class>hit.common.VerifyCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VerifyCodeServlet</servlet-name>
+		<url-pattern>/VerifyCodeServlet</url-pattern>
+	</servlet-mapping>
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -45,17 +53,6 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	
-	<!-- 这是验证码的servlet配置，！！！ -->
-	<servlet>
-		<servlet-name>VerifyCodeServlet</servlet-name>
-		<servlet-class>hit.common.VerifyCodeServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>VerifyCodeServlet</servlet-name>
-		<url-pattern>/VerifyCodeServlet</url-pattern>
-	</servlet-mapping> 
 <!-- 
 	<filter>
 		<filter-name>loginFilter</filter-name>
