@@ -289,8 +289,20 @@ body {
 	line-height: 50px;
 	font-size: 24px;
 }
+#pageInfo .Nocommunity p {
+	font-size: 50px;
+}
+#pageInfo .Nocommunity {
+	display: none;
+	max-width: 650px;
+}
 #pageInfo .communitydiv a:hover {
 	border-radius: 0px;
+}
+#pageInfo .communitydiv a::after {
+	content: "";
+	display: block;
+	clear: both;
 }
 /*社团管理页面*/
 #pageInfo #communityInfoChange {
@@ -723,15 +735,11 @@ body {
 }
 #carousel-example-generic .item img{
 	display: block;
-	width: 450px;
-	height: 300px;
-	margin: 100px;
+	width: 100%;
+	height: 600px;
 }
 #carousel-example-generic .carousel-caption {
 	position: absolute;
-	padding-left: 300px;
-	padding-top: 0px;
-	top: -100px;
 }
 /*社团日志*/
 #pageInfo #communityNews {
@@ -919,4 +927,28 @@ body {
 }
 #pageInfo #publishNews .submit > input:active {
 	background: #FFF;
+}
+/*加入社团页面*/
+#pageInfo .joinCommunity .search {
+	padding: 30px 20px;
+	font-size: 20px;
+}
+#pageInfo .joinCommunity .search button{
+	width: 100px;
+	height: 40px;
+	margin: 0px 20px;
+	border: solid 1px #FF7B36;
+	background: #FF7B36;
+	border-radius: 10px;
+}
+#pageInfo .joinCommunity .search button:active{
+	border: solid 1px #09192A;
+	background: #09192A;
+	color: #77C0FD;
+}
+#pageInfo .joinCommunity .communitydiv {
+	border: solid 1px #cfcfcf;
+}
+#pageInfo .joinCommunity .communitydiv .communitySum{
+	color: #272822;
 }

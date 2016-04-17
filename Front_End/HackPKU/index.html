@@ -9,7 +9,7 @@
     <meta name="description" content="HIT 哈工大 社团管理系统 Quiclub">
     <meta name="author" content="HIT 蓝线俱乐部 孙一铀 张旭 黄运智 孙鹏">
 
-    <title>社团管理系统</title>
+    <title>Quiclub</title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -58,7 +58,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-bar-chart fa-fw"></i>排行榜
+                        <i class="fa fa-bar-chart-o fa-fw"></i>排行榜
                     </a>
                 </li>
                 <!-- /.dropdown -->
@@ -97,14 +97,14 @@
            </div>
            <div class="login" id="showlg_2">
             <!--表单验证===================================================-->
-             <form name="loginForm" action="manager.html" method="post">
+             <form name="loginForm" action="manager.html" method="post" class="validate_login">
                   <!-- start of login form -->
                   <div id="user-name">
-                    <input type="text" name="username" placeholder="请输入邮箱账号">
+                    <input type="email" name="username" placeholder="请输入邮箱账号" class="required email">
                   </div>
                   <p></p>
                   <div id="user-password">
-                    <input type="password" name="password" placeholder="请输入密码">
+                    <input type="password" name="password" placeholder="请输入密码" minlength="6" required>
                   </div>
                   <p></p>
                   <div id="button-group">
@@ -118,16 +118,16 @@
              <!-- end of form=========================================- -->
           </div>
           <div class="signup" id="showlg_1">
-             <form name="loginForm" action="javascript:void(0);" method="post">
+             <form name="loginForm" action="javascript:void(0);" class="validate_signup" method="post">
                   <!-- start of login form -->
                   <div id="user-name">
-                    <input type="text" name="username" placeholder="请输入邮箱" class="email:true">
+                    <input type="text" name="username" placeholder="请输入邮箱" class="required email">
                   </div>
                   <p></p>
                   <div id="user-password">
-                    <input type="password" name="password" placeholder="请输入密码">
+                    <input id="password" type="password" name="password" placeholder="请输入密码" minlength="6" required>
                     <p></p>
-                    <input type="password" name="password" placeholder="请确认密码">
+                    <input type="password" name="confirm_password" placeholder="请确认密码" minlength="6" equalTo="#password" required>
                   </div>
                   <p></p>
                   <div id="button-group">
@@ -154,21 +154,21 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner" role="listbox">
             <div class="item active">
-              <img src="images/show_1.jpg" alt="...">
+              <img src="images/portfolio/game.png" alt="...">
               <div class="carousel-caption">
-                <img src="images/show_2.jpg" alt="...">
+                这是未完工的页面...
               </div>
             </div>
             <div class="item">
-              <img src="images/show_3.jpg" alt="...">
+              <img src="images/portfolio/cake.png" alt="...">
               <div class="carousel-caption">
-                <img src="images/show_4.jpg" alt="...">
+                这是未完工的页面...
               </div>
             </div>
             <div class="item">
-              <img src="images/show_5.jpg" alt="...">
+              <img src="images/portfolio/safe.png" alt="...">
               <div class="carousel-caption">
-                <img src="images/show_6.jpg" alt="...">
+                这是未完工的页面...
               </div>
             </div>
           </div>
@@ -290,7 +290,7 @@
                 通过管理后台，可以轻松的完成社团的信息修改、成员增减、职位分配、任务管理、活动评价以及社团论坛等操作。
             </p>
             <ul>
-                <li>人脸识别登录系统</li>
+                <li>软件学院俱乐部自主开发</li>
                 <li>IBM BlueMix云平台和青云数据库管理</li>
                 <li>更加方便快捷的社团管理方式</li>
                 <li>实时通知最新活动和任务</li>
@@ -311,7 +311,7 @@
                         <br>
                         <a href="https://www.qingcloud.com/">青云</a>
                         <br>
-                        <a href="https://www.sensetime.com/">商汤科技</a>
+                        <a href="https://www.baidu.com/">蓝线俱乐部</a>
                         <br>
                         <a href="https://www.hit.edu.cn/">哈工大</a>
                     </div>
@@ -336,7 +336,7 @@
                         </ul>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>HIT_SSHZ</h3>
+                        <h3>技术支持</h3>
                         <p>
                             哈尔滨工业大学14级计软学院
                             <br>
@@ -352,7 +352,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Copyright &copy; All rights preserved by HIT_SSHZ
+                        Copyright &copy; All rights preserved by HIT
                     </div>
                 </div>
             </div>
@@ -382,22 +382,22 @@
                             <h2>哈工大微软俱乐部</h2>
                             <hr class="star-primary">
                             <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                            <p>==其实这里现在什么都没有，所以不要多想了，早点洗洗睡吧。<a href="http://www.helianthuswhite.cn">我说让你不要点你肯定忍不住</a>是不是偷偷点了上面的链接？不管你是不是，反正我也看不到，快点承认吧，哈哈哈。</p>
                             <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+                                <li>写点什么呢:
+                                    <strong><a href="http://startbootstrap.com">别点我</a>
                                     </strong>
                                 </li>
-                                <li>Date:
+                                <li>时间:
                                     <strong><a href="http://startbootstrap.com">April 2014</a>
                                     </strong>
                                 </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
+                                <li>额==:
+                                    <strong><a href="http://startbootstrap.com">以后再改好了</a>
                                     </strong>
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> 关闭</button>
                         </div>
                     </div>
                 </div>
@@ -416,25 +416,25 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2>Project Title</h2>
+                            <h2>哈工大微软俱乐部</h2>
                             <hr class="star-primary">
-                            <img src="img/portfolio/cake.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                            <p>==其实这里现在什么都没有，所以不要多想了，早点洗洗睡吧。<a href="http://www.helianthuswhite.cn">我说让你不要点你肯定忍不住</a>是不是偷偷点了上面的链接？不管你是不是，反正我也看不到，快点承认吧，哈哈哈。</p>
                             <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+                                <li>写点什么呢:
+                                    <strong><a href="http://startbootstrap.com">别点我</a>
                                     </strong>
                                 </li>
-                                <li>Date:
+                                <li>时间:
                                     <strong><a href="http://startbootstrap.com">April 2014</a>
                                     </strong>
                                 </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
+                                <li>额==:
+                                    <strong><a href="http://startbootstrap.com">以后再改好了</a>
                                     </strong>
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> 关闭</button>
                         </div>
                     </div>
                 </div>
@@ -453,25 +453,25 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2>Project Title</h2>
+                            <h2>哈工大微软俱乐部</h2>
                             <hr class="star-primary">
-                            <img src="img/portfolio/circus.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                            <p>==其实这里现在什么都没有，所以不要多想了，早点洗洗睡吧。<a href="http://www.helianthuswhite.cn">我说让你不要点你肯定忍不住</a>是不是偷偷点了上面的链接？不管你是不是，反正我也看不到，快点承认吧，哈哈哈。</p>
                             <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+                                <li>写点什么呢:
+                                    <strong><a href="http://startbootstrap.com">别点我</a>
                                     </strong>
                                 </li>
-                                <li>Date:
+                                <li>时间:
                                     <strong><a href="http://startbootstrap.com">April 2014</a>
                                     </strong>
                                 </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
+                                <li>额==:
+                                    <strong><a href="http://startbootstrap.com">以后再改好了</a>
                                     </strong>
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> 关闭</button>
                         </div>
                     </div>
                 </div>
@@ -490,25 +490,25 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2>Project Title</h2>
+                            <h2>哈工大微软俱乐部</h2>
                             <hr class="star-primary">
-                            <img src="img/portfolio/game.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                            <p>==其实这里现在什么都没有，所以不要多想了，早点洗洗睡吧。<a href="http://www.helianthuswhite.cn">我说让你不要点你肯定忍不住</a>是不是偷偷点了上面的链接？不管你是不是，反正我也看不到，快点承认吧，哈哈哈。</p>
                             <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+                                <li>写点什么呢:
+                                    <strong><a href="http://startbootstrap.com">别点我</a>
                                     </strong>
                                 </li>
-                                <li>Date:
+                                <li>时间:
                                     <strong><a href="http://startbootstrap.com">April 2014</a>
                                     </strong>
                                 </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
+                                <li>额==:
+                                    <strong><a href="http://startbootstrap.com">以后再改好了</a>
                                     </strong>
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> 关闭</button>
                         </div>
                     </div>
                 </div>
@@ -527,25 +527,25 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2>Project Title</h2>
+                            <h2>哈工大微软俱乐部</h2>
                             <hr class="star-primary">
-                            <img src="img/portfolio/safe.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                            <p>==其实这里现在什么都没有，所以不要多想了，早点洗洗睡吧。<a href="http://www.helianthuswhite.cn">我说让你不要点你肯定忍不住</a>是不是偷偷点了上面的链接？不管你是不是，反正我也看不到，快点承认吧，哈哈哈。</p>
                             <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+                                <li>写点什么呢:
+                                    <strong><a href="http://startbootstrap.com">别点我</a>
                                     </strong>
                                 </li>
-                                <li>Date:
+                                <li>时间:
                                     <strong><a href="http://startbootstrap.com">April 2014</a>
                                     </strong>
                                 </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
+                                <li>额==:
+                                    <strong><a href="http://startbootstrap.com">以后再改好了</a>
                                     </strong>
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> 关闭</button>
                         </div>
                     </div>
                 </div>
@@ -564,25 +564,25 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2>Project Title</h2>
+                            <h2>哈工大微软俱乐部</h2>
                             <hr class="star-primary">
-                            <img src="img/portfolio/submarine.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                            <p>==其实这里现在什么都没有，所以不要多想了，早点洗洗睡吧。<a href="http://www.helianthuswhite.cn">我说让你不要点你肯定忍不住</a>是不是偷偷点了上面的链接？不管你是不是，反正我也看不到，快点承认吧，哈哈哈。</p>
                             <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+                                <li>写点什么呢:
+                                    <strong><a href="http://startbootstrap.com">别点我</a>
                                     </strong>
                                 </li>
-                                <li>Date:
+                                <li>时间:
                                     <strong><a href="http://startbootstrap.com">April 2014</a>
                                     </strong>
                                 </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
+                                <li>额==:
+                                    <strong><a href="http://startbootstrap.com">以后再改好了</a>
                                     </strong>
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> 关闭</button>
                         </div>
                     </div>
                 </div>
@@ -597,10 +597,16 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
     <script src="js/jquery.metisMenu.js"></script>
+    <!-- validate JS -->
+    <script src="js/jquery.validate.js"></script>
 
-    <script src="js/jquery.validate.js" type="text/javascript"></script>
-
-
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <script>
+    $().ready(function() {
+        $(".validate_signup").validate();
+        $(".validate_login").validate();
+    });
+    </script>
 </body>
 
 </html>

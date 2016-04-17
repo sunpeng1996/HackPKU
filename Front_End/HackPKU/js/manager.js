@@ -15,7 +15,7 @@
 		$("#page-inner").load("myCommunity.html");
 		addActive('#myCommunity');
 	});
-	// 我的任务页面
+	// 历史任务页面
 	$("#myTask").bind("click",function() {
 		$("#page-inner").load("myTask.html");
 		addActive('#myTask');
@@ -29,9 +29,13 @@
 	$("#edit-Info").bind("click",function() {
 		$("#page-inner").load("addInfo.html");
 	})
-	// 查看日程页面
-	$("#myEvents").bind("click",function() {
-		$("#page-inner").load("myEvents.html");
+	// 创建社团页面
+	$("#createCommunity").bind("click",function() {
+		$("#page-inner").load("createCommunity.html");
+	})
+	// 加入社团页面
+	$("#joinCommunity").bind("click",function() {
+		$("#page-inner").load("joinCommunity.html");
 	})
 })();
 

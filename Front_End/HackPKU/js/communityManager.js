@@ -1,29 +1,24 @@
 (function (){
 	//异步加载页面
-	//个人信息页面
-	$("#personInfo").bind("click",function() {
-		$("#page-inner").load("personInfo.html");
-		addActive('#personInfo');
+	//社团主页
+	$("#communityMain").bind("click",function() {
+		$("#page-inner").load("communityMain.html");
+		addActive('#communityMain');
 	});
-	//认证页面
-	$("#confirm").bind("click",function() {
-		$("#page-inner").load("confirm.html");
-		addActive('#confirm');
+	//社团信息
+	$("#communityInfo").bind("click",function() {
+		$("#page-inner").load("communityInfo.html");
+		addActive('#communityInfo');
 	});
-	// 我的社团页面
+	// 社团日志页面
 	$("#communityNews").bind("click",function() {
 		$("#page-inner").load("communityNews.html");
 		addActive('#communityNews');
 	});
-	// 我的任务页面
-	$("#myTask").bind("click",function() {
-		$("#page-inner").load("myTask.html");
-		addActive('#myTask');
-	});
-	// 消息管理页面
-	$("#messageManage").bind("click",function() {
-		$("#page-inner").load("messageManage.html");
-		addActive('#messageManage');
+	// 社团论坛页面
+	$("#communityBBS").bind("click",function() {
+		$("#page-inner").load("communityBBS.html");
+		addActive('#communityBBS');
 	});
 	// 社团管理添加active类
 	$("#communityManage").bind("click",function() {
