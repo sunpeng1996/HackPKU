@@ -29,15 +29,15 @@ request.setAttribute("basePath", basePath);
 	            <a href="<%=path %>/toClubPage.do?club_id=${club.clubId}">GO>></a>
 	        </div>
         </c:forEach>
-        <div class="communitydiv">
+       <%--  <div class="communitydiv">
             <div>
                <a href="<%=path %>/toCreateCommunity.do">创建社团</a> 
             </div>
             
             <div>
                 <a href="">加入社团</a>
-            </div>
-        </div>
+            </div> 
+        </div> --%>
     </div>
     
 </body>

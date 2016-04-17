@@ -84,6 +84,10 @@ public class UserController extends AbstractController {
 	}
 	@RequestMapping(value="/user_regist.do",method={RequestMethod.POST})
 	public String regist(HttpServletRequest request , @RequestParam String email ,@RequestParam String password ){
+		
+		
+		
+		
 		User temp = userService.selectByEmail(email);
 		if (temp!=null) {
 			System.out.println("该邮箱已经被注册");

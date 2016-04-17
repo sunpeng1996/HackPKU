@@ -93,6 +93,10 @@ request.setAttribute("basePath", basePath);
                         <a href="javascript:void(0);"  id="myCommunity"><i class="fa fa-bar-chart-o"></i>
                             我的社团</a>
                     </li>
+                     <li>
+                        <a href="javascript:void(0);"  id="createCommunity"><i class="fa fa-bar-chart-o"></i>
+                            创建社团</a>
+                    </li>
                     <li>
                         <a href="javascript:void(0);"  id="joinCommunity"><i class="fa fa-bar-chart-o"></i>
                            加入社团</a>

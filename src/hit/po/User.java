@@ -1,5 +1,7 @@
 package hit.po;
 
+import javax.persistence.Transient;
+
 public class User {
     private Integer userId;
 
@@ -32,8 +34,19 @@ public class User {
     private String scholar;
 
     private String keyCode;
+    
+    @Transient  //不需要持久到DB的属性使用该注解 
+    private String code;//验证码啊
 
-    public Integer getUserId() {
+    public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Integer getUserId() {
         return userId;
     }
 

@@ -33,6 +33,22 @@ request.setAttribute("basePath", basePath);
     <link rel="stylesheet" type="text/css" href="css/custom-styles.css">
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+<!--     加入用于注册验证的jQuery
+    <script type="text/javascript" src="js/jquery.validate.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.min.js"></script> -->
+    
+    
+<!--     <script type="text/javascript">
+	$(function(){
+	    // 调用了Jquery验证框架定义的validate方法
+		$("#regForm").validate({
+			 // 设置为调试状态, 如果生效,说明Jquery验证框架配置OK
+			 debug:true				   
+		});	   
+	})
+</script> -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,6 +60,9 @@ request.setAttribute("basePath", basePath);
 </head>
 
 <body id="page-top" class="index">
+
+
+
     <div id="wrapper"></div>
     <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
@@ -158,18 +177,32 @@ request.setAttribute("basePath", basePath);
 	            };
 	        </script>
              <!-- end of form=========================================- -->
+             
+             
+       
           </div>
           <div class="signup" id="showlg_1">
-             <form name="loginForm" action="<%=path%>/user_regist.do" method="post">
+             <form id="firstform" name="loginForm" action="<%=path%>/user_regist.do" method="post">
                   <!-- start of login form -->
                   <div id="user-name">
-                    <input type="text" name="email" placeholder="请输入邮箱" class="required email">
+                    <input type="text" name="email" placeholder="请输入邮箱" class="required email" >
+                     <p></p>
                   </div>
-                  <p><c:out value="${sessionScope.error}"></c:out></p>
                   <div id="user-password">
                     <input type="password" name="password" placeholder="请输入密码">
                     <p></p>
                     <input type="password" name="repassword" placeholder="请确认密码">
+                    <p></p>
+                  </div>
+                  <div id="user-code">
+                  		<tr>
+                  			<!-- <td>验证码</td> -->
+                  			<td><input id="index_code" name="code" type="text"  placeholder="请输入验证码" style="width:111px"/></td>  
+       						<td>
+       								 <img id="imgObj" alt="验证码" src="admin/code" width="200px" />  
+       								 <a href="#" onclick="changeImg();">换一张</a>
+       						 </td>
+       					</tr>
                   </div>
                   <p></p>
                   <div id="button-group">
@@ -182,6 +215,29 @@ request.setAttribute("basePath", basePath);
           </div>
         </div>
     </div>
+    
+    <!-- 这是为了验证码而准备的js -->
+    <script type="text/javascript">  
+    function changeImg() {  
+    	//ok  alert("换一张");
+        var imgSrc = $("#imgObj");  
+        var src = imgSrc.attr("src");  
+        imgSrc.attr("src", chgUrl(src));  
+    }  
+    //时间戳     
+    //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳     
+    function chgUrl(url) {  
+        var timestamp = (new Date()).valueOf();  
+        url = url.substring(0, 17);  
+        if ((url.indexOf("&") >= 0)) {  
+            url = url + "×tamp=" + timestamp;  
+        } else {  
+            url = url + "?timestamp=" + timestamp;  
+        }  
+        return url;  
+    }  
+</script>  
+    
 
     <!-- Header -->
     <header>

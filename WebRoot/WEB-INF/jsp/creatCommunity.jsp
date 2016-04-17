@@ -12,7 +12,7 @@ request.setAttribute("basePath", basePath);
     <meta charset="UTF-8">
     <title>myCommunity</title>
     <script type="text/javascript" src="<%=path %>/js/common.js"></script>
-    <script type="text/javascript" src="<%=path %>/js/jquery-1.10.2.js"></script>>
+    <script type="text/javascript" src="<%=path %>/js/jquery-1.10.2.js"></script>
 </head>
 <body>
     <div id="1">

@@ -1,13 +1,32 @@
 (function (){
 	//异步加载页面
-	//个人信息页面
+	//个人信息页面,有些bug
 	$("#personInfo").bind("click",function() {
-		$("#page-inner").load("personInfo.html");
+		$.ajax({
+			url:basePath+ "/MyInfo.do",
+			type:'GET',
+			 success: function(data){ 
+	            	$("#page-inner").html(data);
+	            },
+	            error: function(data){
+	                alert("gg");
+	            }
+		});
 		addActive('#personInfo');
 	});
 	//认证页面
 	$("#confirm").bind("click",function() {
-		$("#page-inner").load("confirm.html");
+		$.ajax({
+			url:basePath + "/confirm.do",
+			type:'GET',
+			contentType:'application/json;charset=utf-8',
+			success:function(data){
+				$("#page-inner").html(data);
+			},
+            error: function(data){
+                alert("gg");
+            }
+		});
 		addActive('#confirm');
 	});
 	// 我的社团页面
@@ -41,6 +60,24 @@
         }); 
 		addActive('#joinCommunity');
 	});
+	
+	//加入社团界面,获取所有的社团
+	$("#createCommunity").bind("click",function() {
+		$.ajax({ 
+            url:basePath + "/toCreateCommunity.do", 
+            type:'GET', 
+            contentType:'application/json;charset=utf-8',
+            success: function(data){ 
+            	$("#page-inner").html(data);
+            },
+            error: function(data){
+                alert("gg了吧");
+            }
+        }); 
+		addActive('#createCommunity');
+	});
+	
+	
 	
 	// 我的任务页面
 	$("#myTask").bind("click",function() {

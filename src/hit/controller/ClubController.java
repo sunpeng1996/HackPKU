@@ -417,9 +417,7 @@ public class ClubController{
 	public String getAllClubs(HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute("user");
 		List<Club> clubs = clubService.getAllClubs();
-		
 		request.getSession().setAttribute("clubs", clubs);
-		
 		return "jsp/toJoinClub";
 	}
 	
