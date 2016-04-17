@@ -67,6 +67,13 @@ body {
     padding: 30px;
     font-size: 25px;
 }
+#error-bottom {
+    position: fixed;
+    left: 50%;
+    margin-left: -88px;
+    bottom: 10px;
+    z-index: 99999;
+}
 #errorInfo-inner p a{
     display: block;
     text-decoration: none;
