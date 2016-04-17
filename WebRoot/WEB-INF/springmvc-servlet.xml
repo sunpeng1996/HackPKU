@@ -47,8 +47,6 @@
 				<bean class="hit.common.DateConverter"/>
 			</list>
 		</property>
-		
-	
 	</bean>
 
  </beans>

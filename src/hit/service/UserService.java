@@ -53,5 +53,7 @@ public interface UserService {
 		 *创建时间:2016年4月16日下午9:58:34
 		 */
 		public Boolean judgeRequest(Integer user_id, Integer clubId);
+
+		public Boolean findPasswordByEmail(String email);
 		
 }

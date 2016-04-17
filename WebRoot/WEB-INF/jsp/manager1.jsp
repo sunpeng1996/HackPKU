@@ -36,12 +36,12 @@ request.setAttribute("basePath", basePath);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">LOGO</a>
+                <a class="navbar-brand" href="index.jsp">LOGO</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-left">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="index.jsp" aria-expanded="false">
                        <i class="fa fa-home fa-fw"></i>首页
                     </a>
                 </li>

@@ -49,14 +49,13 @@ request.setAttribute("basePath", basePath);
 			            	if(data=='success')
 			            		alert('您已经申请成功，请耐心等待');
 			            	else{
-			            		alert('请勿重复提交');
+			            		alert('请勿重复申请');
 			            	}
-			            	/* $("#page-inner").html(data); */
 			            },
 			            error: function(data){
 			                alert("something wrong");
 			            }
-    			})
+    			});
     		}
     </script>
     

@@ -4,6 +4,7 @@ package hit.service.impl;
  *@author sunpeng123
  */
 import hit.common.BaseDao;
+import hit.common.JavaMailUtils;
 import hit.mapper.SchoolMapper;
 import hit.mapper.UserCustomMapper;
 import hit.mapper.UserMapper;
@@ -237,7 +238,25 @@ public class UserServiceImpl extends BaseDao implements UserService {
 		}else {
 			return false;
 		}
-		
+	}
+
+	
+	/**
+	 * @author sunpeng123
+	 * 这是用户找回密码的方法
+	 */
+	@Override
+	public Boolean findPasswordByEmail(String email) {
+	    User temp =  this.selectByEmail(email);
+	    if (temp==null) {
+			return false;
+		}else {
+			String password = temp.getPassword();
+			JavaMailUtils.sendMail(email, "您的社团登录密码已经找回：请尝试登录", 
+					"您好, "+ temp.getUsername()+"。您的密码是："+ password +"。请登录进行尝试，或及时登录修改密码。"
+							+ "如果有任何疑问，请回复此邮件与开发人员进行联系");
+			return true;
+		}
 		
 	}
 }
