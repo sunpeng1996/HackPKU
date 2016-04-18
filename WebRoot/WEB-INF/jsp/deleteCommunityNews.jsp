@@ -12,25 +12,28 @@ request.setAttribute("basePath", basePath);
 <html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
-	<title>社团信息</title>
+	<title>社团日志</title>
 </head>
 <body>
-	<div id="pageInfo">
+
+
+
+    <div id="pageInfo">
 		<nav>
-			<span>社团新闻</span>
+			<span>社团新闻删除</span>
 		</nav>
-		<div id="communityNews">
+			<div id="communityNews">
 			<table >
 				<tr>
 					<td>标题</td>
 					<td>时间</td>
 					<td>发布者</td>
+					<td>选项</td>
 				</tr>
-		    <c:forEach items="${requestScope.newsList }" var="nc" > 
+				  <c:forEach items="${requestScope.newsList }" var="nc" > 
 				<tr>
 						<td>
 							<a href="javascript:void(0);" id="a_${nc.newId }" onclick="showNews(this);"><c:out value="${nc.title }"></c:out></a>
-							
 						</td>
 						<td>
 							<span class="time"><i><c:out value="${nc.newsTime }"></c:out></i></span>
@@ -38,9 +41,13 @@ request.setAttribute("basePath", basePath);
 						<td>
 							<span class="author"><c:out value="${nc.author}"></c:out></span>
 						</td>
+						<td>
+							<a href="javascript:void(0);" id="b_${nc.newId }" onclick="deleteNews(this);">删除</a>
+							<%-- <c:out value="${nc.newId }"></c:out> --%>
+						</td>
 				</tr>
-	</c:forEach>	
-			</table>
+				</c:forEach>	
+		</table>
 		</div>
 	</div>
 	  <!-- Bootstrap Js -->
@@ -59,7 +66,9 @@ request.setAttribute("basePath", basePath);
 				target.attr("id","myModal");
 			});
 		})();
+    	
     	function showNews(a){
+    		//alert("看新闻");
     		var id = $(a).attr('id').replace('a_','');
     		$.ajax({ 
                 url:basePath+"/toNewsPage.do", 
@@ -73,7 +82,36 @@ request.setAttribute("basePath", basePath);
                 }
             }); 
     	}
+    	
+    	function deleteNews(b){
+    		alert("即将删除");
+    		var id = $(b).attr('id').replace('b_','');
+    		$.ajax({
+    			url:basePath+"/deleteNews.do",
+    			type:'POST',
+    			data:'news_id='+id,
+    			success:function(data){
+    				alert("删除成功");
+    				/* $("#page-inner").html(data); 没意义*/
+    				//这里让用户删除一篇日志之后直接ajax跳转到查看社团日志界面
+    				$.ajax({ 
+    			        url:basePath + "/clubnews.do", 
+    			        type:'GET', 
+    			        contentType:'application/json;charset=utf-8',
+    			        success: function(data){ 
+    			        	$("#page-inner").html(data);
+    			        },
+    			        error: function(data){
+    			            alert("gg");
+    			        }
+    			    }); 
+    			},
+    			error:function(data){
+    				alert("gggg");
+    			}
+    		});
+    	}
     
-    </script>
-</body>
+    </script> 
+</body> 
 </html>

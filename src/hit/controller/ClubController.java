@@ -268,7 +268,13 @@ public class ClubController{
 	public String clubnews(HttpServletRequest request){
 		loadIds(request);
 		newsSimpleList = newsService.getAllNews(club_id);
-		//newsList = null;
+		//System.out.println(newsSimpleList.size());
+		//boolean flag = (newsSimpleList == null);
+		if(newsSimpleList.isEmpty()){
+			System.out.println("该社团已经没有新闻啦");
+			request.setAttribute("error", "你的社团已经没有新闻啦，快去创建一个吧");
+			return "jsp/error";
+		}else{
 		newsList.clear();//清空集合
 		for( News news  : newsSimpleList){
 				NewsCustom nc = new NewsCustom();//每遍历一次都创建一个NewsCustom
@@ -290,6 +296,7 @@ public class ClubController{
 		request.removeAttribute("newsList");
 		request.setAttribute("newsList", newsList);
 		return "jsp/communityNews";
+		}
 	}
 	
 	/**
@@ -511,6 +518,9 @@ public class ClubController{
 			return "error";
 		}
 	}
+	
+	
+	
 	@RequestMapping(value="/toNewsPage.do")
 	public String toNewsPage(HttpServletRequest request,Integer news_id) {
 		News news = newsService.getNewsById(news_id);

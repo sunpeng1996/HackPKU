@@ -17,5 +17,7 @@ public interface NewsService {
 
 	List<News> getAllNews(Integer club_id);
 	News getNewsById(Integer news_id);
+
+	void deleteByNewsId(Integer news_id);
 	
 }

@@ -12,25 +12,28 @@ request.setAttribute("basePath", basePath);
 <html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
-	<title>社团信息</title>
+	<title>社团日志</title>
 </head>
 <body>
-	<div id="pageInfo">
+
+
+
+    <div id="pageInfo">
 		<nav>
-			<span>社团新闻</span>
+			<span>社团新闻编辑</span>
 		</nav>
-		<div id="communityNews">
+			<div id="communityNews">
 			<table >
 				<tr>
 					<td>标题</td>
 					<td>时间</td>
 					<td>发布者</td>
+					<td>选项</td>
 				</tr>
-		    <c:forEach items="${requestScope.newsList }" var="nc" > 
+				  <c:forEach items="${requestScope.newsList }" var="nc" > 
 				<tr>
 						<td>
 							<a href="javascript:void(0);" id="a_${nc.newId }" onclick="showNews(this);"><c:out value="${nc.title }"></c:out></a>
-							
 						</td>
 						<td>
 							<span class="time"><i><c:out value="${nc.newsTime }"></c:out></i></span>
@@ -38,9 +41,12 @@ request.setAttribute("basePath", basePath);
 						<td>
 							<span class="author"><c:out value="${nc.author}"></c:out></span>
 						</td>
+						<td>
+							<a href="javascript:void(0);" id="c_${nc.newId }" onclick="editNews(this);">编辑</a>
+						</td>
 				</tr>
-	</c:forEach>	
-			</table>
+				</c:forEach>	
+		</table>
 		</div>
 	</div>
 	  <!-- Bootstrap Js -->
@@ -59,7 +65,9 @@ request.setAttribute("basePath", basePath);
 				target.attr("id","myModal");
 			});
 		})();
+    	
     	function showNews(a){
+    		//alert("看新闻");
     		var id = $(a).attr('id').replace('a_','');
     		$.ajax({ 
                 url:basePath+"/toNewsPage.do", 
@@ -73,7 +81,23 @@ request.setAttribute("basePath", basePath);
                 }
             }); 
     	}
+    	
+    	function editNews(c){
+    		alert("即将编辑");
+    		var id = $(c).attr('id').replace('c_','');
+    		$.ajax({
+    			url:basePath+"/editNews.do",
+    			type:'POST',
+    			data:'news_id='+id,
+    			success:function(data){
+    				alert("编辑成功");
+    			},
+    			error:function(data){
+    				alert("gggg");
+    			}
+    		});
+    	}
     
-    </script>
-</body>
+    </script> 
+</body> 
 </html>

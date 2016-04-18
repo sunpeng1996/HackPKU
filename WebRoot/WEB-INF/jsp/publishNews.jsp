@@ -27,7 +27,8 @@ request.setAttribute("basePath", basePath);
 		<div id="publishNews">
 			<div class="summary publish-Info">
 				<span>新闻标题:</span>
-				<input id="title" type="text" name="summary">
+				
+				<input id="title" type="text" name="summary" value="${requestScope.news.title }">
 			</div>
 			<!-- <div class="author publish-Info">
 				<span>发布者:</span>
@@ -88,9 +89,12 @@ request.setAttribute("basePath", basePath);
 				      </div>
 				      <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
 				    </div>
-
-				    <div id="editor">
+					<%
+						String summary = new String((byte[])request.getAttribute("summary"));
+					%>
+				    <div id="editor" value="${summary }">
 				      输入内容&hellip;
+				      
 				    </div>
 			</div>
 		</div>

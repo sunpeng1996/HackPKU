@@ -180,7 +180,7 @@ public class UserController extends AbstractController {
 	@RequestMapping(value="/MyInfo.do")
 	public String MyInfo(HttpServletRequest request) {
 		if (request.getSession().getAttribute("user") == null) {
-			request.getSession().setAttribute("error", "您还没有登录");
+			request.getSession().setAttribute("error", "您还没有登录,请重新登录");
 			return "jsp/error";
 		}else{
 			return "jsp/manager1";			

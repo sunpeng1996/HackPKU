@@ -60,6 +60,11 @@
 	});
 	
 	
+	//社团日志编辑
+	$("#communityNewsEdit").bind("click",function() {
+		loadPage("/toEditNews.do");
+	});
+	
 	//社团日志删除
 	$("#communityNewsDelete").bind("click",function() {
 		loadPage("/toDeleteNews.do");

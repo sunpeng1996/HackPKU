@@ -27,4 +27,19 @@ public class NewsServiceImpl implements NewsService {
 	public News getNewsById(Integer news_id) {
 		return newsMapper.selectByPrimaryKey(news_id);
 	}
+	
+	
+	/**
+	 * @author sunpeng123
+	 * 通过id删除新闻
+	 */
+	@Override
+	public void deleteByNewsId(Integer news_id) {
+		try {
+			newsMapper.deleteByPrimaryKey(news_id);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+			
+	}
 }
