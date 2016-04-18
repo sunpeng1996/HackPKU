@@ -23,5 +23,8 @@ public class NewsServiceImpl implements NewsService {
 		}
 		
 	}
-
+	@Override
+	public News getNewsById(Integer news_id) {
+		return newsMapper.selectByPrimaryKey(news_id);
+	}
 }

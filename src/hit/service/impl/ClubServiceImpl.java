@@ -10,6 +10,7 @@ import hit.po.ClubMember;
 import hit.po.ClubMemberRequest;
 import hit.po.Menu;
 import hit.po.News;
+import hit.po.NewsCustom;
 import hit.po.Role;
 import hit.po.RolePrivilege;
 import hit.po.User;
@@ -248,14 +249,15 @@ public class ClubServiceImpl extends BaseDao implements ClubService {
 	@Override
 	public News addNews(String title, String blob, Integer user_id, Integer club_id) {
 			News news = new News();
+		
 			Date time = new Date();//自动创建新闻创建的时间
-			//SimpleDateFormat format = new SimpleDateFormat();
-			//String formateDate = format.format(time);
+			
 			news.setTime(time);
 			news.setClubId(club_id);
 			news.setPublisherId(user_id);
 			news.setSummary(blob.getBytes());
 			news.setTitle(title);
+			
 			newsMapper.insertSelective(news);//入库
 			System.out.println("获取到新闻的id"+news.getNewId());
 			return news;

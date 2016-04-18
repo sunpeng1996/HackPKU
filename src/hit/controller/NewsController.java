@@ -31,8 +31,15 @@ public class NewsController  {
 	
 	
 	
-	
-	//@RequestMapping(value="/")
+	/**
+	 * @author 作者: 如今我已·剑指天涯
+	 * @Description:前往删除日志的界面
+	 *创建时间:2016年4月18日下午8:45:43
+	 */
+	@RequestMapping(value="/toDeleteNews.do")
+	public String toDeleteNews(){
+		return "jsp/deleteNews";
+	}
 
 	
 

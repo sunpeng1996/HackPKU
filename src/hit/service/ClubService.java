@@ -10,6 +10,7 @@ import hit.po.ClubMember;
 import hit.po.ClubMemberRequest;
 import hit.po.Menu;
 import hit.po.News;
+import hit.po.NewsCustom;
 import hit.po.Role;
 import hit.po.RolePrivilege;
 import hit.po.User;

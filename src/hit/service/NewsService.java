@@ -16,6 +16,6 @@ import org.springframework.stereotype.Component;
 public interface NewsService {
 
 	List<News> getAllNews(Integer club_id);
-
+	News getNewsById(Integer news_id);
 	
 }

@@ -9,6 +9,7 @@ import hit.po.ClubMember;
 import hit.po.ClubMemberRequest;
 import hit.po.Menu;
 import hit.po.News;
+import hit.po.NewsCustom;
 import hit.po.Role;
 import hit.po.RolePrivilege;
 import hit.po.User;
@@ -43,9 +44,10 @@ public class ClubController{
    private NewsService newsService;
    
    
-   //用来存储所有新闻的集合
-   private List<News> newsList = new ArrayList<News>();
+   //用来存储所有新闻的集合,用于显示到jsp上的
+   private List<NewsCustom> newsList = new ArrayList<NewsCustom>();
 
+   private List<News> newsSimpleList = new ArrayList<News>();
 
    //用来存储用户所加入的俱乐部
    private List<Club> clubs = new ArrayList<Club>();
@@ -265,7 +267,27 @@ public class ClubController{
 	@RequestMapping(value="clubnews.do",method={RequestMethod.GET})
 	public String clubnews(HttpServletRequest request){
 		loadIds(request);
-		newsList = newsService.getAllNews(club_id);
+		newsSimpleList = newsService.getAllNews(club_id);
+		//newsList = null;
+		newsList.clear();//清空集合
+		for( News news  : newsSimpleList){
+				NewsCustom nc = new NewsCustom();//每遍历一次都创建一个NewsCustom
+				nc.setAuthor(userService.getUserById(user_id).getUsername());
+				nc.setClubId(news.getClubId());
+				nc.setNewId(news.getNewId());
+				nc.setTitle(news.getTitle());
+				System.out.println(news.getSummary()+"我就想看看他是什么格式");
+				nc.setNewsSummary(new String(news.getSummary()));//转换成string存储进去
+				request.setAttribute("summary", news.getSummary());
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				String formatDate = format.format(news.getTime());
+				nc.setNewsTime(formatDate);
+				nc.setSummary(news.getSummary());
+				nc.setPublisherId(user_id);
+				
+				newsList.add(nc);//这也添加了啊
+		}
+		request.removeAttribute("newsList");
 		request.setAttribute("newsList", newsList);
 		return "jsp/communityNews";
 	}
@@ -461,10 +483,24 @@ public class ClubController{
 			@RequestParam(defaultValue="") String title,
 			@RequestParam(defaultValue="") String blob ) {
 		loadIds(request);
-		News news = clubService.addNews(title,blob,user_id,club_id);
+		News news = clubService.addNews(title,blob,user_id,club_id);//返回 
 		Integer newsId = clubService.queryNewsIdByTitleAndUser(title,user_id,club_id);
 		news.setNewId(newsId);//将查询出来的newsid存储到new对象中
-		newsList.add(news);//将新闻添加到集合中
+		System.out.println("新发布的新闻“”这是后台发过来的新闻"+blob);
+		NewsCustom nc = new NewsCustom();
+		SimpleDateFormat format = new SimpleDateFormat();
+		String formateDate = format.format(news.getTime());
+		/*nc.setAuthor();*/
+		nc.setAuthor(userService.getUserById(user_id).getUsername());
+		nc.setTitle(title);
+		nc.setClubId(club_id);
+		nc.setPublisherId(user_id);
+		nc.setNewsSummary(blob);
+		nc.setNewId(news.getNewId());
+		nc.setSummary(blob.getBytes());
+	
+		
+		newsList.add(nc);//将新闻Custom类添加到集合中
 		request.setAttribute("newsList", newsList);
 		User user = userService.getUserById(user_id);
 		request.setAttribute("user",user);
@@ -475,6 +511,19 @@ public class ClubController{
 			return "error";
 		}
 	}
-	
+	@RequestMapping(value="/toNewsPage.do")
+	public String toNewsPage(HttpServletRequest request,Integer news_id) {
+		News news = newsService.getNewsById(news_id);
+		SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String time = sFormat.format(news.getTime());
+		/*nc.setAuthor();*/
+		String author = userService.getUserById(news.getPublisherId()).getUsername();
+		String summary = new String(news.getSummary());
+		request.setAttribute("news", news);
+		request.setAttribute("author",author);
+		request.setAttribute("summary",summary);
+		request.setAttribute("time", time);
+		return "jsp/showNews";
+	}
 	
 }

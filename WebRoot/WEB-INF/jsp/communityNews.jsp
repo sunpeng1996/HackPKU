@@ -26,78 +26,23 @@ request.setAttribute("basePath", basePath);
 					<td>时间</td>
 					<td>发布者</td>
 				</tr>
-		    <c:forEach items="${newsList }" var="news" > 
-		    <%
-		    	
-		    	Date date = request.getAttribute("");
-		    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		    	String timeFormat = format.format(date)
-		    %>
+		    <c:forEach items="${requestScope.newsList }" var="nc" > 
 				<tr>
 						<td>
-							<a href="javascript:void(0);"  data-toggle="modal" data-target="#myModal"><c:out value="${news.title }"></c:out></a>
-							<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
-					        <div class="modal-dialog">  
-					        	<div class="modal-content">  
-					                <div class="modal-header">  
-					               		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã</button>  
-					                	<h4 class="modal-title">日志详情</h4>  
-					                </div>  
-					                <div class="modal-body"> 
-					                	<div class="news-title">
-					                		<h2><c:out value="${news.title }"></c:out></h2>
-					                	</div>
-					                	<div class="news-info">
-					                		<span><i><c:out value="${news.publisherId }"></c:out></i></span>
-					                		<span><i><c:out  value="${timeFormat }"></c:out></i></span>
-					                	</div>
-					                	<div class="news-body" >
-					                		<c:out value="${news.summary}"></c:out>
-					                	</div>
-					                </div> 
-					                <div class="modal-footer">  
-					                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
-					                </div>  
-					            </div><!-- /.modal-content -->  
-					        </div><!-- /.modal-dialog -->  
-					    </div><!-- /.modal -->
+							<a href="javascript:void(0);" id="a_${nc.newId }" onclick="showNews(this);"><c:out value="${nc.title }"></c:out></a>
+							
 						</td>
 						<td>
-							<span class="time"><i><c:out value="${news.time }"></c:out></i></span>
+							<span class="time"><i><c:out value="${nc.newsTime }"></c:out></i></span>
 						</td>
 						<td>
-							<span class="author"><c:out value="${news.publisherId}"></c:out></span>
+							<span class="author"><c:out value="${nc.author}"></c:out></span>
 						</td>
 				</tr>
 	</c:forEach>	
 			<tr>
 						<td>
-							<a href="javascript:void(0);"  data-toggle="modal" data-target="#myModal">我是写死的，测试用的</a>
-							<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
-					        <div class="modal-dialog">  
-					        	<div class="modal-content">  
-					                <div class="modal-header">  
-					               		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã</button>  
-					                	<h4 class="modal-title">日志详情</h4>  
-					                </div>  
-					                <div class="modal-body"> 
-					                	<div class="news-title">
-					                		<h2>我是这条新闻的标题</h2>
-					                	</div>
-					                	<div class="news-info">
-					                		<span><i>黄运智</i></span>
-					                		<span><i>2015/4/16 18:10</i></span>
-					                	</div>
-					                	<div class="news-body" >
-					                		重磅来袭，虽然我也不知到是很么鬼。但是为了填满这个框框我必须啊要写一些东西来，重点是呢我觉得吧，写满挺不容易的。时间的话在新活动中心的222房间，时间是18:30到21:30分。
-					                	</div>
-					                </div> 
-					                <div class="modal-footer">  
-					                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
-					                </div>  
-					            </div><!-- /.modal-content -->  
-					        </div><!-- /.modal-dialog -->  
-					    </div><!-- /.modal -->
+							<a href="javascript:void(0);" id="">我是写死的，测试用的</a>
 						</td>
 						<td>
 							<span class="time"><i>2016-04-15</i></span>
@@ -114,7 +59,7 @@ request.setAttribute("basePath", basePath);
     <script src="js/bootstrap.min.js"></script> 
     <script type="text/javascript">
     	(function () {
-    		//æ¶é¤å¤ä¸ªæ¨¡ææ¡ä¹é´çç¹å»å²çª
+    		//æ¶é¤å¤ä¸ªæ¨¡ææ¡ä¹é´çç¹å»å²çª这他妈是啥
 			$("a[data-toggle='modal']").click(function() {
 				var trs = $("#pageInfo").find("#communityNews").find("table").children();
 				var father = $(this).parent();
@@ -124,8 +69,22 @@ request.setAttribute("basePath", basePath);
 				});
 				target.attr("id","myModal");
 			});
-			//å¤çæ¯æ¬¡ç¹å»è¿å¥é¡µé¢æ¨¡ææ¡èæ¯å±æ°å¢å¤çBUG
 		})();
+    	function showNews(a){
+    		var id = $(a).attr('id').replace('a_','');
+    		$.ajax({ 
+                url:basePath+"/toNewsPage.do", 
+                type:'POST', 
+                data:"news_id="+id,
+                success: function(data){
+        			$("#page-inner").html(data);
+                },
+                error: function(data){
+                    alert("fail");
+                }
+            }); 
+    	}
+    
     </script>
 </body>
 </html>

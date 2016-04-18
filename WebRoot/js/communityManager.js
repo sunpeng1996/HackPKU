@@ -59,6 +59,12 @@
 		loadPage("/toPublishNews.do");
 	});
 	
+	
+	//社团日志删除
+	$("#communityNewsDelete").bind("click",function() {
+		loadPage("/toDeleteNews.do");
+	});
+	
 	// 社团角色分配
 	$("#communityPosChange").bind("click",function(menu_id) {
 		loadPage("/delegateclubrole.do");

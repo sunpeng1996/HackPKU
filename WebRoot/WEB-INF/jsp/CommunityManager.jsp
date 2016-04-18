@@ -94,10 +94,26 @@ request.setAttribute("basePath", basePath);
                     <li>
                         <a href="javascript:void(0);" menu_id="16" class="menu" id="clubmember"><i class="fa fa-desktop"></i>社团成员16</a>
                     </li>
-					<li>
-                        <a href="javascript:void(0);" menu_id="14" class="menu"  id="communityNews"><i class="fa fa-bar-chart-o"></i>
-                            社团日志14</a>
+                    
+                    
+                       <li>
+                        <a href="javascript:void(0);" menu_id="14" class="menu" id="communityNews"><i class="fa fa-sitemap"></i>
+                            社团日志14<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="javascript:void(0);" menu_id="11" class="menu" id="communityNewsPublish">社团日志发布11</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" menu_id="17" class="menu" id="communityNewsEdit">社团日志编辑17</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" menu_id="18" class="menu" id="communityNewsDelete">社团日志删除18</a>
+                            </li>
+                        </ul>
                     </li>
+                    
+                    
+                    
                     <li>
                         <a href="javascript:void(0);" menu_id="15" class="menu" id="myTask"><i class="fa fa-qrcode"></i> 
                             社团论坛15</a>
@@ -113,9 +129,7 @@ request.setAttribute("basePath", basePath);
                             <li>
                                 <a href="javascript:void(0);" menu_id="2" class="menu" id="communityMemChange">社团成员调整2</a>
                             </li>
-                             <li>
-                                <a href="javascript:void(0);" menu_id="11" class="menu" id="communityNewsPublish">社团日志发布11</a>
-                            </li>
+                            
                             <li>
                                 <a href="javascript:void(0);" menu_id="4">社团职位调整4<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
