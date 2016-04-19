@@ -15,30 +15,45 @@ request.setAttribute("basePath", basePath);
     <script type="text/javascript" src="<%=path %>/js/jquery-1.10.2.js"></script>
 </head>
 <body>
-    <div id="1">
-        <nav>
-            <span>创建社团</span>
-        </nav>
-      
-        <form id="createClub" name="createClub"  method="post"  action="<%=path%>/club_create.do"  enctype="multipart/form-data" >
-        	<div>
+    <div id="pageInfo">
+           <nav>
+            我的社团 >> 创建社团
+      	  </nav>
+        <form id="communityInfoChange" name="createClub"  method="post"  action="<%=path%>/club_create.do"  enctype="multipart/form-data" >
+        	<div id="communityInfoChange-left">
                 <span>社团名称：</span>
                 <input  type="text" name="clubname" value="${sessionScope.club.clubname }">
             </div>
-            <div>
+            <div id="communityInfoChange-logo" >
+            	<span>社团图片 :</span>
+            	<div id="communityLogo"></div> 
+            	<!--<input type="file" name="clubImage" value="上传社团图片" > -->
+            	  <a href="javascript:void(0);">
+                    点击上传<input id="click_upload" type="file" name="clubImage" accept="image/*" onclick="uploadImage()">
+                </a>
+            </div>
+            <div id="communityInfoChange-right">
                 <span>社团描述：</span>
-                <input  type="text" name="description" value="${sessionScope.club.description }">
+                <textarea name="description">${sessionScope.club.description }</textarea>
             </div>
-            <div class="photo">
-            	<span>上传社团图片 :</span>
-            	<input type="file" name="clubImage" value="上传社团图片" >
+            <div id="communityInfoChange-bottom">
+                <input type="submit" value="确认创建" name="submit">
             </div>
-            <div>
-                <span>创建时间：</span>
-                <input  type="text" name="setuptime" placeholder="YYYY-MM-DD" value="${sessionScope.club.setuptime }">
-            </div>
-            <input id="createClubButton" class="button" type="submit" name="submit" value="确认信息"  >
 		</form>
+		
+		
+		<!-- ajax用于图片上传的实时回显 -->
+		<script type="text/javascript">
+			function uploadImage(){
+					
+			
+			}
+		
+		
+		
+		</script>
+		
+		
 		
 		 <!-- <script type="text/javascript"  这块是ajax提交表单，由于有文件，所以先注释掉>
 		 $('#createClubButton').click(function(){

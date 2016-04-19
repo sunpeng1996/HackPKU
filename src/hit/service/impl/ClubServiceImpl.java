@@ -10,14 +10,12 @@ import hit.po.ClubMember;
 import hit.po.ClubMemberRequest;
 import hit.po.Menu;
 import hit.po.News;
-import hit.po.NewsCustom;
 import hit.po.Role;
 import hit.po.RolePrivilege;
 import hit.po.User;
 import hit.service.ClubService;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -40,7 +38,6 @@ public class ClubServiceImpl extends BaseDao implements ClubService {
 		private RoleMapper roleMapper;
 		@Autowired
 		private NewsMapper newsMapper;
-		
 		@Override
 	    public Club getClubById(Integer club_id) {
 			return clubMapper.selectByPrimaryKey(club_id);
@@ -242,6 +239,7 @@ public class ClubServiceImpl extends BaseDao implements ClubService {
 		return null;
 	}
 	
+
 	/**
 	 * @author sunpeng123
 	 * 发布新闻，新闻入库

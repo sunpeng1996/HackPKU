@@ -83,7 +83,7 @@ request.setAttribute("basePath", basePath);
     	}
     	
     	function editNews(c){
-    		alert("即将编辑");
+    		//alert("即将编辑");
     		var id = $(c).attr('id').replace('c_','');
     		$.ajax({
     			url:basePath+"/editNews.do",

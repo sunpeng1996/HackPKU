@@ -141,7 +141,7 @@ public class NewsController  {
 					nc.setClubId(news.getClubId());
 					nc.setNewId(news.getNewId());
 					nc.setTitle(news.getTitle());
-					System.out.println(news.getSummary()+"我就想看看他是什么格式");
+				//	System.out.println(news.getSummary()+"我就想看看他是什么格式");
 					nc.setNewsSummary(new String(news.getSummary()));//转换成string存储进去
 					request.setAttribute("summary", news.getSummary());
 					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -170,10 +170,10 @@ public class NewsController  {
 			News news = newsService.getNewsById(news_id);
 			
 			request.setAttribute("summary", new String(news.getSummary()));
-			System.out.println(news.getSummary());
+			//System.out.println(news.getSummary());
 			request.setAttribute("news",news);//向request中存储数据用于数据回显
-			System.out.println(new String(news.getSummary()));
-			newsService.deleteByNewsId(news_id);//将旧的新闻删除
+			//System.out.println(new String(news.getSummary()));
+			//newsService.deleteByNewsId(news_id);//将旧的新闻删除,在这里删除会有问题
 			return "jsp/publishNews";
 	}
 

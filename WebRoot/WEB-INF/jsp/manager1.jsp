@@ -36,11 +36,11 @@ request.setAttribute("basePath", basePath);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.jsp">LOGO</a>
+                <a class="navbar-brand" href="index.jsp"></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-left">
-                <li class="dropdown">
+                <li class="dropdown">˙
                     <a class="dropdown-toggle" data-toggle="dropdown" href="index.jsp" aria-expanded="false">
                        <i class="fa fa-home fa-fw"></i>首页
                     </a>
@@ -50,7 +50,6 @@ request.setAttribute("basePath", basePath);
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-list fa-fw"></i>活动
                     </a>
-                </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
@@ -84,11 +83,11 @@ request.setAttribute("basePath", basePath);
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li>
-                        <a class="active-menu" href="javascript:void(0);" id="personInfo"><i class="fa fa-dashboard"></i>个人信息</a>
+                        <a class="active-menu" href="<%=path%>/MyInfo.do" ><i class="fa fa-dashboard"></i>个人信息</a>
                     </li>
-                    <li>
+                  <!--   <li>
                         <a href="javascript:void(0);" id="confirm"><i class="fa fa-desktop"></i>认证</a>
-                    </li>
+                    </li> -->
 					<li>
                         <a href="javascript:void(0);"  id="myCommunity"><i class="fa fa-bar-chart-o"></i>
                             我的社团</a>

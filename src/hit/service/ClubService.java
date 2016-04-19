@@ -1,19 +1,18 @@
 package hit.service;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import hit.po.Club;
 import hit.po.ClubMember;
 import hit.po.ClubMemberRequest;
 import hit.po.Menu;
 import hit.po.News;
-import hit.po.NewsCustom;
 import hit.po.Role;
 import hit.po.RolePrivilege;
 import hit.po.User;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,7 +46,7 @@ public interface ClubService {
 			Integer userId);
 	public void bindUserAndClub(Club club2, User user);
 	public List<Club> getAllClubs();
-	
+
 	/**
 	 * 
 	 * @author 作者: 如今我已·剑指天涯

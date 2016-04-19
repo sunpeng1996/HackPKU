@@ -16,7 +16,7 @@ body {
 	top: 50%;
 	left: 50%;
 	width: 330px;
-	height: 380px;
+	padding-bottom : 20px;
 	margin-top: -190px;
 	margin-left: -165px;
 	position: fixed;
@@ -63,8 +63,7 @@ body {
 }
 .login{
 	display: none;
-	position: absolute;
-	height: 300px;
+	position: relative;
 	margin-top: 80px;
 	margin-left: 30px;
 }
@@ -85,8 +84,7 @@ body {
 }
 .signup{
 	/*display: none;*/
-	position: absolute;
-	height: 300px;
+	position: relative;
 	margin-top: 80px;
 	margin-left: 30px;
 }

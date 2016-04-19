@@ -37,12 +37,12 @@ request.setAttribute("basePath", basePath);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">LOGO</a>
+                <a class="navbar-brand" href="index.jsp"></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-left">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <a class="dropdown-toggle" href="index.jsp" aria-expanded="false">
                        <i class="fa fa-home fa-fw"></i>首页
                     </a>
                 </li>
@@ -89,13 +89,12 @@ request.setAttribute("basePath", basePath);
                         <a class="active-menu" href="javascript:void(0);" id="personInfo"><i class="fa fa-dashboard"></i>社团主页</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" menu_id="12" class="menu" id="clubmessage"><i class="fa fa-desktop"></i>社团信息12</a>
+                        <a href="javascript:void(0);" menu_id="12" class="menu" id="clubmessage"><i class="fa fa-desktop"></i>社团信息</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" menu_id="16" class="menu" id="clubmember"><i class="fa fa-desktop"></i>社团成员16</a>
+                        <a href="javascript:void(0);" menu_id="16" class="menu" id="clubmember"><i class="fa fa-desktop"></i>社团成员</a>
                     </li>
-                    
-                    
+					
                        <li>
                         <a href="javascript:void(0);" menu_id="14" class="menu" id="communityNews"><i class="fa fa-sitemap"></i>
                             社团日志14<span class="fa arrow"></span></a>
@@ -111,33 +110,29 @@ request.setAttribute("basePath", basePath);
                             </li>
                         </ul>
                     </li>
-                    
-                    
-                    
                     <li>
                         <a href="javascript:void(0);" menu_id="15" class="menu" id="myTask"><i class="fa fa-qrcode"></i> 
-                            社团论坛15</a>
+                            社团论坛</a>
                     </li>
 
                     <li>
                         <a href="javascript:void(0);" menu_id="1" class="menu" id="messageManage"><i class="fa fa-sitemap"></i>
-                            社团管理1<span class="fa arrow"></span></a>
+                            社团管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="javascript:void(0);" menu_id="3" class="menu" id="communityInfoChange" >社团信息变更3</a>
+                                <a href="javascript:void(0);" menu_id="3" class="menu" id="communityInfoChange" >社团信息变更</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" menu_id="2" class="menu" id="communityMemChange">社团成员调整2</a>
+                                <a href="javascript:void(0);" menu_id="2" class="menu" id="communityMemChange">社团成员调整</a>
                             </li>
-                            
                             <li>
-                                <a href="javascript:void(0);" menu_id="4">社团职位调整4<span class="fa arrow"></span></a>
+                                <a href="javascript:void(0);" menu_id="4">社团职位调整<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="javascript:void(0);" menu_id="5" class="menu" id="communityPosChange">社团角色分配5</a>
+                                        <a href="javascript:void(0);" menu_id="5" class="menu" id="communityPosChange">社团角色分配</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);" menu_id="6" class="menu" id="communityPosManage">社团角色管理6</a>
+                                        <a href="javascript:void(0);" menu_id="6" class="menu" id="communityPosManage">社团角色管理</a>
                                     </li>
                                 </ul>
 
@@ -146,16 +141,16 @@ request.setAttribute("basePath", basePath);
                     </li>
                     <li>
                         <a href="javascript:void(0);" menu_id="7" class="menu" id="messageManage"><i class="fa fa-sitemap"></i>
-                            社团活动7<span class="fa arrow"></span></a>
+                            社团活动<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="javascript:void(0);" menu_id="8" class="menu" id="myEvents">查看日程8</a>
+                                <a href="javascript:void(0);" menu_id="8" class="menu" id="myEvents">查看日程</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" menu_id="9" class="menu" id="distributeActivity">分配活动9</a>
+                                <a href="javascript:void(0);" menu_id="9" class="menu" id="distributeActivity">分配活动</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" menu_id="10" class="menu" id="evaluateActivity">编辑活动状态10</a>
+                                <a href="javascript:void(0);" menu_id="10" class="menu" id="evaluateActivity">编辑活动状态</a>
                             </li>
                         </ul>
                     </li>

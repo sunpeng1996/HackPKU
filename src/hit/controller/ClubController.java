@@ -2,8 +2,6 @@ package hit.controller;
 /**
  * 用户模块控制器
  */
-import hit.mapper.ClubMapper;
-import hit.mapper.RoleMapper;
 import hit.po.Club;
 import hit.po.ClubMember;
 import hit.po.ClubMemberRequest;
@@ -22,12 +20,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,8 +38,7 @@ public class ClubController{
    private UserService userService;
    @Autowired
    private NewsService newsService;
-   
-   
+
    //用来存储所有新闻的集合,用于显示到jsp上的
    private List<NewsCustom> newsList = new ArrayList<NewsCustom>();
 
@@ -257,7 +252,6 @@ public class ClubController{
 		return "jsp/adjustclubrole";
 	}
 	
-	
 	/**
 	 * 
 	 * @author 作者: 如今我已·剑指天涯
@@ -276,7 +270,7 @@ public class ClubController{
 					nc.setClubId(news.getClubId());
 					nc.setNewId(news.getNewId());
 					nc.setTitle(news.getTitle());
-					System.out.println(news.getSummary()+"我就想看看他是什么格式");
+					//System.out.println(news.getSummary()+"我就想看看他是什么格式");
 					nc.setNewsSummary(new String(news.getSummary()));//转换成string存储进去
 					request.setAttribute("summary", news.getSummary());
 					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -477,6 +471,8 @@ public class ClubController{
 	}
 	
 	
+
+	
 	
 	/**
 	 * 
@@ -487,37 +483,44 @@ public class ClubController{
 	@RequestMapping(value="/publishNews.do")
 	public  String publishNews(HttpServletRequest request,
 			@RequestParam(defaultValue="") String title,
-			@RequestParam(defaultValue="") String blob ) {
+			@RequestParam(defaultValue="") String blob
+			/*,@RequestParam(defaultValue="0") Integer newId*/) {
 		loadIds(request);
-		News news = clubService.addNews(title,blob,user_id,club_id);//返回 
-		Integer newsId = clubService.queryNewsIdByTitleAndUser(title,user_id,club_id);
-		news.setNewId(newsId);//将查询出来的newsid存储到new对象中
-		System.out.println("新发布的新闻“”这是后台发过来的新闻"+blob);
-		NewsCustom nc = new NewsCustom();
-		SimpleDateFormat format = new SimpleDateFormat();
-		String formateDate = format.format(news.getTime());
-		/*nc.setAuthor();*/
-		nc.setAuthor(userService.getUserById(user_id).getUsername());
-		nc.setTitle(title);
-		nc.setClubId(club_id);
-		nc.setPublisherId(user_id);
-		nc.setNewsSummary(blob);
-		nc.setNewId(news.getNewId());
-		nc.setSummary(blob.getBytes());
-		newsList.add(nc);//将新闻Custom类添加到集合中
-		request.setAttribute("newsList", newsList);
-		User user = userService.getUserById(user_id);
-		request.setAttribute("user",user);
-		System.out.println("现在再获取到新闻的id"+news.getNewId());
-		if (newsId!=null) {
-			return "jsp/communityNews";
-		}else {
-			return "error";
+		
+		
+			News news = clubService.addNews(title,blob,user_id,club_id);//返回 
+			Integer newsId = clubService.queryNewsIdByTitleAndUser(title,user_id,club_id);
+			news.setNewId(newsId);//将查询出来的newsid存储到new对象中
+		//	System.out.println("新发布的新闻“”这是后台发过来的新闻"+blob);
+			NewsCustom nc = new NewsCustom();
+			SimpleDateFormat format = new SimpleDateFormat();
+			String formateDate = format.format(news.getTime());
+			/*nc.setAuthor();*/
+			nc.setAuthor(userService.getUserById(user_id).getUsername());
+			nc.setTitle(title);
+			nc.setClubId(club_id);
+			nc.setPublisherId(user_id);
+			nc.setNewsSummary(blob);
+			nc.setNewId(news.getNewId());
+			nc.setSummary(blob.getBytes());
+			newsList.add(nc);//将新闻Custom类添加到集合中
+			request.setAttribute("newsList", newsList);
+			User user = userService.getUserById(user_id);
+			request.setAttribute("user",user);
+			//System.out.println("现在再获取到新闻的id"+news.getNewId());
+			if (newsId!=null) {
+				return "jsp/communityNews";
+			}else {
+				return "error";
+			}
 		}
-	}
 	
 	
 	
+	/**
+	 * @author 作者: 如今我已·剑指天涯
+	 * @return
+	 */
 	@RequestMapping(value="/toNewsPage.do")
 	public String toNewsPage(HttpServletRequest request,Integer news_id) {
 		News news = newsService.getNewsById(news_id);
@@ -532,5 +535,4 @@ public class ClubController{
 		request.setAttribute("time", time);
 		return "jsp/showNews";
 	}
-	
 }

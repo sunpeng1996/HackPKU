@@ -1,5 +1,9 @@
 package hit.vo;
 
+import hit.po.User;
+
+import java.util.List;
+
 public class EventVo {
 	private Integer task_id;
 	private String taskname;
@@ -11,7 +15,14 @@ public class EventVo {
 	private String end_hour;
 	private String end_min;
 	private String thisDay;
-
+	private List<User> ptcs;
+	
+	public List<User> getPtcs() {
+		return ptcs;
+	}
+	public void setPtcs(List<User> ptcs) {
+		this.ptcs = ptcs;
+	}
 	public Integer getTask_id() {
 		return task_id;
 	}

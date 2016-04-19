@@ -90,14 +90,30 @@ request.setAttribute("basePath", basePath);
 				      <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="" >
 				    </div>
 				
-				    <div id="editor" >
+				    <div id="editor">
+				    在这里输入文字......
 						    ${summary }
+						    id:${requestScope.news.newId }
 				    </div>
 			</div>
 		</div>
+		
+		
 		<div class="submit">
 			<button id="btn_publish" name="submit" type="button" onclick="publish();">发布</button>
 		</div>
+		
+	<%-- 	<c:if test="${requestScope.news.newId }!=null">
+				<div class="submit1">
+			<button id="btn_${requestScope.news.newId }" name="submit1" type="button" onclick="edit(this);">更新</button>
+		</div>
+		
+		</c:if>
+		<c:if test="${requestScope.news.newId}==null">
+		<div class="submit">
+			<button id="btn_publish" name="submit" type="button" onclick="publish();">发布</button>
+		</div>
+		</c:if> --%>
 	</div>
 	</div>
 
@@ -130,6 +146,35 @@ request.setAttribute("basePath", basePath);
 		});
 		
 	}
+	
+	
+	/* function edit(data){
+		var title = $("#title").val();//获取到新闻的标题
+		//alert($("#title").val());
+		
+		var blob = $("#editor").html();//获取到正文
+		
+		var newId = ${data}.attr('id').replace('btn_','');
+		//alert(blob);
+		$.ajax({
+			url:basePath + "/publishNews.do",
+			type:'POST',
+			data:{
+				title:title,
+				blob:blob,
+				newId:newId
+			},
+			success:function(data){
+				alert('发布成功');
+				$("#page-inner").html(data);
+			},
+			error:function(data){
+				alert("GG");
+			}
+		});
+		
+	} */
+	
 	
 	 
 	

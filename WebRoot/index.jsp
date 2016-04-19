@@ -13,10 +13,10 @@ request.setAttribute("basePath", basePath);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<meta name="description" content="HIT 哈工大 社团管理系统 Quiclub">
+    <meta name="author" content="HIT 蓝线俱乐部 孙一铀 张旭 黄运智 孙鹏">
 
-    <title>社团管理系统</title>
+    <title>Quiclub</title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -35,9 +35,6 @@ request.setAttribute("basePath", basePath);
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
     
-<!--     加入用于注册验证的jQuery
-    <script type="text/javascript" src="js/jquery.validate.js"></script>
-    <script type="text/javascript" src="js/jquery-1.7.min.js"></script> -->
     
     
 <!--     <script type="text/javascript">
@@ -66,18 +63,12 @@ request.setAttribute("basePath", basePath);
     <div id="wrapper"></div>
     <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.jsp">LOGO</a>
+                <a class="navbar-brand" href="index.jsp"></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-left">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <a class="dropdown-toggle"  href="index.jsp" aria-expanded="false">
                        <i class="fa fa-home fa-fw"></i>首页
                     </a>
                 </li>
@@ -90,7 +81,7 @@ request.setAttribute("basePath", basePath);
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-bar-chart fa-fw"></i>排行榜
+                        <i class="fa fa-bar-chart-o fa-fw"></i>排行榜
                     </a>
                 </li>
                 <!-- /.dropdown -->
@@ -146,14 +137,14 @@ request.setAttribute("basePath", basePath);
            </div>
            <div class="login" id="showlg_2">
             <!--表单验证===================================================-->
-             <form id="loginForm" name="loginForm" action="<%=path%>/MyInfo.do" method="post">
+             <form id="loginForm" name="loginForm" class="validate_login" action="<%=path%>/MyInfo.do" method="post">
                   <!-- start of login form -->
                   <div id="user-name">
-                    <input type="text" name="email" placeholder="请输入邮箱账号">
+                    <input type="email" class="required email" name="email" placeholder="请输入邮箱账号">
                   </div>
                   <p></p>
                   <div id="user-password">
-                    <input type="password" name="password" placeholder="请输入密码">
+                    <input type="password" name="password" placeholder="请输入密码" minlength="6" required>
                   </div>
                   <p></p>
                   <div id="button-group">
@@ -182,25 +173,25 @@ request.setAttribute("basePath", basePath);
        
           </div>
           <div class="signup" id="showlg_1">
-             <form id="firstform" name="loginForm" action="<%=path%>/user_regist.do" method="post">
+             <form id="firstform" name="loginForm"  class="validate_signup"  action="<%=path%>/user_regist.do" method="post">
                   <!-- start of login form -->
                   <div id="user-name">
                     <input type="text" name="email" placeholder="请输入邮箱" class="required email" >
                      <p></p>
                   </div>
                   <div id="user-password">
-                    <input type="password" name="password" placeholder="请输入密码">
+                    <input id="password" type="password" name="password" placeholder="请输入密码" minlength="6" required/>
                     <p></p>
-                    <input type="password" name="repassword" placeholder="请确认密码">
+                      <input type="password" name="confirm_password" placeholder="请确认密码" minlength="6" equalTo="#password" required/>
                     <p></p>
                   </div>
                   <div id="user-code">
                   		<tr>
                   			<!-- <td>验证码</td> -->
-                  			<td><input id="index_code" name="code" type="text"  placeholder="请输入验证码" style="width:111px"/></td>  
+                  			<td><input id="index_code" name="verifyCode" type="text"  placeholder="请输入验证码" style="width:111px"/></td>  
        						<td>
-       								 <img id="imgObj" alt="验证码" src="admin/code" width="200px" />  
-       								 <a href="#" onclick="changeImg();">换一张</a>
+       								 <img id="vCode" alt="验证码" src="<c:url value='/VerifyCodeServlet'/>" width="80px" />  
+       								 <a href="#" onclick="javascript:_change()">换一张</a>
        						 </td>
        					</tr>
                   </div>
@@ -211,32 +202,27 @@ request.setAttribute("basePath", basePath);
                   <div class="errorInfo">
                     <p>用户名或密码错误！</p> <!-- 显示表单验证的出错信息 -->
                   </div>
+                  
+                  
             </form>
           </div>
         </div>
     </div>
     
     <!-- 这是为了验证码而准备的js -->
-    <script type="text/javascript">  
-    function changeImg() {  
-    	//ok  alert("换一张");
-        var imgSrc = $("#imgObj");  
-        var src = imgSrc.attr("src");  
-        imgSrc.attr("src", chgUrl(src));  
-    }  
-    //时间戳     
-    //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳     
-    function chgUrl(url) {  
-        var timestamp = (new Date()).valueOf();  
-        url = url.substring(0, 17);  
-        if ((url.indexOf("&") >= 0)) {  
-            url = url + "×tamp=" + timestamp;  
-        } else {  
-            url = url + "?timestamp=" + timestamp;  
-        }  
-        return url;  
-    }  
-</script>  
+  <script type="text/javascript">
+	/*
+	如果一个表单项的name和<img>的id相同，那么可能会出问题！一般只有IE出问题！
+	*/
+	function _change() {
+		/*
+		1. 获取<img>元素
+		*/
+		var ele = document.getElementById("vCode");
+		ele.src = "<c:url value='/VerifyCodeServlet'/>?xxx=" + new Date().getTime();
+		
+	}
+</script>
     
 
     <!-- Header -->
@@ -287,7 +273,7 @@ request.setAttribute("basePath", basePath);
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>高效管理社团</h2>
+                    <h2><font color="red">Q</font>uiclub <font color="red">U</font>sed <font color="red">I</font>n <font color="red">CLUB</font></h2>
                     <hr class="star-primary">
                 </div>
             </div>
@@ -387,7 +373,6 @@ request.setAttribute("basePath", basePath);
                 通过管理后台，可以轻松的完成社团的信息修改、成员增减、职位分配、任务管理、活动评价以及社团论坛等操作。
             </p>
             <ul>
-                <li>人脸识别登录系统</li>
                 <li>IBM BlueMix云平台和青云数据库管理</li>
                 <li>更加方便快捷的社团管理方式</li>
                 <li>实时通知最新活动和任务</li>
@@ -694,9 +679,16 @@ request.setAttribute("basePath", basePath);
     <script src="js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
     <script src="js/jquery.metisMenu.js"></script>
-<!-- 
-    <script src="js/jquery.validate.js" type="text/javascript"></script>
- -->
+    <!-- validate JS -->
+    <script src="js/jquery.validate.js"></script>
+
+   <script src="js/messages_zh.js"></script>
+    <script>
+    $().ready(function() {
+        $(".validate_signup").validate();
+        $(".validate_login").validate();
+    });
+    </script>
 
 </body>
 

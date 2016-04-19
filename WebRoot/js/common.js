@@ -1,4 +1,5 @@
 var basePath = "http://localhost:8080/Quiclub";
+//var basePath = "http://quiclub.mybluemix.net/";
 function loadPage(action){
 	$.ajax({ 
         url:basePath + action, 

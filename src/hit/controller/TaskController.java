@@ -169,6 +169,9 @@ public class TaskController{
    public String evaluateactivity(HttpServletRequest request){
 	   loadIds(request);
 	   List<EventVo> events = taskService.getAllTaskAdmin(club_id, user_id);
+	   for (EventVo eventVo : events) {
+		   eventVo.setPtcs(taskService.getTaskPtcs(eventVo.getTask_id()));
+	   }
 	   request.setAttribute("events",events);
 	   return "jsp/evaluateactivity";
    }
