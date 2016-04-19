@@ -90,7 +90,8 @@ request.setAttribute("basePath", basePath);
     			type:'POST',
     			data:'news_id='+id,
     			success:function(data){
-    				alert("编辑成功");
+    				//alert("编辑成功");
+    				$("#page-inner").html(data);
     			},
     			error:function(data){
     				alert("gggg");

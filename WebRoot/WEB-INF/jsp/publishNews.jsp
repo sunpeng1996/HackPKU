@@ -87,14 +87,11 @@ request.setAttribute("basePath", basePath);
 				        <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
 				        <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
 				      </div>
-				      <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
+				      <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="" >
 				    </div>
-					<%
-						String summary = new String((byte[])request.getAttribute("summary"));
-					%>
-				    <div id="editor" value="${summary }">
-				      输入内容&hellip;
-				      
+				
+				    <div id="editor" >
+						    ${summary }
 				    </div>
 			</div>
 		</div>

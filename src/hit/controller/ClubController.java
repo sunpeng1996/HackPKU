@@ -268,34 +268,32 @@ public class ClubController{
 	public String clubnews(HttpServletRequest request){
 		loadIds(request);
 		newsSimpleList = newsService.getAllNews(club_id);
-		//System.out.println(newsSimpleList.size());
-		//boolean flag = (newsSimpleList == null);
-		if(newsSimpleList.isEmpty()){
+		if(newsSimpleList != null){
+			newsList.clear();//清空集合
+			for( News news  : newsSimpleList){
+					NewsCustom nc = new NewsCustom();//每遍历一次都创建一个NewsCustom
+					nc.setAuthor(userService.getUserById(user_id).getUsername());
+					nc.setClubId(news.getClubId());
+					nc.setNewId(news.getNewId());
+					nc.setTitle(news.getTitle());
+					System.out.println(news.getSummary()+"我就想看看他是什么格式");
+					nc.setNewsSummary(new String(news.getSummary()));//转换成string存储进去
+					request.setAttribute("summary", news.getSummary());
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+					String formatDate = format.format(news.getTime());
+					nc.setNewsTime(formatDate);
+					nc.setSummary(news.getSummary());
+					nc.setPublisherId(user_id);
+					newsList.add(nc);//这也添加了啊
+			}
+			request.removeAttribute("newsList");
+			request.setAttribute("newsList", newsList);
+			return "jsp/communityNews";
+			
+		}else{
 			System.out.println("该社团已经没有新闻啦");
 			request.setAttribute("error", "你的社团已经没有新闻啦，快去创建一个吧");
-			return "jsp/error";
-		}else{
-		newsList.clear();//清空集合
-		for( News news  : newsSimpleList){
-				NewsCustom nc = new NewsCustom();//每遍历一次都创建一个NewsCustom
-				nc.setAuthor(userService.getUserById(user_id).getUsername());
-				nc.setClubId(news.getClubId());
-				nc.setNewId(news.getNewId());
-				nc.setTitle(news.getTitle());
-				System.out.println(news.getSummary()+"我就想看看他是什么格式");
-				nc.setNewsSummary(new String(news.getSummary()));//转换成string存储进去
-				request.setAttribute("summary", news.getSummary());
-				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-				String formatDate = format.format(news.getTime());
-				nc.setNewsTime(formatDate);
-				nc.setSummary(news.getSummary());
-				nc.setPublisherId(user_id);
-				
-				newsList.add(nc);//这也添加了啊
-		}
-		request.removeAttribute("newsList");
-		request.setAttribute("newsList", newsList);
-		return "jsp/communityNews";
+			return "jsp/error";//这个界面 
 		}
 	}
 	
@@ -473,7 +471,8 @@ public class ClubController{
 		request.getSession().setAttribute("user_id", user.getUserId());
 		//调用service层绑定user和Club的方法
 		clubService.bindUserAndClub(club2,user);
-	
+		//this 这是新建社团的时候系统自动存储的一条日志
+		clubService.addNews(clubname+"建立", clubname+"已经建立完成啦，希望在"+user.getUsername()+"的带领下社团能越办越红火", user.getUserId(), clubId);
 		return "successCreate";
 	}
 	
@@ -505,8 +504,6 @@ public class ClubController{
 		nc.setNewsSummary(blob);
 		nc.setNewId(news.getNewId());
 		nc.setSummary(blob.getBytes());
-	
-		
 		newsList.add(nc);//将新闻Custom类添加到集合中
 		request.setAttribute("newsList", newsList);
 		User user = userService.getUserById(user_id);

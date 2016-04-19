@@ -80,32 +80,31 @@ public class NewsController  {
 		loadIds(request);
 		newsSimpleList = newsService.getAllNews(club_id);
 		
-		if(newsSimpleList.size()==0 || newsSimpleList==null){
+		if( newsSimpleList != null ){
+			newsList.clear();//清空集合
+			for( News news  : newsSimpleList){
+					NewsCustom nc = new NewsCustom();//每遍历一次都创建一个NewsCustom
+					nc.setAuthor(userService.getUserById(user_id).getUsername());
+					nc.setClubId(news.getClubId());
+					nc.setNewId(news.getNewId());
+					nc.setTitle(news.getTitle());
+					System.out.println(news.getSummary()+"我就想看看他是什么格式");
+					nc.setNewsSummary(new String(news.getSummary()));//转换成string存储进去
+					request.setAttribute("summary", news.getSummary());
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+					String formatDate = format.format(news.getTime());
+					nc.setNewsTime(formatDate);
+					nc.setSummary(news.getSummary());
+					nc.setPublisherId(user_id);
+					newsList.add(nc);//这也添加了啊
+			}
+			request.removeAttribute("newsList");
+			request.setAttribute("newsList", newsList);
+			return "jsp/deleteCommunityNews";
+		}else{
 			System.out.println("该社团已经没有新闻啦");
 			request.setAttribute("error", "你的社团已经没有新闻啦，快去创建一个吧");
 			return "jsp/error";
-		}else{
-		newsList.clear();//清空集合
-		for( News news  : newsSimpleList){
-				NewsCustom nc = new NewsCustom();//每遍历一次都创建一个NewsCustom
-				nc.setAuthor(userService.getUserById(user_id).getUsername());
-				nc.setClubId(news.getClubId());
-				nc.setNewId(news.getNewId());
-				nc.setTitle(news.getTitle());
-				System.out.println(news.getSummary()+"我就想看看他是什么格式");
-				nc.setNewsSummary(new String(news.getSummary()));//转换成string存储进去
-				request.setAttribute("summary", news.getSummary());
-				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-				String formatDate = format.format(news.getTime());
-				nc.setNewsTime(formatDate);
-				nc.setSummary(news.getSummary());
-				nc.setPublisherId(user_id);
-				
-				newsList.add(nc);//这也添加了啊
-		}
-		request.removeAttribute("newsList");
-		request.setAttribute("newsList", newsList);
-		return "jsp/deleteCommunityNews";
 		}
 	}
 	
@@ -130,36 +129,36 @@ public class NewsController  {
 	 */
 	@RequestMapping(value="/toEditNews.do")
 	public String toEditNews(HttpServletRequest request){
-		System.out.println("即将到达删除新闻的页面");
+		System.out.println("即将到达编辑新闻的页面");
 		loadIds(request);
 		newsSimpleList = newsService.getAllNews(club_id);
-		if(newsSimpleList.size() == 0 || newsSimpleList == null){
+		if(newsSimpleList != null ){
+			//newsList = null;
+			newsList.clear();//清空集合
+			for( News news  : newsSimpleList){
+					NewsCustom nc = new NewsCustom();//每遍历一次都创建一个NewsCustom
+					nc.setAuthor(userService.getUserById(user_id).getUsername());
+					nc.setClubId(news.getClubId());
+					nc.setNewId(news.getNewId());
+					nc.setTitle(news.getTitle());
+					System.out.println(news.getSummary()+"我就想看看他是什么格式");
+					nc.setNewsSummary(new String(news.getSummary()));//转换成string存储进去
+					request.setAttribute("summary", news.getSummary());
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+					String formatDate = format.format(news.getTime());
+					nc.setNewsTime(formatDate);
+					nc.setSummary(news.getSummary());
+					nc.setPublisherId(user_id);
+					newsList.add(nc);//这也添加了啊
+			}
+			request.removeAttribute("newsList");
+			request.setAttribute("newsList", newsList);
+			return "jsp/editCommunityNews";
+		}else{
 			System.out.println("该社团已经没有新闻啦");
 			request.setAttribute("error", "你的社团已经没有新闻啦，快去创建一个吧");
 			return "jsp/error";
-		}else{
-		//newsList = null;
-		newsList.clear();//清空集合
-		for( News news  : newsSimpleList){
-				NewsCustom nc = new NewsCustom();//每遍历一次都创建一个NewsCustom
-				nc.setAuthor(userService.getUserById(user_id).getUsername());
-				nc.setClubId(news.getClubId());
-				nc.setNewId(news.getNewId());
-				nc.setTitle(news.getTitle());
-				System.out.println(news.getSummary()+"我就想看看他是什么格式");
-				nc.setNewsSummary(new String(news.getSummary()));//转换成string存储进去
-				request.setAttribute("summary", news.getSummary());
-				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-				String formatDate = format.format(news.getTime());
-				nc.setNewsTime(formatDate);
-				nc.setSummary(news.getSummary());
-				nc.setPublisherId(user_id);
-				newsList.add(nc);//这也添加了啊
-		}
-		request.removeAttribute("newsList");
-		request.setAttribute("newsList", newsList);
-		return "jsp/editCommunityNews";
-		}
+		}	
 	}
 	
 	/**
@@ -169,8 +168,12 @@ public class NewsController  {
 	@RequestMapping(value="/editNews.do",method={RequestMethod.POST})
 	public  String editNews(HttpServletRequest request,Integer news_id){
 			News news = newsService.getNewsById(news_id);
-			request.setAttribute("summary", news.getSummary());
+			
+			request.setAttribute("summary", new String(news.getSummary()));
+			System.out.println(news.getSummary());
 			request.setAttribute("news",news);//向request中存储数据用于数据回显
+			System.out.println(new String(news.getSummary()));
+			newsService.deleteByNewsId(news_id);//将旧的新闻删除
 			return "jsp/publishNews";
 	}
 

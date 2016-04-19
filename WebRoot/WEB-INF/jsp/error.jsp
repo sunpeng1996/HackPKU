@@ -19,5 +19,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 您来到了错误页面，骚年！<br/>
 对不起：
-${errorMessage }
+${error}
 </html>
