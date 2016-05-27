@@ -538,9 +538,9 @@ font-size: 19px;
     color: #FF3C3C;
 }
 .rank_right {
-    position: absolute;
+    position: relative;
     width: calc(100% - 350px);
-    top: 0px;
+    top: -212px;
     margin-left: 350px;
     height: 100%;
     padding-left: 50px;
@@ -581,9 +581,9 @@ font-size: 19px;
     text-align: center;
 }
 .rank_right .rank_div_body {
+    position: relative;
     width: 100%;
     height: auto;
-    border: solid 1px #000;
 }
 .rank_right .rank_objs {
     position: relative;
@@ -609,6 +609,10 @@ font-size: 19px;
 }
 .rank_right .rank_objs a:hover {
     color: #FF3C3C;
+}
+.rank_right_footer {
+    height: 50px;
+    border: solid 1px #000;
 }
 
 
