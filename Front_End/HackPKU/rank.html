@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="HIT 哈工大 社团管理系统 Quiclub">
+    <meta name="author" content="HIT 蓝线俱乐部 孙一铀 张旭 黄运智 孙鹏">
+
+    <title>Quiclub</title>
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/freelancer.css" rel="stylesheet">
+    
+    <!-- 自己的css -->
+    <link href="css/my.css" rel="stylesheet">
+    
+    <link rel="shortcut icon" href="images/favicon.ico" />
+
+    <!-- custom-style.css -->
+    <link rel="stylesheet" type="text/css" href="css/custom-styles.css">
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+    <div id="wrapper"></div>
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html"></a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-left">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                       <i class="fa fa-home fa-fw"></i>首页
+                    </a>
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-list fa-fw"></i>活动
+                    </a>
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-bar-chart-o fa-fw"></i>排行榜
+                    </a>
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-group fa-fw"></i>
+                        加入我们
+                    </a>
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a id="login_index" class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" aria-expanded="false">
+                       登录
+                    </a>
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a id="signup_index" class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" aria-expanded="false">
+                        注册
+                    </a>
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!-- 登录和注册 -->
+    <div id="loginbg">
+        <div id="lgmain">
+          <div class="lghead" id="login_id">
+            <ul>
+              <li><a id="register_active" href="javascript:void(0);">注册</a></li>
+               <li><a id="login_active" href="javascript:void(0);">登录</a></li>
+             </ul>
+             <a id="exit" class="exit" href="javascript:void(0)">X</a>
+           </div>
+           <div class="login" id="showlg_2">
+            <!--表单验证===================================================-->
+             <form name="loginForm" action="manager.html" method="post" class="validate_login">
+                  <!-- start of login form -->
+                  <div id="user-name">
+                    <input type="email" name="username" placeholder="请输入邮箱账号" class="required email">
+                  </div>
+                  <p></p>
+                  <div id="user-password">
+                    <input type="password" name="password" placeholder="请输入密码" minlength="6" required>
+                  </div>
+                  <p></p>
+                  <div id="button-group">
+                    <input type="submit" class="btn" value="登录"/>
+                  </div>
+                  <a href="javascript:void(0)">忘记密码？</a>
+                  <div class="errorInfo">
+                    <p>用户名或密码错误！</p> <!-- 显示表单验证的出错信息 -->
+                  </div>
+            </form>
+             <!-- end of form=========================================- -->
+          </div>
+          <div class="signup" id="showlg_1">
+             <form name="loginForm" action="javascript:void(0);" class="validate_signup" method="post">
+                  <!-- start of login form -->
+                  <div id="user-name">
+                    <input type="text" name="username" placeholder="请输入邮箱" class="required email">
+                  </div>
+                  <p></p>
+                  <div id="user-password">
+                    <input id="password" type="password" name="password" placeholder="请输入密码" minlength="6" required>
+                    <p></p>
+                    <input type="password" name="confirm_password" placeholder="请确认密码" minlength="6" equalTo="#password" required>
+                  </div>
+                  <p></p>
+                  <div id="button-group">
+                    <input type="submit" class="btn" value="注册"/>
+                  </div>
+                  <div class="errorInfo">
+                    <p>用户名或密码错误！</p> <!-- 显示表单验证的出错信息 -->
+                  </div>
+            </form>
+          </div>
+        </div>
+    </div>
+
+    <section class="rank">
+        <div class="rank_left">
+            <div class="rank_left_head">
+                <h2>类别</h2>
+            </div>
+            <div class="rank_left_body">
+                <ul>
+                    <li><a href="">社团人数排行榜</a></li>
+                    <li><a href="">社团活动排行榜</a></li>
+                    <li><a href="">高校排行榜</a></li>
+                    <li><a href="">活跃社团排行榜</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="rank_right">
+            <div class="rank_div">
+                <span>1</span>
+                <div class="rank_div_main">
+                    <img src="">
+                    <a href="">哈工大蓝线俱乐部</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3>友情链接</h3>
+                        <a href="https://console.ng.bluemix.net/">IBM BlueMix</a>
+                        <br>
+                        <a href="https://www.qingcloud.com/">青云</a>
+                        <br>
+                        <a href="https://www.baidu.com/">蓝线俱乐部</a>
+                        <br>
+                        <a href="https://www.hit.edu.cn/">哈工大</a>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3>联系我们</h3>
+                        <ul class="list-inline">
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3>技术支持</h3>
+                        <p>
+                            哈尔滨工业大学14级计软学院
+                            <br>
+                            孙一铀、黄运智、孙鹏、张旭
+                            <br>
+                            提供技术支持
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; All rights preserved by HIT
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visible-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    <!-- Portfolio Modals -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>哈工大微软俱乐部</h2>
+                            <hr class="star-primary">
+                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                            <p>==其实这里现在什么都没有，所以不要多想了，早点洗洗睡吧。<a href="http://www.helianthuswhite.cn">我说让你不要点你肯定忍不住</a>是不是偷偷点了上面的链接？不管你是不是，反正我也看不到，快点承认吧，哈哈哈。</p>
+                            <ul class="list-inline item-details">
+                                <li>写点什么呢:
+                                    <strong><a href="http://startbootstrap.com">别点我</a>
+                                    </strong>
+                                </li>
+                                <li>时间:
+                                    <strong><a href="http://startbootstrap.com">April 2014</a>
+                                    </strong>
+                                </li>
+                                <li>额==:
+                                    <strong><a href="http://startbootstrap.com">以后再改好了</a>
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> 关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>哈工大微软俱乐部</h2>
+                            <hr class="star-primary">
+                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                            <p>==其实这里现在什么都没有，所以不要多想了，早点洗洗睡吧。<a href="http://www.helianthuswhite.cn">我说让你不要点你肯定忍不住</a>是不是偷偷点了上面的链接？不管你是不是，反正我也看不到，快点承认吧，哈哈哈。</p>
+                            <ul class="list-inline item-details">
+                                <li>写点什么呢:
+                                    <strong><a href="http://startbootstrap.com">别点我</a>
+                                    </strong>
+                                </li>
+                                <li>时间:
+                                    <strong><a href="http://startbootstrap.com">April 2014</a>
+                                    </strong>
+                                </li>
+                                <li>额==:
+                                    <strong><a href="http://startbootstrap.com">以后再改好了</a>
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> 关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>哈工大微软俱乐部</h2>
+                            <hr class="star-primary">
+                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                            <p>==其实这里现在什么都没有，所以不要多想了，早点洗洗睡吧。<a href="http://www.helianthuswhite.cn">我说让你不要点你肯定忍不住</a>是不是偷偷点了上面的链接？不管你是不是，反正我也看不到，快点承认吧，哈哈哈。</p>
+                            <ul class="list-inline item-details">
+                                <li>写点什么呢:
+                                    <strong><a href="http://startbootstrap.com">别点我</a>
+                                    </strong>
+                                </li>
+                                <li>时间:
+                                    <strong><a href="http://startbootstrap.com">April 2014</a>
+                                    </strong>
+                                </li>
+                                <li>额==:
+                                    <strong><a href="http://startbootstrap.com">以后再改好了</a>
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> 关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>哈工大微软俱乐部</h2>
+                            <hr class="star-primary">
+                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                            <p>==其实这里现在什么都没有，所以不要多想了，早点洗洗睡吧。<a href="http://www.helianthuswhite.cn">我说让你不要点你肯定忍不住</a>是不是偷偷点了上面的链接？不管你是不是，反正我也看不到，快点承认吧，哈哈哈。</p>
+                            <ul class="list-inline item-details">
+                                <li>写点什么呢:
+                                    <strong><a href="http://startbootstrap.com">别点我</a>
+                                    </strong>
+                                </li>
+                                <li>时间:
+                                    <strong><a href="http://startbootstrap.com">April 2014</a>
+                                    </strong>
+                                </li>
+                                <li>额==:
+                                    <strong><a href="http://startbootstrap.com">以后再改好了</a>
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> 关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>哈工大微软俱乐部</h2>
+                            <hr class="star-primary">
+                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                            <p>==其实这里现在什么都没有，所以不要多想了，早点洗洗睡吧。<a href="http://www.helianthuswhite.cn">我说让你不要点你肯定忍不住</a>是不是偷偷点了上面的链接？不管你是不是，反正我也看不到，快点承认吧，哈哈哈。</p>
+                            <ul class="list-inline item-details">
+                                <li>写点什么呢:
+                                    <strong><a href="http://startbootstrap.com">别点我</a>
+                                    </strong>
+                                </li>
+                                <li>时间:
+                                    <strong><a href="http://startbootstrap.com">April 2014</a>
+                                    </strong>
+                                </li>
+                                <li>额==:
+                                    <strong><a href="http://startbootstrap.com">以后再改好了</a>
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> 关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>哈工大微软俱乐部</h2>
+                            <hr class="star-primary">
+                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                            <p>==其实这里现在什么都没有，所以不要多想了，早点洗洗睡吧。<a href="http://www.helianthuswhite.cn">我说让你不要点你肯定忍不住</a>是不是偷偷点了上面的链接？不管你是不是，反正我也看不到，快点承认吧，哈哈哈。</p>
+                            <ul class="list-inline item-details">
+                                <li>写点什么呢:
+                                    <strong><a href="http://startbootstrap.com">别点我</a>
+                                    </strong>
+                                </li>
+                                <li>时间:
+                                    <strong><a href="http://startbootstrap.com">April 2014</a>
+                                    </strong>
+                                </li>
+                                <li>额==:
+                                    <strong><a href="http://startbootstrap.com">以后再改好了</a>
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> 关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JS Scripts-->
+    <script src="js/index.js"></script>
+    <!-- jQuery Js -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="js/jquery.metisMenu.js"></script>
+    <!-- validate JS -->
+    <script src="js/jquery.validate.js"></script>
+
+    <script src="js/messages_zh.js"></script>
+    <script>
+    $().ready(function() {
+        $(".validate_signup").validate();
+        $(".validate_login").validate();
+    });
+    </script>
+</body>
+
+</html>

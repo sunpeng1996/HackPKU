@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>推荐社团 >> 查看活动</title>
+</head>
+<body>
+    <div id="pageInfo">
+        <nav>
+            <span>哈工大蓝线俱乐部 >> 查看活动</span>
+        </nav>
+        <div id="communityNews">
+            <table >
+                <tr>
+                    <td>内容</td>
+                    <td>时间</td>
+                    <td>发布者</td>
+                </tr>
+                <tr>
+                        <td>
+                            <a href="javascript:void(0);" class="activities">提交form表单如何让页面在提交后不发生跳转-CSDN论坛-CSDN.NET-...</a>
+                        </td>
+                        <td>
+                            <span class="time"><i>2016-04-15</i></span>
+                        </td>
+                        <td>
+                            <span class="author">黄运智</span>
+                        </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="javascript:void(0);" class="activities">
+                            为此，360网站卫士推出一项字体加速服务，站长只要修改一行代码，就可以免费使用到由360网站卫士CDN加速的字体服务。
+                        </a>
+                    </td>
+                    <td>
+                        <span class="time"><i>2016-04-15</i></span>
+                    </td>
+                    <td>
+                        <span class="author">孙鹏</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+      <!-- Bootstrap Js -->
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        (function () {
+            var objs = document.getElementById('communityNews').getElementsByClassName('activities');
+            for (var i = 0; i < objs.length; i++) {
+                objs[i].click  = function () {
+                    alert(111);
+                };
+                // objs[i].bind("click",function() {
+                //     console.log(111);
+                //     $("#page-inner").load("goodActivities.html");
+                // });
+            }
+        })();
+    </script>
+</body>
+</html>

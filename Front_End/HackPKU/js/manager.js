@@ -37,6 +37,17 @@
 	$("#joinCommunity").bind("click",function() {
 		$("#page-inner").load("joinCommunity.html");
 	})
+	// 推荐社团页面
+	$("#goodCommunities").bind("click",function() {
+		$("#page-inner").load("goodCommunities.html");
+		addActive('#goodCommunities');
+	});
+	// 推荐社团查看活动页面
+	$("#goodActivities").bind("click",function() {
+		
+		$("#page-inner").load("goodActivities.html");
+	});
+
 })();
 
 //活跃的菜单按钮添加样式
